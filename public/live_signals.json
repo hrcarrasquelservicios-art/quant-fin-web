@@ -84,8 +84,9 @@
       {
         "level": 1,
         "price": 63358.43525608727,
-        "hit": false,
-        "pnlPercent": 0
+        "hit": true,
+        "pnlPercent": 0.4247226624405705,
+        "hitAt": "2026-07-04T21:24:43.710Z"
       },
       {
         "level": 2,
@@ -125,12 +126,20 @@
       "fastMA": 62617.8326171875,
       "slowMA": 62119.396640625
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-04T19:00:00.210Z"
+    },
+    "result": {
+      "exitPrice": 63368,
+      "exitAt": "2026-07-04T21:24:43.710Z",
+      "pnlPercent": 0.4247226624405705,
+      "pnlAbs": 268,
+      "holdBars": 0,
+      "reason": "tp1"
     }
   },
   {
