@@ -2,6 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://quant-fin.online; frame-src 'none'; object-src 'none';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuantFin | Trading Élite</title>
     <!-- Google Fonts: Inter and Outfit -->
@@ -22,7 +23,7 @@
       </div>
       <div class="nav-links">
         <a href="#dashboard">Live Dashboard</a>
-        <a href="#performance">Rendimiento</a>
+        <a href="#transparency">Transparencia</a>
         <a href="https://t.me/QuantF" class="btn-primary" target="_blank">Únete al Canal VIP</a>
       </div>
     </nav>
@@ -63,8 +64,108 @@
         </div>
       </div>
 
-      <div class="signals-grid" id="signals-container">
-        <!-- Señales se inyectan aquí via JS -->
+      <!-- Exchange Rates Widget -->
+      <div class="rates-container glass" id="rates-container" style="margin-bottom: 3rem;">
+        <div class="rates-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+          <h3 style="margin: 0; font-size: 1.25rem; font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 8px;">🏦 Tasas de Cambio Oficiales</h3>
+          <span class="rates-timestamp" id="rates-timestamp" style="font-size: 0.85rem; color: var(--text-muted);">04/07/2026 13:00</span>
+        </div>
+        <div class="rates-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
+            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💵 Dólar BCV</span>
+            <span class="rate-value" id="rate-bcv-usd" style="font-size: 1.25rem; font-weight: 700; color: #ffd700;">Bs. --</span>
+          </div>
+          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
+            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💶 Euro BCV</span>
+            <span class="rate-value" id="rate-bcv-eur" style="font-size: 1.25rem; font-weight: 700; color: #3b82f6;">Bs. --</span>
+          </div>
+          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
+            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💱 Dólar Paralelo</span>
+            <span class="rate-value" id="rate-paralelo" style="font-size: 1.25rem; font-weight: 700; color: #f59e0b;">Bs. --</span>
+          </div>
+          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
+            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">₮ USDT (Binance)</span>
+            <span class="rate-value" id="rate-usdt" style="font-size: 1.25rem; font-weight: 700; color: #10b981;">Bs. --</span>
+          </div>
+        </div>
+        <div class="rates-conversions" style="display: flex; gap: 2rem; padding: 1rem 0; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.9rem; flex-wrap: wrap;">
+          <span>🇨🇴 1 Peso Colombiano = <strong id="rate-cop" style="color: #f3f4f6;">Bs. --</strong></span>
+          <span>🇨🇱 1 Peso Chileno = <strong id="rate-clp" style="color: #f3f4f6;">Bs. --</strong></span>
+        </div>
+        <div class="rates-footer" style="font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 0.75rem; margin-top: 0.5rem;">
+          <span>Fuente: BCV Oficial &middot; Referencia: @CambioRealBot</span>
+          <span style="font-weight: 600; color: var(--color-primary);">#QuantFin</span>
+        </div>
+      </div>
+
+      <h3 class="grid-title"><span class="badge-real">REAL</span> Ejecución en Cuenta Directa</h3>
+      <div class="signals-grid" id="signals-real-container">
+        <!-- Señales REALES se inyectan aquí via JS -->
+      </div>
+
+      <h3 class="grid-title" style="margin-top: 4rem;"><span class="badge-demo">DEMO</span> Validación en Vivo</h3>
+      <div class="signals-grid" id="signals-demo-container">
+        <!-- Señales DEMO se inyectan aquí via JS -->
+      </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section id="transparency" class="section-transparency">
+      <div class="transparency-container glass">
+        <h2>¿Qué significa <span class="text-gradient">DEMO y REAL</span> en nuestras señales?</h2>
+        
+        <div class="transparency-grid">
+          <div class="transparency-text">
+            <h3>La Aclaración Central</h3>
+            <p>Nuestras señales en fase <strong>DEMO</strong> no son una simulación con datos inventados. Corren sobre el precio real del mercado, en tiempo real, minuto a minuto — exactamente el mismo mercado contra el que operaría una cuenta real. La única diferencia es que, mientras validamos el sistema en vivo, no hay capital ejecutándose detrás de cada orden.</p>
+            
+            <h3 style="margin-top: 1.5rem;">Por qué lo hacemos así</h3>
+            <p>Preferimos demostrar consistencia con el mercado real antes de arriesgar capital — tuyo o nuestro. Cada señal DEMO pasó primero por un backtest de 12 meses con costos de comisión y slippage incluidos, y ahora se valida en vivo antes de pasar a ejecución real.</p>
+          </div>
+
+          <div class="transparency-table-wrapper">
+            <table class="transparency-table">
+              <thead>
+                <tr>
+                  <th>Característica</th>
+                  <th>🧪 DEMO</th>
+                  <th>✅ REAL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Datos de mercado</td>
+                  <td>Reales, en vivo</td>
+                  <td>Reales, en vivo</td>
+                </tr>
+                <tr>
+                  <td>Ejecución de la orden</td>
+                  <td>Simulada (sin capital)</td>
+                  <td>Real (con capital)</td>
+                </tr>
+                <tr>
+                  <td>TP / SL</td>
+                  <td>Verificados contra precio real</td>
+                  <td>Verificados contra precio real</td>
+                </tr>
+                <tr>
+                  <td>Reportado en el canal</td>
+                  <td>Sí, historial completo</td>
+                  <td>Sí, historial completo</td>
+                </tr>
+                <tr>
+                  <td>Objetivo</td>
+                  <td>Validar el sistema públicamente</td>
+                  <td>Generar resultado real</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="transparency-disclaimer">
+          <strong>⚠️ Disclaimer:</strong> El trading de criptoactivos conlleva un riesgo severo de pérdida de capital. Los resultados pasados, tanto en modo DEMO como REAL, no garantizan rendimientos futuros. QuantFin no ofrece asesoría financiera personalizada; todas las señales y análisis son exclusivamente de carácter educativo e informativo.
+        </div>
       </div>
     </section>
 

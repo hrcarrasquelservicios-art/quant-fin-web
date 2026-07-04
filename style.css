@@ -339,6 +339,119 @@ h1, h2, h3, .logo {
 .status-active { border-color: var(--accent-cyan); color: var(--accent-cyan); }
 .status-closed { border-color: var(--text-muted); color: var(--text-muted); }
 
+/* Dashboard Titles and Badges */
+.grid-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-real, .badge-demo {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.badge-real {
+  background-color: rgba(0, 255, 136, 0.15);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.badge-demo {
+  background-color: rgba(230, 183, 65, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+}
+
+/* Section Transparency */
+.section-transparency {
+  padding: 3rem 10%;
+}
+
+.transparency-container {
+  padding: 2.5rem;
+  border-radius: 12px;
+}
+
+.transparency-container h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.transparency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .transparency-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.transparency-text h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.transparency-text p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.transparency-table-wrapper {
+  overflow-x: auto;
+}
+
+.transparency-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.transparency-table th, .transparency-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.transparency-table th {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  font-weight: 700;
+}
+
+.transparency-table td {
+  color: var(--text-muted);
+}
+
+.transparency-table tr:hover td {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.transparency-disclaimer {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 51, 102, 0.05);
+  border: 1px solid rgba(255, 51, 102, 0.15);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* Footer */
 footer {
   padding: 3rem 10%;
