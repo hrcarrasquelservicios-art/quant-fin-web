@@ -1,5 +1,75 @@
 [
   {
+    "id": "QFS-0089",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-04T23:00:00.286Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63126.98046875,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 63374.81889076943,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 63622.657312788855,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 63994.414945817996,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 63103.6015625,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 64.90663125870078,
+      "macd": {
+        "macdLine": 276.34418684658885,
+        "signalLine": 252.0271494190853,
+        "histogram": 24.31703742750355
+      },
+      "volume": 1827194880,
+      "volumeAvg": 171139932.16,
+      "volumeAvg20": 319855308.8,
+      "ema200": 61182.94144664372,
+      "atr14": 247.83842201942733,
+      "upperWickPct": 13.324467404925706,
+      "lowerWickPct": 13.997084473542875,
+      "close": 63126.98046875,
+      "fastMA": 62750.992578125,
+      "slowMA": 62250.30015625
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-04T23:00:00.291Z"
+    }
+  },
+  {
     "id": "QFS-0088",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-04T21:00:00.300Z",
@@ -1490,85 +1560,6 @@
       "exitAt": "2026-07-03T19:14:21.706Z",
       "pnlPercent": 0.5057364476289862,
       "pnlAbs": 2.8599902343750045,
-      "holdBars": 0,
-      "reason": "tp1"
-    }
-  },
-  {
-    "id": "QFS-0069",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T09:00:00.757Z",
-    "asset": {
-      "ticker": "DOGE-USD",
-      "name": "Dogecoin",
-      "yahooSymbol": "DOGE-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 55,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 0.0747700035572052,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 0.07530746586404721,
-        "hit": true,
-        "pnlPercent": 0.7342469127673231,
-        "hitAt": "2026-07-03T10:51:21.130Z"
-      },
-      {
-        "level": 2,
-        "price": 0.07584492817088923,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 0.07665112163115224,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 0.0745700035572052,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 58.43670822230505,
-      "macd": {
-        "macdLine": 0.00043506957261679746,
-        "signalLine": 0.0004190758052217226,
-        "histogram": 0.000015993767395074848
-      },
-      "volume": 30274496,
-      "volumeAvg": 5847357.44,
-      "volumeAvg20": 4422374.4,
-      "ema200": 0.07454924977024567,
-      "atr14": 0.0005374623068420121,
-      "upperWickPct": 34.28559264305177,
-      "lowerWickPct": 0,
-      "close": 0.0747700035572052,
-      "fastMA": 0.07445949986577034,
-      "slowMA": 0.07335620000958443
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T09:00:00.762Z"
-    },
-    "result": {
-      "exitPrice": 0.075319,
-      "exitAt": "2026-07-03T10:51:21.130Z",
-      "pnlPercent": 0.7342469127673231,
-      "pnlAbs": 0.0005489964427947969,
       "holdBars": 0,
       "reason": "tp1"
     }
