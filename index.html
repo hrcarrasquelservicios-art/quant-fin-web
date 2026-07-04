@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuantFin | Trading Élite</title>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="bg-glow top-left"></div>
+    <div class="bg-glow bottom-right"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar glass">
+      <div class="logo">
+        <span class="logo-accent">Q</span>uant<span class="logo-accent">F</span>in
+      </div>
+      <div class="nav-links">
+        <a href="#dashboard">Live Dashboard</a>
+        <a href="#performance">Rendimiento</a>
+        <a href="https://t.me/QuantF" class="btn-primary" target="_blank">Únete al Canal VIP</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="pulse-indicator">
+          <div class="dot"></div> Sistema Algorítmico Activo
+        </div>
+        <h1>El Futuro del Trading<br><span class="text-gradient">Algorítmico Institucional</span></h1>
+        <p class="hero-subtitle">Operaciones automatizadas con precisión matemática. Maximiza tus retornos con nuestra inteligencia artificial y modelos cuantitativos de alta frecuencia.</p>
+        <div class="hero-buttons">
+          <a href="#dashboard" class="btn-secondary">Ver Señales en Vivo</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Live Dashboard Section -->
+    <section id="dashboard" class="section-dashboard">
+      <div class="section-header">
+        <h2>Live <span class="text-gradient">Market Signals</span></h2>
+        <p>Sincronización directa con el motor de Binance</p>
+      </div>
+      
+      <div class="status-bar glass">
+        <div class="stat">
+          <span class="stat-label">Última Actualización</span>
+          <span class="stat-value" id="last-update">--:--:--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Win Rate Semanal</span>
+          <span class="stat-value text-green">87.5%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Estado del Servidor</span>
+          <span class="stat-value text-cyan">ONLINE</span>
+        </div>
+      </div>
+
+      <div class="signals-grid" id="signals-container">
+        <!-- Señales se inyectan aquí via JS -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Nexus Flow Dynamics. Todos los derechos reservados.</p>
+      <p class="disclaimer">El trading conlleva un alto nivel de riesgo. Los resultados pasados no garantizan rendimientos futuros.</p>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

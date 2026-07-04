@@ -1,0 +1,37 @@
+[
+  {
+    "id": "sig-001",
+    "timestamp": "2026-07-04T10:00:00Z",
+    "pair": "BTC/USDT",
+    "type": "LONG",
+    "entry": 64500.25,
+    "target1": 65500.00,
+    "stopLoss": 63000.00,
+    "status": "ACTIVE",
+    "confidence": 89
+  },
+  {
+    "id": "sig-002",
+    "timestamp": "2026-07-04T08:30:00Z",
+    "pair": "ETH/USDT",
+    "type": "SHORT",
+    "entry": 3450.00,
+    "target1": 3300.00,
+    "stopLoss": 3550.00,
+    "status": "CLOSED",
+    "pnl_percent": 4.35,
+    "confidence": 75
+  },
+  {
+    "id": "sig-003",
+    "timestamp": "2026-07-03T18:15:00Z",
+    "pair": "SOL/USDT",
+    "type": "LONG",
+    "entry": 142.50,
+    "target1": 155.00,
+    "stopLoss": 138.00,
+    "status": "CLOSED",
+    "pnl_percent": -3.15,
+    "confidence": 60
+  }
+]
