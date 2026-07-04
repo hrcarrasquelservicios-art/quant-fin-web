@@ -117,8 +117,9 @@
     ],
     "stopLoss": {
       "price": 1780.43994140625,
-      "hit": false,
-      "pnlPercent": 0
+      "hit": true,
+      "pnlPercent": -0.45006260918169494,
+      "hitAt": "2026-07-04T23:16:43.748Z"
     },
     "estrategia": "MA_CROSSOVER",
     "confidence": 75,
@@ -140,7 +141,15 @@
       "fastMA": 1767.0750061035155,
       "slowMA": 1742.11240234375
     },
-    "status": "open"
+    "status": "stopped",
+    "result": {
+      "exitPrice": 1778.39,
+      "exitAt": "2026-07-04T23:16:43.748Z",
+      "pnlPercent": -0.45006260918169494,
+      "pnlAbs": -8.0400537109374,
+      "holdBars": 0,
+      "reason": "sl"
+    }
   },
   {
     "id": "QFS-0087",
