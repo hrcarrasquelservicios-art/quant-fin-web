@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pair = sig.pair || sig.activo || sig.asset?.ticker || 'BTC-USD';
       const entry = sig.entry || sig.precioActual || sig.precio_entrada || 0;
       const target = sig.target1 || (sig.takeProfits && sig.takeProfits[0]?.price) || 0;
-      const stopLoss = sig.stopLoss || sig.stopLoss?.price || sig.sl || 0;
+      const stopLoss = sig.stopLoss?.price || sig.stopLoss || sig.sl || 0;
       const status = sig.status || 'open';
       const typeLabel = isLong ? 'BUY' : 'SELL';
 
