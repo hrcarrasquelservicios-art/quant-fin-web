@@ -76,8 +76,7 @@
       "pnlAbs": 10.6700292968751,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0097",
@@ -156,8 +155,7 @@
       "pnlAbs": -3.619960937500082,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0096",
@@ -236,8 +234,7 @@
       "pnlAbs": -0.7599780273437773,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0095",
@@ -316,8 +313,7 @@
       "pnlAbs": 4.6799877929687455,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0094",
@@ -396,8 +392,7 @@
       "pnlAbs": 3.3799731445312773,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0093",
@@ -476,8 +471,7 @@
       "pnlAbs": 3.3999853515624636,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0092",
@@ -556,8 +550,7 @@
       "pnlAbs": 3.54998779296875,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0091",
@@ -636,8 +629,7 @@
       "pnlAbs": -3.5899975585937227,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0090",
@@ -716,8 +708,7 @@
       "pnlAbs": -173,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0089",
@@ -796,8 +787,7 @@
       "pnlAbs": -31.98046875,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0088",
@@ -870,8 +860,7 @@
       "pnlAbs": -8.0400537109374,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0087",
@@ -950,8 +939,7 @@
       "pnlAbs": 268,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0086",
@@ -1003,7 +991,7 @@
       "macd": {
         "macdLine": 0.0004223311746513747,
         "signalLine": 0.0004192525300660339,
-        "histogram": 3.0786445853408324e-06
+        "histogram": 0.0000030786445853408324
       },
       "volume": 11797440,
       "volumeAvg": 4908096,
@@ -1030,8 +1018,7 @@
       "pnlAbs": 0.0006059973773956256,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0085",
@@ -1113,8 +1100,7 @@
       "pnlAbs": -0.1000033569335983,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0084",
@@ -1196,8 +1182,7 @@
       "pnlAbs": -0.5099966430664011,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0083",
@@ -1276,8 +1261,7 @@
       "pnlAbs": -130.87890625,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0082",
@@ -1356,8 +1340,7 @@
       "pnlAbs": -125.96875,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0081",
@@ -1436,8 +1419,7 @@
       "pnlAbs": -49.8515625,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0080",
@@ -1516,8 +1498,7 @@
       "pnlAbs": -3.9500585937501,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   },
   {
     "id": "QFS-0079",
@@ -1596,7 +1577,6 @@
       "pnlAbs": -56.80859375,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "DEMO"
+    }
   }
 ]
