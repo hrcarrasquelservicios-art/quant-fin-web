@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchSignals() {
     try {
       // Intentar cargar de equity_signals.json
-      let res = await fetch('/equity_signals.json');
+      let res = await fetch('https://raw.githubusercontent.com/hrcarrasquelservicios-art/quant-fin-web/main/public/equity_signals.json');
       if (!res.ok) {
         // Fallback a live_signals.json
-        res = await fetch('/live_signals.json');
+        res = await fetch('https://raw.githubusercontent.com/hrcarrasquelservicios-art/quant-fin-web/main/public/live_signals.json');
       }
       if (!res.ok) throw new Error("No se pudo cargar el archivo de señales");
       
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para obtener y renderizar tasas de cambio
   async function fetchExchangeRates() {
     try {
-      const res = await fetch('/exchange_rates.json');
+      const res = await fetch('https://raw.githubusercontent.com/hrcarrasquelservicios-art/quant-fin-web/main/public/exchange_rates.json');
       if (!res.ok) throw new Error("No se pudo cargar las tasas de cambio");
       const data = await res.json();
       
