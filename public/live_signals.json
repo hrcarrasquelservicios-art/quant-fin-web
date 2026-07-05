@@ -1,5 +1,75 @@
 [
   {
+    "id": "QFS-0096",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-05T20:00:00.351Z",
+    "asset": {
+      "ticker": "BNB-USD",
+      "name": "Binance Coin",
+      "yahooSymbol": "BNB-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 5
+    },
+    "direction": "BUY",
+    "entry": 588.7899780273438,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 592.9669398730848,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 597.143901718826,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 603.4093444874376,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 588.1599926757813,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 69.28214853059984,
+      "macd": {
+        "macdLine": 4.2339914268183065,
+        "signalLine": 3.1184988251438237,
+        "histogram": 1.1154926016744828
+      },
+      "volume": 18759296,
+      "volumeAvg": 9183001.6,
+      "volumeAvg20": 13264515.2,
+      "ema200": 565.8427426352856,
+      "atr14": 4.1769618457411015,
+      "upperWickPct": 26.359875376679092,
+      "lowerWickPct": 25.522243219776293,
+      "close": 588.7899780273438,
+      "fastMA": 578.3999969482422,
+      "slowMA": 575.1292004394531
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-05T20:00:00.358Z"
+    }
+  },
+  {
     "id": "QFS-0095",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-05T13:00:00.378Z",
@@ -1499,85 +1569,6 @@
       "exitAt": "2026-07-03T20:22:21.432Z",
       "pnlPercent": 0.5333055453200565,
       "pnlAbs": 3.02997558593745,
-      "holdBars": 0,
-      "reason": "tp1"
-    }
-  },
-  {
-    "id": "QFS-0076",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T19:00:00.341Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 62163.94140625,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 62460.97890730503,
-        "hit": true,
-        "pnlPercent": 0.5245140291526268,
-        "hitAt": "2026-07-03T20:21:21.457Z"
-      },
-      {
-        "level": 2,
-        "price": 62758.016408360054,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 63203.5726599426,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 62062,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.9493969395846,
-      "macd": {
-        "macdLine": 272.2944574335488,
-        "signalLine": 268.8131442237665,
-        "histogram": 3.481313209782286
-      },
-      "volume": 1484292096,
-      "volumeAvg": 344397824,
-      "volumeAvg20": 139794227.2,
-      "ema200": 60692.74417336112,
-      "atr14": 297.03750105502786,
-      "upperWickPct": 19.518716577540108,
-      "lowerWickPct": 67.8357974205725,
-      "close": 62163.94140625,
-      "fastMA": 61720.5767578125,
-      "slowMA": 61192.60578125
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T19:00:00.343Z"
-    },
-    "result": {
-      "exitPrice": 62490,
-      "exitAt": "2026-07-03T20:21:21.457Z",
-      "pnlPercent": 0.5245140291526268,
-      "pnlAbs": 326.05859375,
       "holdBars": 0,
       "reason": "tp1"
     }
