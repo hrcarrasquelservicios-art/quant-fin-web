@@ -38,8 +38,9 @@
     ],
     "stopLoss": {
       "price": 588.1599926757813,
-      "hit": false,
-      "pnlPercent": 0
+      "hit": true,
+      "pnlPercent": -0.1290745521671368,
+      "hitAt": "2026-07-05T20:28:44.439Z"
     },
     "estrategia": "MA_CROSSOVER",
     "confidence": 75,
@@ -61,12 +62,20 @@
       "fastMA": 578.3999969482422,
       "slowMA": 575.1292004394531
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-05T20:00:00.358Z"
+    },
+    "result": {
+      "exitPrice": 588.03,
+      "exitAt": "2026-07-05T20:28:44.439Z",
+      "pnlPercent": -0.1290745521671368,
+      "pnlAbs": -0.7599780273437773,
+      "holdBars": 0,
+      "reason": "sl"
     }
   },
   {
