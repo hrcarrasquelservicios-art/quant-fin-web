@@ -451,7 +451,15 @@
       "fastMA": 1774.0794982910156,
       "slowMA": 1770.4213989257812
     },
-    "status": "open",
+    "status": "tp1_hit",
+    "result": {
+      "exitPrice": 1795.02001953125,
+      "exitAt": "2026-07-06T16:47:19.694Z",
+      "pnlPercent": 0.7623090629864304,
+      "pnlAbs": 13.580078125,
+      "holdBars": 0,
+      "reason": "tp1"
+    },
     "mode": "REAL"
   },
   {
