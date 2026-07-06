@@ -1,5 +1,79 @@
 [
   {
+    "id": "QFS-0105",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-06T16:00:00.786Z",
+    "asset": {
+      "ticker": "SOL-USD",
+      "name": "Solana",
+      "yahooSymbol": "SOL-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "ICHIMOKU_MACD_RSI",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 4
+    },
+    "direction": "BUY",
+    "entry": 81.33000183105469,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 82.21963032342656,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 83.10925881579843,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 84.44370155435622,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 80.20000122070313,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "ICHIMOKU_MACD_RSI",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 55.663589369739796,
+      "macd": {
+        "macdLine": -0.19445724845608936,
+        "signalLine": -0.21421764337358223,
+        "histogram": 0.019760394917492874
+      },
+      "volume": 125802496,
+      "volumeAvg": 22564792.32,
+      "volumeAvg20": 45074534.4,
+      "ema200": 78.27806625851922,
+      "atr14": 0.8896284923718685,
+      "upperWickPct": 11.199951171875,
+      "lowerWickPct": 2.39990234375,
+      "close": 81.33000183105469,
+      "tenkanSen": 80.31500244140625,
+      "kijunSen": 80.7400016784668,
+      "senkouSpanA": 80.52750205993652,
+      "senkouSpanB": 80.94500350952148,
+      "chikouSpan": 81.33000183105469
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-06T16:00:00.807Z"
+    },
+    "mode": "DEMO"
+  },
+  {
     "id": "QFS-0104",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T15:00:00.778Z",
@@ -3857,86 +3931,6 @@
       "exitAt": "2026-07-02T14:04:20.507Z",
       "pnlPercent": 0.8134355812155492,
       "pnlAbs": 499.921875,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "DEMO"
-  },
-  {
-    "id": "QFS-0055",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T12:00:00.179Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 61234.51953125,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 61699.749556484516,
-        "hit": true,
-        "pnlPercent": 0.7870731614119105,
-        "hitAt": "2026-07-02T13:19:20.628Z"
-      },
-      {
-        "level": 2,
-        "price": 62164.97958171903,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 62862.82461957081,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 61050.1484375,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.62022209183974,
-      "macd": {
-        "macdLine": 419.18691593253607,
-        "signalLine": 360.07597978492885,
-        "histogram": 59.11093614760722
-      },
-      "volume": 1887109120,
-      "volumeAvg": 475075338.24,
-      "volumeAvg20": 714377625.6,
-      "ema200": 60335.46575381111,
-      "atr14": 465.23002523451714,
-      "upperWickPct": 23.930328803727964,
-      "lowerWickPct": 53.740997816665036,
-      "close": 61234.51953125,
-      "fastMA": 60386.56484375,
-      "slowMA": 59421.044609375
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T12:00:00.181Z"
-    },
-    "result": {
-      "exitPrice": 61716.48,
-      "exitAt": "2026-07-02T13:19:20.628Z",
-      "pnlPercent": 0.7870731614119105,
-      "pnlAbs": 481.9604687500032,
       "holdBars": 0,
       "reason": "tp1"
     },
