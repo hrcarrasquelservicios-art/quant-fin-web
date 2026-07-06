@@ -64,12 +64,20 @@
       "senkouSpanB": 80.94500350952148,
       "chikouSpan": 81.91999816894531
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-06T19:00:00.448Z"
+    },
+    "result": {
+      "exitPrice": 83.12000274658203,
+      "exitAt": "2026-07-06T21:12:19.620Z",
+      "pnlPercent": 1.4648493706773826,
+      "pnlAbs": 1.2000045776367188,
+      "holdBars": 0,
+      "reason": "tp1"
     },
     "mode": "REAL"
   },
@@ -135,12 +143,20 @@
       "fastMA": 582.2924957275391,
       "slowMA": 579.8703979492187
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-06T18:00:00.826Z"
+    },
+    "result": {
+      "exitPrice": 590,
+      "exitAt": "2026-07-06T21:12:19.717Z",
+      "pnlPercent": 1.3171196203291202,
+      "pnlAbs": 7.66998291015625,
+      "holdBars": 0,
+      "reason": "tp1"
     },
     "mode": "REAL"
   },
@@ -209,7 +225,15 @@
       "senkouSpanB": 80.94500350952148,
       "chikouSpan": 82.01000213623047
     },
-    "status": "open",
+    "status": "tp1_hit",
+    "result": {
+      "exitPrice": 83.12000274658203,
+      "exitAt": "2026-07-06T21:12:19.724Z",
+      "pnlPercent": 1.3534941853893516,
+      "pnlAbs": 1.1100006103515625,
+      "holdBars": 0,
+      "reason": "tp1"
+    },
     "mode": "REAL"
   },
   {
@@ -277,12 +301,20 @@
       "senkouSpanB": 80.94500350952148,
       "chikouSpan": 81.33000183105469
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-06T16:00:00.807Z"
+    },
+    "result": {
+      "exitPrice": 83.12000274658203,
+      "exitAt": "2026-07-06T21:12:19.730Z",
+      "pnlPercent": 2.2009109494989065,
+      "pnlAbs": 1.7900009155273438,
+      "holdBars": 0,
+      "reason": "tp1"
     },
     "mode": "REAL"
   },
