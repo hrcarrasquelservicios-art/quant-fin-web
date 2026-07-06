@@ -372,12 +372,20 @@
       "fastMA": 62950.0658203125,
       "slowMA": 62836.74140625
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-06T04:00:00.288Z"
+    },
+    "result": {
+      "exitPrice": 63762.8203125,
+      "exitAt": "2026-07-06T16:37:19.658Z",
+      "pnlPercent": 0.8486823265783863,
+      "pnlAbs": 536.58984375,
+      "holdBars": 0,
+      "reason": "tp1"
     },
     "mode": "REAL"
   },
@@ -508,7 +516,15 @@
       "fastMA": 62937.1193359375,
       "slowMA": 62820.46421875
     },
-    "status": "open",
+    "status": "tp1_hit",
+    "result": {
+      "exitPrice": 63762.8203125,
+      "exitAt": "2026-07-06T16:37:19.742Z",
+      "pnlPercent": 0.5767458849152769,
+      "pnlAbs": 365.640625,
+      "holdBars": 0,
+      "reason": "tp1"
+    },
     "mode": "REAL"
   },
   {
