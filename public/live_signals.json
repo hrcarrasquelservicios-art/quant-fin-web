@@ -42,7 +42,7 @@
       "pnlPercent": 0
     },
     "estrategia": "ICHIMOKU_MACD_RSI",
-    "confidence": 75,
+    "confidence": 77,
     "indicators": {
       "rsi": 55.663589369739796,
       "macd": {
