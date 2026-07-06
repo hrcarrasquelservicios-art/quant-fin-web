@@ -1,5 +1,76 @@
 [
   {
+    "id": "QFS-0107",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-06T18:00:00.814Z",
+    "asset": {
+      "ticker": "BNB-USD",
+      "name": "Binance Coin",
+      "yahooSymbol": "BNB-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 5
+    },
+    "direction": "BUY",
+    "entry": 582.3300170898438,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 586.586785426095,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 590.8435537623463,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 597.2287062667233,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 582.3100170898438,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 52.23253453127022,
+      "macd": {
+        "macdLine": -0.37875544150017504,
+        "signalLine": -0.3867025513290173,
+        "histogram": 0.00794710982884228
+      },
+      "volume": 27286400,
+      "volumeAvg": 10112418.56,
+      "volumeAvg20": 9810707.2,
+      "ema200": 569.1543885989003,
+      "atr14": 4.256768336251301,
+      "upperWickPct": 23.313113158091813,
+      "lowerWickPct": 0,
+      "close": 582.3300170898438,
+      "fastMA": 582.2924957275391,
+      "slowMA": 579.8703979492187
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-06T18:00:00.826Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0106",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T17:00:00.601Z",
@@ -3887,86 +3958,6 @@
       "exitAt": "2026-07-02T13:40:20.476Z",
       "pnlPercent": 0.6720417238597007,
       "pnlAbs": 3.77001953125,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0057",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T13:00:00.583Z",
-    "asset": {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "yahooSymbol": "ETH-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 8
-    },
-    "direction": "BUY",
-    "entry": 1660.010009765625,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 1674.476766639979,
-        "hit": true,
-        "pnlPercent": 0.9228854129944638,
-        "hitAt": "2026-07-02T13:23:20.493Z"
-      },
-      {
-        "level": 2,
-        "price": 1688.9435235143326,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 1710.6436588258634,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 1643.8299560546875,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 69.11122897478235,
-      "macd": {
-        "macdLine": 13.5085631527013,
-        "signalLine": 10.94273003936888,
-        "histogram": 2.5658331133324186
-      },
-      "volume": 953987072,
-      "volumeAvg": 174126243.84,
-      "volumeAvg20": 297465856,
-      "ema200": 1608.2541720689812,
-      "atr14": 14.46675687435383,
-      "upperWickPct": 28.456080706551862,
-      "lowerWickPct": 10.090782552997549,
-      "close": 1660.010009765625,
-      "fastMA": 1625.3590026855468,
-      "slowMA": 1596.8730004882811
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T13:00:00.585Z"
-    },
-    "result": {
-      "exitPrice": 1675.33,
-      "exitAt": "2026-07-02T13:23:20.493Z",
-      "pnlPercent": 0.9228854129944638,
-      "pnlAbs": 15.319990234374927,
       "holdBars": 0,
       "reason": "tp1"
     },
