@@ -71,7 +71,7 @@
       "matchPercent": 100,
       "validatedAt": "2026-07-06T16:00:00.807Z"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0104",
@@ -142,7 +142,7 @@
       "matchPercent": 100,
       "validatedAt": "2026-07-06T15:00:00.790Z"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0103",
@@ -213,7 +213,7 @@
       "matchPercent": 100,
       "validatedAt": "2026-07-06T06:00:00.176Z"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0102",
@@ -284,7 +284,7 @@
       "matchPercent": 100,
       "validatedAt": "2026-07-06T04:00:00.391Z"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0101",
@@ -355,7 +355,7 @@
       "matchPercent": 100,
       "validatedAt": "2026-07-06T04:00:00.288Z"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0100",
@@ -420,7 +420,7 @@
       "slowMA": 1770.4213989257812
     },
     "status": "open",
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0099",
@@ -485,7 +485,7 @@
       "slowMA": 62820.46421875
     },
     "status": "open",
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0098",
@@ -565,7 +565,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0097",
@@ -645,7 +645,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0096",
@@ -725,7 +725,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0095",
@@ -805,7 +805,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0094",
@@ -885,7 +885,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0093",
@@ -965,7 +965,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0092",
@@ -1045,7 +1045,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0091",
@@ -1125,7 +1125,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0090",
@@ -1205,7 +1205,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0089",
@@ -1285,7 +1285,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0088",
@@ -1359,7 +1359,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0087",
@@ -1439,7 +1439,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0086",
@@ -1519,7 +1519,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0085",
@@ -1602,7 +1602,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0084",
@@ -1685,7 +1685,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0083",
@@ -1765,7 +1765,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0082",
@@ -1845,7 +1845,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0081",
@@ -1925,7 +1925,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0080",
@@ -2005,7 +2005,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0079",
@@ -2085,7 +2085,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0078",
@@ -2168,7 +2168,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0077",
@@ -2248,7 +2248,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0076",
@@ -2328,7 +2328,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0075",
@@ -2408,7 +2408,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0074",
@@ -2488,7 +2488,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0073",
@@ -2568,7 +2568,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0072",
@@ -2648,7 +2648,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0071",
@@ -2728,7 +2728,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0070",
@@ -2808,7 +2808,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0069",
@@ -2888,7 +2888,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0068",
@@ -2968,7 +2968,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0067",
@@ -3048,7 +3048,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0066",
@@ -3128,7 +3128,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0065",
@@ -3208,7 +3208,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0064",
@@ -3288,7 +3288,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0063",
@@ -3368,7 +3368,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0062",
@@ -3448,7 +3448,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0061",
@@ -3531,7 +3531,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0060",
@@ -3611,7 +3611,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0059",
@@ -3694,7 +3694,7 @@
       "holdBars": 0,
       "reason": "sl"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0058",
@@ -3774,7 +3774,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0057",
@@ -3854,7 +3854,7 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   },
   {
     "id": "QFS-0056",
@@ -3934,6 +3934,6 @@
       "holdBars": 0,
       "reason": "tp1"
     },
-    "mode": "DEMO"
+    "mode": "REAL"
   }
 ]
