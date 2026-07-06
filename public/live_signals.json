@@ -1,5 +1,76 @@
 [
   {
+    "id": "QFS-0104",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-06T15:00:00.778Z",
+    "asset": {
+      "ticker": "DOGE-USD",
+      "name": "Dogecoin",
+      "yahooSymbol": "DOGE-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 55,
+      "backtestYears": 5
+    },
+    "direction": "SELL",
+    "entry": 0.0754299983382225,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 0.07463357259878013,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 0.07383714685933776,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 0.07264250825017421,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 0.0760500024676323,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 65,
+    "indicators": {
+      "rsi": 37.75561431227754,
+      "macd": {
+        "macdLine": -0.0003693267014870938,
+        "signalLine": -0.0001328287603397253,
+        "histogram": -0.0002364979411473685
+      },
+      "volume": 16848960,
+      "volumeAvg": 5144116.48,
+      "volumeAvg20": 10519500.8,
+      "ema200": 0.07583315872405855,
+      "atr14": 0.0007964257394423701,
+      "upperWickPct": 49.41228031730727,
+      "lowerWickPct": 25.882456063461458,
+      "close": 0.0754299983382225,
+      "fastMA": 0.07693799994885922,
+      "slowMA": 0.07700199976563454
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-06T15:00:00.790Z"
+    },
+    "mode": "DEMO"
+  },
+  {
     "id": "QFS-0103",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T06:00:00.167Z",
@@ -3866,86 +3937,6 @@
       "exitAt": "2026-07-02T13:19:20.628Z",
       "pnlPercent": 0.7870731614119105,
       "pnlAbs": 481.9604687500032,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "DEMO"
-  },
-  {
-    "id": "QFS-0054",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T11:00:00.166Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 61197.609375,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 61697.52983680906,
-        "hit": true,
-        "pnlPercent": 0.8478609381953545,
-        "hitAt": "2026-07-02T13:19:20.944Z"
-      },
-      {
-        "level": 2,
-        "price": 62197.45029861812,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 62947.330991331706,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 60959.75,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.27075906001382,
-      "macd": {
-        "macdLine": 391.1014646453259,
-        "signalLine": 345.5937140528717,
-        "histogram": 45.507750592454215
-      },
-      "volume": 1975701504,
-      "volumeAvg": 437333155.84,
-      "volumeAvg20": 684395520,
-      "ema200": 60326.93482130844,
-      "atr14": 499.9204618090582,
-      "upperWickPct": 24.978877789374284,
-      "lowerWickPct": 40.52606729287809,
-      "close": 61197.609375,
-      "fastMA": 60330.1498046875,
-      "slowMA": 59382.24484375
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T11:00:00.168Z"
-    },
-    "result": {
-      "exitPrice": 61716.48,
-      "exitAt": "2026-07-02T13:19:20.944Z",
-      "pnlPercent": 0.8478609381953545,
-      "pnlAbs": 518.8706250000032,
       "holdBars": 0,
       "reason": "tp1"
     },
