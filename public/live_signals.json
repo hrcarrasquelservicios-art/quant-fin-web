@@ -1,5 +1,79 @@
 [
   {
+    "id": "QFS-0108",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-06T19:00:00.439Z",
+    "asset": {
+      "ticker": "SOL-USD",
+      "name": "Solana",
+      "yahooSymbol": "SOL-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "ICHIMOKU_MACD_RSI",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 4
+    },
+    "direction": "BUY",
+    "entry": 81.91999816894531,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 82.82165570858993,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 83.72331324823453,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 85.07579955770146,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 81.24000213623047,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "ICHIMOKU_MACD_RSI",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 58.618546678943666,
+      "macd": {
+        "macdLine": 0.09829156718173238,
+        "signalLine": -0.09337705096090596,
+        "histogram": 0.19166861814263833
+      },
+      "volume": 96396288,
+      "volumeAvg": 28949127.68,
+      "volumeAvg20": 52832000,
+      "ema200": 78.38394328953832,
+      "atr14": 0.901657539644612,
+      "upperWickPct": 31.959257511404747,
+      "lowerWickPct": 32.98961774421897,
+      "close": 81.91999816894531,
+      "tenkanSen": 80.74500274658203,
+      "kijunSen": 80.74500274658203,
+      "senkouSpanA": 80.74500274658203,
+      "senkouSpanB": 80.94500350952148,
+      "chikouSpan": 81.91999816894531
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-06T19:00:00.448Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0107",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T18:00:00.814Z",
@@ -3880,86 +3954,6 @@
       "pnlAbs": -0.27999908447264943,
       "holdBars": 0,
       "reason": "sl"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0058",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T13:00:00.974Z",
-    "asset": {
-      "ticker": "BNB-USD",
-      "name": "Binance Coin",
-      "yahooSymbol": "BNB-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 60,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 560.97998046875,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 564.7222905958479,
-        "hit": true,
-        "pnlPercent": 0.6720417238597007,
-        "hitAt": "2026-07-02T13:40:20.476Z"
-      },
-      {
-        "level": 2,
-        "price": 568.4646007229458,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 574.0780659135926,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 558.5799755859375,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.67299716896026,
-      "macd": {
-        "macdLine": 2.0433246704627663,
-        "signalLine": 1.1781718972955242,
-        "histogram": 0.8651527731672422
-      },
-      "volume": 26457856,
-      "volumeAvg": 10224355.84,
-      "volumeAvg20": 11905900.8,
-      "ema200": 558.6958197767957,
-      "atr14": 3.7423101270978676,
-      "upperWickPct": 26.544221531506075,
-      "lowerWickPct": 15.431854572854856,
-      "close": 560.97998046875,
-      "fastMA": 552.6690002441406,
-      "slowMA": 548.9469982910156
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T13:00:00.976Z"
-    },
-    "result": {
-      "exitPrice": 564.75,
-      "exitAt": "2026-07-02T13:40:20.476Z",
-      "pnlPercent": 0.6720417238597007,
-      "pnlAbs": 3.77001953125,
-      "holdBars": 0,
-      "reason": "tp1"
     },
     "mode": "REAL"
   }
