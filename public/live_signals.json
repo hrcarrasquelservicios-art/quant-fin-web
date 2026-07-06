@@ -1,5 +1,76 @@
 [
   {
+    "id": "QFS-0103",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-06T06:00:00.167Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63054.3203125,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 63386.40602584016,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 63718.49173918032,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 64216.62030919056,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 62894.03125,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 50.90786272417602,
+      "macd": {
+        "macdLine": 153.56394424096652,
+        "signalLine": 147.1187982023528,
+        "histogram": 6.4451460386137285
+      },
+      "volume": 576561152,
+      "volumeAvg": 146982010.88,
+      "volumeAvg20": 297311948.8,
+      "ema200": 61649.393597657516,
+      "atr14": 332.0857133401605,
+      "upperWickPct": 2.8111343459260465,
+      "lowerWickPct": 50.74066190005134,
+      "close": 63054.3203125,
+      "fastMA": 62992.0328125,
+      "slowMA": 62861.16546875
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-06T06:00:00.176Z"
+    },
+    "mode": "DEMO"
+  },
+  {
     "id": "QFS-0102",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T04:00:00.384Z",
@@ -3875,86 +3946,6 @@
       "exitAt": "2026-07-02T13:19:20.944Z",
       "pnlPercent": 0.8478609381953545,
       "pnlAbs": 518.8706250000032,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "DEMO"
-  },
-  {
-    "id": "QFS-0053",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T10:00:00.467Z",
-    "asset": {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "yahooSymbol": "ETH-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 8
-    },
-    "direction": "BUY",
-    "entry": 1642.989990234375,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 1658.1505393130933,
-        "hit": true,
-        "pnlPercent": 1.0626972695758388,
-        "hitAt": "2026-07-02T12:31:20.461Z"
-      },
-      {
-        "level": 2,
-        "price": 1673.3110883918116,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 1696.051912009889,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 1616.3699951171875,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 63.82719186004541,
-      "macd": {
-        "macdLine": 9.995835484349755,
-        "signalLine": 9.682954456106355,
-        "histogram": 0.3128810282433996
-      },
-      "volume": 824564736,
-      "volumeAvg": 206086758.4,
-      "volumeAvg20": 389454387.2,
-      "ema200": 1606.9795059696728,
-      "atr14": 15.160549078718331,
-      "upperWickPct": 18.368808965843826,
-      "lowerWickPct": 13.328962120200266,
-      "close": 1642.989990234375,
-      "fastMA": 1619.3734924316407,
-      "slowMA": 1592.77419921875
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T10:00:00.468Z"
-    },
-    "result": {
-      "exitPrice": 1660.45,
-      "exitAt": "2026-07-02T12:31:20.461Z",
-      "pnlPercent": 1.0626972695758388,
-      "pnlAbs": 17.460009765625045,
       "holdBars": 0,
       "reason": "tp1"
     },
