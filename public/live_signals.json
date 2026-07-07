@@ -1,5 +1,147 @@
 [
   {
+    "id": "QFS-0125",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T20:00:00.623Z",
+    "asset": {
+      "ticker": "ETH-USD",
+      "name": "Ethereum",
+      "yahooSymbol": "ETH-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 8
+    },
+    "direction": "BUY",
+    "entry": 1789.010009765625,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 1806.4627784907725,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 1823.9155472159198,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 1850.094700303641,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 1771.31005859375,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 52.56329947269747,
+      "macd": {
+        "macdLine": 3.857334116934908,
+        "signalLine": 2.338653420477519,
+        "histogram": 1.518680696457389
+      },
+      "volume": 842821632,
+      "volumeAvg": 286840770.56,
+      "volumeAvg20": 147787622.4,
+      "ema200": 1722.426146977734,
+      "atr14": 17.452768725147415,
+      "upperWickPct": 10.439051565056927,
+      "lowerWickPct": 66.05828487866022,
+      "close": 1789.010009765625,
+      "fastMA": 1781.8059997558594,
+      "slowMA": 1779.8036083984375
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T20:00:00.635Z"
+    },
+    "mode": "REAL"
+  },
+  {
+    "id": "QFS-0124",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T20:00:00.320Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63764,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 64239.11901246081,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 64714.23802492163,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 65426.91654361285,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 63332.01171875,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 55.01395002382238,
+      "macd": {
+        "macdLine": 144.94626762541156,
+        "signalLine": 98.7095339135687,
+        "histogram": 46.23673371184286
+      },
+      "volume": 1772498944,
+      "volumeAvg": 576999731.2,
+      "volumeAvg20": 253411020.8,
+      "ema200": 62180.64373805499,
+      "atr14": 475.1190124608146,
+      "upperWickPct": 16.076819859107683,
+      "lowerWickPct": 62.38754536305694,
+      "close": 63764,
+      "fastMA": 63443.1298828125,
+      "slowMA": 63276.432109375
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T20:00:00.331Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0123",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-07T19:00:00.433Z",
@@ -3802,166 +3944,6 @@
       "exitAt": "2026-07-03T20:21:21.457Z",
       "pnlPercent": 0.5245140291526268,
       "pnlAbs": 326.05859375,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0075",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T18:00:00.513Z",
-    "asset": {
-      "ticker": "BNB-USD",
-      "name": "Binance Coin",
-      "yahooSymbol": "BNB-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 60,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 567.3200073242188,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 570.0511262488504,
-        "hit": true,
-        "pnlPercent": 0.5252754419567232,
-        "hitAt": "2026-07-03T19:39:21.753Z"
-      },
-      {
-        "level": 2,
-        "price": 572.7822451734821,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 576.8789235604297,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 566.0799755859375,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 66.22640030447651,
-      "macd": {
-        "macdLine": 2.5453491066957667,
-        "signalLine": 2.342355657885636,
-        "histogram": 0.2029934488101306
-      },
-      "volume": 7487104,
-      "volumeAvg": 5642928.64,
-      "volumeAvg20": 1304147.2,
-      "ema200": 559.4922425752134,
-      "atr14": 2.7311189246317005,
-      "upperWickPct": 29.885299379143426,
-      "lowerWickPct": 16.668420498789857,
-      "close": 567.3200073242188,
-      "fastMA": 562.467495727539,
-      "slowMA": 557.9323986816406
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T18:00:00.519Z"
-    },
-    "result": {
-      "exitPrice": 570.3,
-      "exitAt": "2026-07-03T19:39:21.753Z",
-      "pnlPercent": 0.5252754419567232,
-      "pnlAbs": 2.9799926757812045,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0074",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T15:00:00.360Z",
-    "asset": {
-      "ticker": "BNB-USD",
-      "name": "Binance Coin",
-      "yahooSymbol": "BNB-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 60,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 565.6199951171875,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 568.4361281134995,
-        "hit": true,
-        "pnlPercent": 0.6170228975178715,
-        "hitAt": "2026-07-03T19:16:21.679Z"
-      },
-      {
-        "level": 2,
-        "price": 571.2522611098117,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 575.4764606042797,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 562.9099926757813,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 63.36889704261941,
-      "macd": {
-        "macdLine": 2.4935278611400236,
-        "signalLine": 2.196195439311447,
-        "histogram": 0.29733242182857644
-      },
-      "volume": 1046464,
-      "volumeAvg": 6912008.96,
-      "volumeAvg20": 796560,
-      "ema200": 559.2892831045001,
-      "atr14": 2.816132996312068,
-      "upperWickPct": 0,
-      "lowerWickPct": 73.90086857372816,
-      "close": 565.6199951171875,
-      "fastMA": 561.1539978027344,
-      "slowMA": 556.9853991699218
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T15:00:00.362Z"
-    },
-    "result": {
-      "exitPrice": 569.11,
-      "exitAt": "2026-07-03T19:16:21.679Z",
-      "pnlPercent": 0.6170228975178715,
-      "pnlAbs": 3.4900048828125136,
       "holdBars": 0,
       "reason": "tp1"
     },
