@@ -1,180 +1,338 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://quant-fin.online https://raw.githubusercontent.com; frame-src 'none'; object-src 'none';">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QuantFin | Trading Élite</title>
-    <!-- Google Fonts: Inter and Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <!-- Background Elements -->
-    <div class="bg-glow top-left"></div>
-    <div class="bg-glow bottom-right"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar glass">
-      <div class="logo">
-        <span class="logo-accent">Q</span>uant<span class="logo-accent">F</span>in
-      </div>
-      <div class="nav-links">
-        <a href="#dashboard">Live Dashboard</a>
-        <a href="#transparency">Transparencia</a>
-        <a href="https://t.me/QuantF" class="btn-primary" target="_blank">Únete al Canal VIP</a>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://quant-fin.online https://raw.githubusercontent.com https://query1.finance.yahoo.com; frame-src 'none'; object-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuantFin — Trading Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
 
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="hero-content">
-        <div class="pulse-indicator">
-          <div class="dot"></div> Sistema Algorítmico Activo
-        </div>
-        <h1>El Futuro del Trading<br><span class="text-gradient">Algorítmico Institucional</span></h1>
-        <p class="hero-subtitle">Operaciones automatizadas con precisión matemática. Maximiza tus retornos con nuestra inteligencia artificial y modelos cuantitativos de alta frecuencia.</p>
-        <div class="hero-buttons">
-          <a href="#dashboard" class="btn-secondary">Ver Señales en Vivo</a>
-        </div>
-      </div>
-    </header>
+  <!-- ─── TOP BAR ────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="brand"><span class="brand-gold">Q</span>uant<span class="brand-gold">F</span>in</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-clock" id="clock">--:--:--</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-status"><span class="dot dot-green"></span> Trading</span>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-stat"><span class="stat-label">Balance</span> <span class="stat-val" id="balance-main">$1,000.00</span></span>
+      <span class="topbar-stat"><span class="stat-label">Margen</span> <span class="stat-val" id="topbar-margin">0%</span></span>
+      <span class="topbar-stat"><span class="stat-label">P&L Hoy</span> <span class="stat-val green" id="topbar-daypnl">+$0.00</span></span>
+      <a href="https://t.me/QuantF" target="_blank" class="topbar-cta">@QuantF</a>
+    </div>
+  </header>
 
-    <!-- Live Dashboard Section -->
-    <section id="dashboard" class="section-dashboard">
-      <div class="section-header">
-        <h2>Live <span class="text-gradient">Market Signals</span></h2>
-        <p>Sincronización directa con el motor de Binance</p>
-      </div>
-      
-      <div class="status-bar glass">
-        <div class="stat">
-          <span class="stat-label">Última Actualización</span>
-          <span class="stat-value" id="last-update">--:--:--</span>
+  <!-- ─── TICKER TAPE ─────────────────── -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker-tape"></div>
+  </div>
+
+  <!-- ─── MARKET OVERVIEW ─────────────── -->
+  <section class="market-strip">
+    <div class="market-grid" id="market-grid"></div>
+  </section>
+
+  <!-- ─── TRADING DASHBOARD ───────────── -->
+  <main class="dash-body">
+
+    <!-- Left Column: Account + Feed -->
+    <div class="col-left">
+      <div class="card account-card">
+        <div class="card-header">
+          <span>CUENTA</span>
+          <span class="badge badge-demo">DEMO</span>
         </div>
-        <div class="stat">
-          <span class="stat-label">Win Rate Semanal</span>
-          <span class="stat-value text-green">87.5%</span>
+        <div class="acct-balance" id="acct-balance">$1,000.00</div>
+        <div class="acct-equity">
+          <span>Equity</span>
+          <span class="eq-val" id="acct-equity">$1,000.00</span>
         </div>
-        <div class="stat">
-          <span class="stat-label">Estado del Servidor</span>
-          <span class="stat-value text-cyan">ONLINE</span>
+        <div class="acct-row">
+          <span class="ar-label">Margen Usado</span>
+          <span class="ar-val" id="acct-margin">$0.00</span>
+        </div>
+        <div class="acct-row">
+          <span class="ar-label">Disponible</span>
+          <span class="ar-val green" id="acct-available">$1,000.00</span>
+        </div>
+        <div class="acct-row">
+          <span class="ar-label">P&L No Realizado</span>
+          <span class="ar-val" id="acct-upl">+$0.00</span>
+        </div>
+        <div class="acct-row">
+          <span class="ar-label">Posiciones</span>
+          <span class="ar-val" id="acct-positions">0</span>
+        </div>
+        <div class="acct-progress">
+          <div class="progress-track"><div class="progress-fill" id="acct-progress-fill" style="width:0%"></div></div>
+          <span class="progress-label">Margen: <span id="acct-margin-pct">0</span>%</span>
+        </div>
+        <div class="acct-leverage">
+          <span>Apalancamiento</span>
+          <span class="lev-val">1x</span>
         </div>
       </div>
 
-      <!-- Exchange Rates Widget -->
-      <div class="rates-container glass" id="rates-container" style="margin-bottom: 3rem;">
-        <div class="rates-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem; margin-bottom: 1.5rem;">
-          <h3 style="margin: 0; font-size: 1.25rem; font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 8px;">🏦 Tasas de Cambio Oficiales</h3>
-          <span class="rates-timestamp" id="rates-timestamp" style="font-size: 0.85rem; color: var(--text-muted);">04/07/2026 13:00</span>
+      <div class="card">
+        <div class="card-header">
+          <span>RESUMEN</span>
         </div>
-        <div class="rates-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
-            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💵 Dólar BCV</span>
-            <span class="rate-value" id="rate-bcv-usd" style="font-size: 1.25rem; font-weight: 700; color: #ffd700;">Bs. --</span>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <span class="si-label">Win Rate</span>
+            <span class="si-val" id="dash-wr">--</span>
           </div>
-          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
-            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💶 Euro BCV</span>
-            <span class="rate-value" id="rate-bcv-eur" style="font-size: 1.25rem; font-weight: 700; color: #3b82f6;">Bs. --</span>
+          <div class="stat-item">
+            <span class="si-label">Profit Factor</span>
+            <span class="si-val" id="dash-pf">--</span>
           </div>
-          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
-            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">💱 Dólar Paralelo</span>
-            <span class="rate-value" id="rate-paralelo" style="font-size: 1.25rem; font-weight: 700; color: #f59e0b;">Bs. --</span>
+          <div class="stat-item">
+            <span class="si-label">Trades</span>
+            <span class="si-val" id="dash-trades">0</span>
           </div>
-          <div class="rate-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 10px; display: flex; flex-direction: column; gap: 4px;">
-            <span class="rate-label" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">₮ USDT (Binance)</span>
-            <span class="rate-value" id="rate-usdt" style="font-size: 1.25rem; font-weight: 700; color: #10b981;">Bs. --</span>
+          <div class="stat-item">
+            <span class="si-label">Sharpe</span>
+            <span class="si-val" id="dash-sharpe">--</span>
           </div>
-        </div>
-        <div class="rates-conversions" style="display: flex; gap: 2rem; padding: 1rem 0; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.9rem; flex-wrap: wrap;">
-          <span>🇨🇴 1 Peso Colombiano = <strong id="rate-cop" style="color: #f3f4f6;">Bs. --</strong></span>
-          <span>🇨🇱 1 Peso Chileno = <strong id="rate-clp" style="color: #f3f4f6;">Bs. --</strong></span>
-        </div>
-        <div class="rates-footer" style="font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 0.75rem; margin-top: 0.5rem;">
-          <span>Fuente: BCV Oficial &middot; Referencia: @CambioRealBot</span>
-          <span style="font-weight: 600; color: var(--color-primary);">#QuantFin</span>
-        </div>
-      </div>
-
-      <h3 class="grid-title"><span class="badge-real">REAL</span> Ejecución en Cuenta Directa</h3>
-      <div class="signals-grid" id="signals-real-container">
-        <!-- Señales REALES se inyectan aquí via JS -->
-      </div>
-
-      <h3 class="grid-title" style="margin-top: 4rem;"><span class="badge-demo">DEMO</span> Validación en Vivo</h3>
-      <div class="signals-grid" id="signals-demo-container">
-        <!-- Señales DEMO se inyectan aquí via JS -->
-      </div>
-    </section>
-
-    <!-- Transparency Section -->
-    <section id="transparency" class="section-transparency">
-      <div class="transparency-container glass">
-        <h2>¿Qué significa <span class="text-gradient">DEMO y REAL</span> en nuestras señales?</h2>
-        
-        <div class="transparency-grid">
-          <div class="transparency-text">
-            <h3>La Aclaración Central</h3>
-            <p>Nuestras señales en fase <strong>DEMO</strong> no son una simulación con datos inventados. Corren sobre el precio real del mercado, en tiempo real, minuto a minuto — exactamente el mismo mercado contra el que operaría una cuenta real. La única diferencia es que, mientras validamos el sistema en vivo, no hay capital ejecutándose detrás de cada orden.</p>
-            
-            <h3 style="margin-top: 1.5rem;">Por qué lo hacemos así</h3>
-            <p>Preferimos demostrar consistencia con el mercado real antes de arriesgar capital — tuyo o nuestro. Cada señal DEMO pasó primero por un backtest de 12 meses con costos de comisión y slippage incluidos, y ahora se valida en vivo antes de pasar a ejecución real.</p>
-          </div>
-
-          <div class="transparency-table-wrapper">
-            <table class="transparency-table">
-              <thead>
-                <tr>
-                  <th>Característica</th>
-                  <th>🧪 DEMO</th>
-                  <th>✅ REAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Datos de mercado</td>
-                  <td>Reales, en vivo</td>
-                  <td>Reales, en vivo</td>
-                </tr>
-                <tr>
-                  <td>Ejecución de la orden</td>
-                  <td>Simulada (sin capital)</td>
-                  <td>Real (con capital)</td>
-                </tr>
-                <tr>
-                  <td>TP / SL</td>
-                  <td>Verificados contra precio real</td>
-                  <td>Verificados contra precio real</td>
-                </tr>
-                <tr>
-                  <td>Reportado en el canal</td>
-                  <td>Sí, historial completo</td>
-                  <td>Sí, historial completo</td>
-                </tr>
-                <tr>
-                  <td>Objetivo</td>
-                  <td>Validar el sistema públicamente</td>
-                  <td>Generar resultado real</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="stat-item full">
+            <span class="si-label">P&L Total</span>
+            <span class="si-val big" id="dash-pnl">$0.00</span>
           </div>
         </div>
+      </div>
 
-        <div class="transparency-disclaimer">
-          <strong>⚠️ Disclaimer:</strong> El trading de criptoactivos conlleva un riesgo severo de pérdida de capital. Los resultados pasados, tanto en modo DEMO como REAL, no garantizan rendimientos futuros. QuantFin no ofrece asesoría financiera personalizada; todas las señales y análisis son exclusivamente de carácter educativo e informativo.
+      <div class="card">
+        <div class="card-header">
+          <span>TRADE FEED</span>
+          <span class="badge badge-live">LIVE</span>
+        </div>
+        <div class="feed" id="trade-feed">
+          <div class="feed-empty">Esperando operaciones...</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2026 Nexus Flow Dynamics. Todos los derechos reservados.</p>
-      <p class="disclaimer">El trading conlleva un alto nivel de riesgo. Los resultados pasados no garantizan rendimientos futuros.</p>
-    </footer>
+    <!-- Center Column: Positions + History -->
+    <div class="col-center">
+      <div class="card">
+        <div class="card-header">
+          <span>POSICIONES ABIERTAS</span>
+          <div class="header-tabs">
+            <span class="htab active">Activas</span>
+            <span class="htab">Historial</span>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Par</th>
+                <th>Dir</th>
+                <th>Cant</th>
+                <th>Entrada</th>
+                <th>SL</th>
+                <th>TP</th>
+                <th>Precio</th>
+                <th>P&L</th>
+              </tr>
+            </thead>
+            <tbody id="positions-tbody">
+              <tr class="empty"><td colspan="8">Sin posiciones activas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+      <div class="card">
+        <div class="card-header">
+          <span>EJECUCIONES RECIENTES</span>
+          <span class="badge badge-outline">Ultimas 30</span>
+        </div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Par</th>
+                <th>Dir</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>P&L</th>
+                <th>Resultado</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody">
+              <tr class="empty"><td colspan="7">Sin historial aun</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>LIBRO DE ORDENES</span>
+          <span class="badge badge-outline">Todas</span>
+        </div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>SL</th>
+                <th>TP1</th><th>TP2</th><th>TP3</th><th>P&L</th><th>Status</th><th>Hora</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <tr class="empty"><td colspan="11">No hay operaciones aun</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Charts + Analytics -->
+    <div class="col-right">
+      <div class="card">
+        <div class="card-header">
+          <span>CURVA DE CAPITAL</span>
+        </div>
+        <div class="chart-box">
+          <canvas id="equity-curve" width="360" height="160"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>RENDIMIENTO</span>
+        </div>
+        <div class="perf-grid">
+          <div class="perf-block">
+            <span class="perf-label">Semanal</span>
+            <div class="perf-row"><span>Trades</span><span id="pw-trades">0</span></div>
+            <div class="perf-row"><span>WR</span><span class="green" id="pw-wr">0%</span></div>
+            <div class="perf-row big"><span>P&L</span><span id="pw-pnl">+0.00%</span></div>
+          </div>
+          <div class="perf-block">
+            <span class="perf-label">Mensual</span>
+            <div class="perf-row"><span>Trades</span><span id="pm-trades">0</span></div>
+            <div class="perf-row"><span>WR</span><span class="green" id="pm-wr">0%</span></div>
+            <div class="perf-row big"><span>P&L</span><span id="pm-pnl">+0.00%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>DESGLOSE POR ACTIVO</span>
+        </div>
+        <div class="table-scroll compact-scroll">
+          <table class="table compact">
+            <thead>
+              <tr><th>Activo</th><th>Trades</th><th>WR</th><th>P&L</th></tr>
+            </thead>
+            <tbody id="asset-tbody">
+              <tr class="empty"><td colspan="4">Sin datos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card vip-card">
+        <div class="vip-inner">
+          <h4>Acceso VIP</h4>
+          <p>Automatiza tus trades con ejecucion OCO en Binance</p>
+          <a href="https://t.me/QuantF" target="_blank" class="btn-gold">Unete a @QuantF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── ANALYTICS SECTION ────────────── -->
+  <section class="section" id="analytics">
+    <div class="section-title">
+      <h2>Analytics <span class="gold">Engine</span></h2>
+      <p>Metricas verificables del algoritmo QuantFin</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="m-value" id="metric-signals">0</div>
+        <div class="m-label">Senales</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value green" id="metric-wr">0%</div>
+        <div class="m-label">Win Rate</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value gold" id="metric-pf">0.00</div>
+        <div class="m-label">Profit Factor</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value" id="metric-pnl">+0.00%</div>
+        <div class="m-label">P&L Total</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value green" id="metric-wins">0</div>
+        <div class="m-label">Ganadas</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value red" id="metric-losses">0</div>
+        <div class="m-label">Perdidas</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1.5rem">
+      <div class="card-header"><span>RENDIMIENTO POR ACTIVO</span></div>
+      <div class="table-scroll">
+        <table class="table">
+          <thead>
+            <tr><th>Activo</th><th>Trades</th><th>Wins</th><th>Losses</th><th>WR</th><th>P&L Total</th><th>Bloque</th></tr>
+          </thead>
+          <tbody id="analytics-asset-tbody">
+            <tr class="empty"><td colspan="7">Cargando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VIP SECTION ──────────────────── -->
+  <section class="section section-vip" id="vip">
+    <div class="vip-hero">
+      <h2>Desbloquea el <span class="gold">Poder Cuantitativo</span></h2>
+      <p>Senales REALES con ejecucion automatica en Binance, alertas instantaneas y soporte 24/7</p>
+      <div class="vip-grid">
+        <div class="vf"><span class="vf-icon">O</span> Ejecucion OCO</div>
+        <div class="vf"><span class="vf-icon">R</span> Reportes detallados</div>
+        <div class="vf"><span class="vf-icon">A</span> Alertas TP/SL</div>
+        <div class="vf"><span class="vf-icon">S</span> Soporte directo</div>
+        <div class="vf"><span class="vf-icon">D</span> Dashboard exclusivo</div>
+        <div class="vf"><span class="vf-icon">T</span> Senales 68%+ WR</div>
+      </div>
+      <a href="https://t.me/QuantF" target="_blank" class="btn-gold btn-lg">Comenzar</a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <span class="brand"><span class="brand-gold">Q</span>uant<span class="brand-gold">F</span>in</span>
+        <p class="footer-text">Broker algoritmico cuantitativo</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://t.me/QuantF">@QuantF</a>
+        <a href="#">Terminos</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+    <p class="disc">El trading conlleva riesgo. Resultados pasados no garantizan rendimientos futuros.</p>
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+</body>
 </html>
