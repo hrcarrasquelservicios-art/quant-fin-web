@@ -1,5 +1,147 @@
 [
   {
+    "id": "QFS-0112",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T02:00:00.285Z",
+    "asset": {
+      "ticker": "ETH-USD",
+      "name": "Ethereum",
+      "yahooSymbol": "ETH-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 8
+    },
+    "direction": "BUY",
+    "entry": 1792.6199951171875,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 1811.1933046717593,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 1829.7666142263313,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 1857.626578558189,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 1785.4000244140625,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 55.25768974409332,
+      "macd": {
+        "macdLine": 7.807427900821722,
+        "signalLine": 4.16536791287168,
+        "histogram": 3.6420599879500415
+      },
+      "volume": 1528752128,
+      "volumeAvg": 374228172.8,
+      "volumeAvg20": 622023424,
+      "ema200": 1709.162954989569,
+      "atr14": 18.573309554571864,
+      "upperWickPct": 0,
+      "lowerWickPct": 37.52665619432914,
+      "close": 1792.6199951171875,
+      "fastMA": 1776.069512939453,
+      "slowMA": 1773.8516015625
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T02:00:00.295Z"
+    },
+    "mode": "REAL"
+  },
+  {
+    "id": "QFS-0111",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T02:00:00.184Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63826.37890625,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 64306.14733061771,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 64785.91575498541,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 65505.568391536974,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 63742.01953125,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 58.82548201688628,
+      "macd": {
+        "macdLine": 294.9724669655916,
+        "signalLine": 158.60622303638655,
+        "histogram": 136.36624392920504
+      },
+      "volume": 1579122688,
+      "volumeAvg": 539318108.16,
+      "volumeAvg20": 1088203571.2,
+      "ema200": 61895.68852151016,
+      "atr14": 479.76842436770715,
+      "upperWickPct": 0,
+      "lowerWickPct": 20.527299633927875,
+      "close": 63826.37890625,
+      "fastMA": 63115.34921875,
+      "slowMA": 62995.506875
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T02:00:00.194Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0110",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-06T23:00:00.726Z",
@@ -3810,169 +3952,6 @@
       "pnlAbs": 558.5703125,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0062",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T15:00:00.420Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 61545.44140625,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 62064.41214801624,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 2,
-        "price": 62583.382889782486,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 63361.83900243185,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 61329.87109375,
-      "hit": true,
-      "pnlPercent": -0.415045209545056,
-      "hitAt": "2026-07-02T16:29:20.530Z"
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.53957712175514,
-      "macd": {
-        "macdLine": 525.2669592435559,
-        "signalLine": 430.8888353066868,
-        "histogram": 94.37812393686909
-      },
-      "volume": 2927640576,
-      "volumeAvg": 627409387.52,
-      "volumeAvg20": 1141616640,
-      "ema200": 60372.782804914794,
-      "atr14": 518.9707417662423,
-      "upperWickPct": 31.98337100024022,
-      "lowerWickPct": 26.80347679440732,
-      "close": 61545.44140625,
-      "fastMA": 60627.7978515625,
-      "slowMA": 59587.59265625
-    },
-    "status": "stopped",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T15:00:00.422Z"
-    },
-    "result": {
-      "exitPrice": 61290,
-      "exitAt": "2026-07-02T16:29:20.530Z",
-      "pnlPercent": -0.415045209545056,
-      "pnlAbs": -255.44140625,
-      "holdBars": 0,
-      "reason": "sl"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0061",
-    "bloque": "C_ACCIONES",
-    "timestamp": "2026-07-02T14:00:01.925Z",
-    "asset": {
-      "ticker": "META",
-      "name": "Meta Platforms",
-      "yahooSymbol": "META",
-      "marketType": "stock",
-      "bloque": "C_ACCIONES",
-      "estrategia": "ICHIMOKU_MACD_RSI",
-      "active": true,
-      "minWinRate": 60,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 592.1599731445312,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 603.0987466002887,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 2,
-        "price": 614.0375200560461,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 630.4456802396822,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 591.2799877929688,
-      "hit": true,
-      "pnlPercent": -0.16464691785125746,
-      "hitAt": "2026-07-02T14:03:20.513Z"
-    },
-    "estrategia": "ICHIMOKU_MACD_RSI",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 54.7728647491994,
-      "macd": {
-        "macdLine": 14.08763390751892,
-        "signalLine": 11.510785873987153,
-        "histogram": 2.5768480335317676
-      },
-      "volume": 4866469,
-      "volumeAvg": 2264902.28,
-      "volumeAvg20": 3151748.25,
-      "ema200": 583.0903257372629,
-      "atr14": 10.938773455757417,
-      "upperWickPct": 11.25657269869868,
-      "lowerWickPct": 4.5988491453451745,
-      "close": 592.1599731445312,
-      "tenkanSen": 594.3800048828125,
-      "kijunSen": 588.625,
-      "senkouSpanA": 591.5025024414062,
-      "senkouSpanB": 584.2425231933594,
-      "chikouSpan": 592.1599731445312
-    },
-    "status": "stopped",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T14:00:01.926Z"
-    },
-    "result": {
-      "exitPrice": 591.185,
-      "exitAt": "2026-07-02T14:03:20.513Z",
-      "pnlPercent": -0.16464691785125746,
-      "pnlAbs": -0.9749731445313046,
-      "holdBars": 0,
-      "reason": "sl"
     },
     "mode": "REAL"
   }
