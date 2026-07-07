@@ -1,5 +1,79 @@
 [
   {
+    "id": "QFS-0116",
+    "bloque": "B_INDICES",
+    "timestamp": "2026-07-07T15:00:01.483Z",
+    "asset": {
+      "ticker": "DIA",
+      "name": "Dow Jones ETF",
+      "yahooSymbol": "DIA",
+      "marketType": "index",
+      "bloque": "B_INDICES",
+      "estrategia": "ICHIMOKU_MACD_RSI",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 528.1649780273438,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 529.9045150134282,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 531.6440519995126,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 534.2533574786391,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 528.1300244140625,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "ICHIMOKU_MACD_RSI",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 59.96039264203136,
+      "macd": {
+        "macdLine": 1.7624775536522748,
+        "signalLine": 1.6830401215698383,
+        "histogram": 0.07943743208243648
+      },
+      "volume": 708786,
+      "volumeAvg": 523539.3,
+      "volumeAvg20": 474716.55,
+      "ema200": 517.7019147912584,
+      "atr14": 1.739536986084408,
+      "upperWickPct": 4.1095317725752505,
+      "lowerWickPct": 1.024247491638796,
+      "close": 528.1649780273438,
+      "tenkanSen": 529.1949768066406,
+      "kijunSen": 526.0799865722656,
+      "senkouSpanA": 527.6374816894531,
+      "senkouSpanB": 524.3199768066406,
+      "chikouSpan": 528.1649780273438
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T15:00:01.499Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0115",
     "bloque": "C_ACCIONES",
     "timestamp": "2026-07-07T14:00:02.918Z",
@@ -3894,86 +3968,6 @@
       "pnlAbs": 13.48999511718739,
       "holdBars": 0,
       "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0066",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-02T23:00:00.590Z",
-    "asset": {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "yahooSymbol": "ETH-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 8
-    },
-    "direction": "BUY",
-    "entry": 1696.219970703125,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 1709.9421066192015,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 2,
-        "price": 1723.664242535278,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 1744.2474464093925,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 1691.0899658203125,
-      "hit": true,
-      "pnlPercent": -0.3189427548646588,
-      "hitAt": "2026-07-02T23:07:20.743Z"
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 67.25013993113306,
-      "macd": {
-        "macdLine": 24.062081933719583,
-        "signalLine": 23.094311192943117,
-        "histogram": 0.9677707407764657
-      },
-      "volume": 1485054976,
-      "volumeAvg": 241202216.96,
-      "volumeAvg20": 427368704,
-      "ema200": 1616.8533293452783,
-      "atr14": 13.722135916076414,
-      "upperWickPct": 11.090511405061973,
-      "lowerWickPct": 53.41318612644517,
-      "close": 1696.219970703125,
-      "fastMA": 1666.802001953125,
-      "slowMA": 1623.1821997070313
-    },
-    "status": "stopped",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-02T23:00:00.592Z"
-    },
-    "result": {
-      "exitPrice": 1690.81,
-      "exitAt": "2026-07-02T23:07:20.743Z",
-      "pnlPercent": -0.3189427548646588,
-      "pnlAbs": -5.409970703125055,
-      "holdBars": 0,
-      "reason": "sl"
     },
     "mode": "REAL"
   }
