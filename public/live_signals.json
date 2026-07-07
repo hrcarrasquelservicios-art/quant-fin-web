@@ -1,5 +1,221 @@
 [
   {
+    "id": "QFS-0119",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T16:00:00.820Z",
+    "asset": {
+      "ticker": "SOL-USD",
+      "name": "Solana",
+      "yahooSymbol": "SOL-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "ICHIMOKU_MACD_RSI",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 4
+    },
+    "direction": "BUY",
+    "entry": 82.02999877929688,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 82.80130392268407,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 83.57260906607127,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 84.72956678115206,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 81.39999816894532,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "ICHIMOKU_MACD_RSI",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 56.98285644647433,
+      "macd": {
+        "macdLine": 0.05813923586333658,
+        "signalLine": 0.0349269157199757,
+        "histogram": 0.02321232014336088
+      },
+      "volume": 36141312,
+      "volumeAvg": 34456762.88,
+      "volumeAvg20": 22095244.8,
+      "ema200": 78.98442819526117,
+      "atr14": 0.7713051433871971,
+      "upperWickPct": 29.88520866766638,
+      "lowerWickPct": 35.63266773653241,
+      "close": 82.02999877929688,
+      "tenkanSen": 81.36999893188477,
+      "kijunSen": 81.66999816894531,
+      "senkouSpanA": 81.51999855041504,
+      "senkouSpanB": 81.36000061035156,
+      "chikouSpan": 82.02999877929688
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T16:00:00.828Z"
+    },
+    "mode": "REAL"
+  },
+  {
+    "id": "QFS-0118",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T16:00:00.483Z",
+    "asset": {
+      "ticker": "ETH-USD",
+      "name": "Ethereum",
+      "yahooSymbol": "ETH-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 8
+    },
+    "direction": "BUY",
+    "entry": 1795.25,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 1811.8755100859298,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 1828.5010201718596,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 1853.4392853007544,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 1779.199951171875,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 57.94553260436164,
+      "macd": {
+        "macdLine": 1.1428310136632263,
+        "signalLine": 0.1846704619595453,
+        "histogram": 0.958160551703681
+      },
+      "volume": 552258560,
+      "volumeAvg": 312797818.88,
+      "volumeAvg20": 254765824,
+      "ema200": 1719.4263152120152,
+      "atr14": 16.62551008592982,
+      "upperWickPct": 29.290124404853323,
+      "lowerWickPct": 33.11565043772078,
+      "close": 1795.25,
+      "fastMA": 1783.0540100097655,
+      "slowMA": 1777.986806640625
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T16:00:00.490Z"
+    },
+    "mode": "REAL"
+  },
+  {
+    "id": "QFS-0117",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T16:00:00.248Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63862.30859375,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 64352.15471771113,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 64842.000841672256,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 65576.77002761394,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 63314.01953125,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 58.80860605590505,
+      "macd": {
+        "macdLine": 59.81843175506219,
+        "signalLine": 43.98653443066403,
+        "histogram": 15.831897324398163
+      },
+      "volume": 1191634944,
+      "volumeAvg": 627145236.48,
+      "volumeAvg20": 438582374.4,
+      "ema200": 62111.86817837367,
+      "atr14": 489.8461239611266,
+      "upperWickPct": 25.5970589956534,
+      "lowerWickPct": 22.020291227528823,
+      "close": 63862.30859375,
+      "fastMA": 63490.10078125,
+      "slowMA": 63178.487109375
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T16:00:00.260Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0116",
     "bloque": "B_INDICES",
     "timestamp": "2026-07-07T15:00:01.483Z",
@@ -3734,246 +3950,6 @@
       "exitAt": "2026-07-03T19:14:21.706Z",
       "pnlPercent": 0.5057364476289862,
       "pnlAbs": 2.8599902343750045,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0069",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T09:00:00.757Z",
-    "asset": {
-      "ticker": "DOGE-USD",
-      "name": "Dogecoin",
-      "yahooSymbol": "DOGE-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 55,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 0.0747700035572052,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 0.07530746586404721,
-        "hit": true,
-        "pnlPercent": 0.7342469127673231,
-        "hitAt": "2026-07-03T10:51:21.130Z"
-      },
-      {
-        "level": 2,
-        "price": 0.07584492817088923,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 0.07665112163115224,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 0.0745700035572052,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 58.43670822230505,
-      "macd": {
-        "macdLine": 0.00043506957261679746,
-        "signalLine": 0.0004190758052217226,
-        "histogram": 0.000015993767395074848
-      },
-      "volume": 30274496,
-      "volumeAvg": 5847357.44,
-      "volumeAvg20": 4422374.4,
-      "ema200": 0.07454924977024567,
-      "atr14": 0.0005374623068420121,
-      "upperWickPct": 34.28559264305177,
-      "lowerWickPct": 0,
-      "close": 0.0747700035572052,
-      "fastMA": 0.07445949986577034,
-      "slowMA": 0.07335620000958443
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T09:00:00.762Z"
-    },
-    "result": {
-      "exitPrice": 0.075319,
-      "exitAt": "2026-07-03T10:51:21.130Z",
-      "pnlPercent": 0.7342469127673231,
-      "pnlAbs": 0.0005489964427947969,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0068",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T06:00:01.000Z",
-    "asset": {
-      "ticker": "DOGE-USD",
-      "name": "Dogecoin",
-      "yahooSymbol": "DOGE-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 55,
-      "backtestYears": 5
-    },
-    "direction": "BUY",
-    "entry": 0.07498999685049057,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 0.07557664104118408,
-        "hit": true,
-        "pnlPercent": 0.9067918096665217,
-        "hitAt": "2026-07-03T11:22:21.422Z"
-      },
-      {
-        "level": 2,
-        "price": 0.07616328523187758,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 0.07704325151791785,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 0.07418000291585922,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.05296188565731,
-      "macd": {
-        "macdLine": 0.00040644126211368536,
-        "signalLine": 0.0003984752476265578,
-        "histogram": 0.000007966014487127574
-      },
-      "volume": 13532800,
-      "volumeAvg": 5596693.76,
-      "volumeAvg20": 6973452.8,
-      "ema200": 0.07453492073691227,
-      "atr14": 0.0005866441906935084,
-      "upperWickPct": 33.69614512471655,
-      "lowerWickPct": 4.347262714609653,
-      "close": 0.07498999685049057,
-      "fastMA": 0.07431749925017357,
-      "slowMA": 0.07317419975996017
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T06:00:01.004Z"
-    },
-    "result": {
-      "exitPrice": 0.07567,
-      "exitAt": "2026-07-03T11:22:21.422Z",
-      "pnlPercent": 0.9067918096665217,
-      "pnlAbs": 0.0006800031495094311,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0067",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T01:00:00.398Z",
-    "asset": {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "yahooSymbol": "ETH-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 8
-    },
-    "direction": "BUY",
-    "entry": 1694.6300048828125,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 1708.0584504777084,
-        "hit": true,
-        "pnlPercent": 0.7960436837727451,
-        "hitAt": "2026-07-03T01:14:20.824Z"
-      },
-      {
-        "level": 2,
-        "price": 1721.4868960726042,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 1741.629564464948,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 1690.8499755859375,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 66.10935055443491,
-      "macd": {
-        "macdLine": 24.18838273294682,
-        "signalLine": 23.17202928548087,
-        "histogram": 1.0163534474659492
-      },
-      "volume": 705605632,
-      "volumeAvg": 198034739.2,
-      "volumeAvg20": 319450009.6,
-      "ema200": 1616.8812891408288,
-      "atr14": 13.428445594895859,
-      "upperWickPct": 30.653744115076144,
-      "lowerWickPct": 22.36194390344891,
-      "close": 1694.6300048828125,
-      "fastMA": 1666.9280029296874,
-      "slowMA": 1623.2326000976564
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T01:00:00.400Z"
-    },
-    "result": {
-      "exitPrice": 1708.12,
-      "exitAt": "2026-07-03T01:14:20.824Z",
-      "pnlPercent": 0.7960436837727451,
-      "pnlAbs": 13.48999511718739,
       "holdBars": 0,
       "reason": "tp1"
     },
