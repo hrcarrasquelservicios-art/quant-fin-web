@@ -1,5 +1,76 @@
 [
   {
+    "id": "QFS-0126",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-07T21:00:00.324Z",
+    "asset": {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "yahooSymbol": "BTC-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 65,
+      "backtestYears": 10
+    },
+    "direction": "BUY",
+    "entry": 63627.5,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 64078.86876913271,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 64530.23753826541,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 65207.290691964474,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 63564.69921875,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 75,
+    "indicators": {
+      "rsi": 52.712740627881146,
+      "macd": {
+        "macdLine": 135.00546830755775,
+        "signalLine": 105.81570797185283,
+        "histogram": 29.189760335704918
+      },
+      "volume": 869947392,
+      "volumeAvg": 594398679.04,
+      "volumeAvg20": 296908390.4,
+      "ema200": 62194.85401480395,
+      "atr14": 451.36876913270595,
+      "upperWickPct": 23.536761804550835,
+      "lowerWickPct": 20.472182033407865,
+      "close": 63627.5,
+      "fastMA": 63416.216015625,
+      "slowMA": 63293.450546875
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-07T21:00:00.336Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0125",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-07T20:00:00.623Z",
@@ -3864,86 +3935,6 @@
       "exitAt": "2026-07-03T20:22:21.432Z",
       "pnlPercent": 0.5333055453200565,
       "pnlAbs": 3.02997558593745,
-      "holdBars": 0,
-      "reason": "tp1"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0076",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-03T19:00:00.341Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 62163.94140625,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 62460.97890730503,
-        "hit": true,
-        "pnlPercent": 0.5245140291526268,
-        "hitAt": "2026-07-03T20:21:21.457Z"
-      },
-      {
-        "level": 2,
-        "price": 62758.016408360054,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 63203.5726599426,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 62062,
-      "hit": false,
-      "pnlPercent": 0
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 64.9493969395846,
-      "macd": {
-        "macdLine": 272.2944574335488,
-        "signalLine": 268.8131442237665,
-        "histogram": 3.481313209782286
-      },
-      "volume": 1484292096,
-      "volumeAvg": 344397824,
-      "volumeAvg20": 139794227.2,
-      "ema200": 60692.74417336112,
-      "atr14": 297.03750105502786,
-      "upperWickPct": 19.518716577540108,
-      "lowerWickPct": 67.8357974205725,
-      "close": 62163.94140625,
-      "fastMA": 61720.5767578125,
-      "slowMA": 61192.60578125
-    },
-    "status": "tp1_hit",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-03T19:00:00.343Z"
-    },
-    "result": {
-      "exitPrice": 62490,
-      "exitAt": "2026-07-03T20:21:21.457Z",
-      "pnlPercent": 0.5245140291526268,
-      "pnlAbs": 326.05859375,
       "holdBars": 0,
       "reason": "tp1"
     },
