@@ -228,6 +228,10 @@ body{
 .table .green{color:var(--green)}
 .table .red{color:var(--red)}
 .table .gold{color:var(--gold)}
+.flash-up{animation:flashG .6s ease}
+.flash-down{animation:flashR .6s ease}
+@keyframes flashG{0%{background:var(--green-bg)}100%{background:transparent}}
+@keyframes flashR{0%{background:var(--red-bg)}100%{background:transparent}}
 .dir-badge{
   display:inline-block;padding:1px 7px;border-radius:3px;
   font-size:.6rem;font-weight:700;text-transform:uppercase;

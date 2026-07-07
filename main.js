@@ -308,6 +308,7 @@ function renderAccount(signals) {
 }
 
 // ─── LIVE PRICE UPDATES ─────────────────
+let lastPnl = {};
 function startLivePriceUpdates(signals) {
   const open = signals.filter(s=>s.status==='open'||s.status==='active');
   open.forEach(async p=>{
@@ -319,10 +320,40 @@ function startLivePriceUpdates(signals) {
       const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
       if(!price) return;
       const pnlPct = p.direction==='BUY'?((price-p.entry)/p.entry*100):((p.entry-price)/p.entry*100);
+      const pnlAbs = pnlPct/100 * p.entry * p.quantity;
       const pe = $(`pr-${p.id||''}`);
       const pn = $(`pn-${p.id||''}`);
       if(pe) pe.textContent=`$${price.toFixed(4)}`;
-      if(pn){pn.textContent=`${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%`;pn.className=pnlPct>=0?'green':'red';}
+      if(pn){
+        const old = lastPnl[p.id];
+        const pnlStr = `${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%`;
+        pn.textContent = pnlStr;
+        pn.className = pnlPct>=0?'green':'red';
+        // Flash effect on change
+        if (old !== undefined && old !== pnlPct) {
+          pn.classList.add(pnlPct>old?'flash-up':'flash-down');
+          setTimeout(()=>pn.classList.remove('flash-up','flash-down'), 600);
+        }
+        lastPnl[p.id] = pnlPct;
+      }
+      // Update topbar day P&L
+      const totalUpl = open.reduce((s,o)=>{
+        const l = lastPnl[o.id]||0;
+        return s + l/100 * o.entry * o.quantity;
+      }, 0);
+      if ($('topbar-daypnl')) {
+        $('topbar-daypnl').textContent = `${totalUpl>=0?'+':''}$${totalUpl.toFixed(2)}`;
+        $('topbar-daypnl').className = `stat-val ${totalUpl>=0?'green':'red'}`;
+      }
+      // Update account equity in real-time
+      if ($('acct-upl')) {
+        $('acct-upl').textContent = `${totalUpl>=0?'+':''}$${totalUpl.toFixed(2)}`;
+        $('acct-upl').className = `ar-val ${totalUpl>=0?'green':'red'}`;
+      }
+      if ($('acct-equity')) {
+        $('acct-equity').textContent = `$${(1000+totalUpl).toFixed(2)}`;
+        $('acct-equity').className = `eq-val ${totalUpl>=0?'green':'red'}`;
+      }
     } catch {}
   });
 }
