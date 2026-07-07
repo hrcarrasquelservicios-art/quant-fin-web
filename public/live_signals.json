@@ -61,12 +61,20 @@
       "fastMA": 1783.2700134277343,
       "slowMA": 1779.2948095703125
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T18:00:00.353Z"
+    },
+    "result": {
+      "exitPrice": 1790.280029296875,
+      "exitAt": "2026-07-07T18:52:19.736Z",
+      "pnlPercent": -0.9888507955505258,
+      "pnlAbs": -17.8800048828125,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
@@ -132,12 +140,20 @@
       "fastMA": 63483.20078125,
       "slowMA": 63231.3190625
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T18:00:00.226Z"
+    },
+    "result": {
+      "exitPrice": 63751.75,
+      "exitAt": "2026-07-07T18:52:19.765Z",
+      "pnlPercent": -0.5959692772014831,
+      "pnlAbs": -382.21875,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
