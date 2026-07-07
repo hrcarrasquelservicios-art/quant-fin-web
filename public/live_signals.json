@@ -364,12 +364,20 @@
       "senkouSpanB": 81.36000061035156,
       "chikouSpan": 82.02999877929688
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T16:00:00.828Z"
+    },
+    "result": {
+      "exitPrice": 81.33999633789062,
+      "exitAt": "2026-07-07T19:02:19.945Z",
+      "pnlPercent": -0.8411586635064002,
+      "pnlAbs": -0.69000244140625,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
