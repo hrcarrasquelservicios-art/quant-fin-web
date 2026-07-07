@@ -140,12 +140,20 @@
       "fastMA": 1781.8059997558594,
       "slowMA": 1779.8036083984375
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T20:00:00.635Z"
+    },
+    "result": {
+      "exitPrice": 1767.9599609375,
+      "exitAt": "2026-07-07T22:02:19.775Z",
+      "pnlPercent": -1.1766311375129046,
+      "pnlAbs": -21.050048828125,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
@@ -211,12 +219,20 @@
       "fastMA": 63443.1298828125,
       "slowMA": 63276.432109375
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T20:00:00.331Z"
+    },
+    "result": {
+      "exitPrice": 63244.0390625,
+      "exitAt": "2026-07-07T22:02:19.831Z",
+      "pnlPercent": -0.8154459216799448,
+      "pnlAbs": -519.9609375,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
@@ -759,12 +775,20 @@
       "fastMA": 63490.10078125,
       "slowMA": 63178.487109375
     },
-    "status": "open",
+    "status": "stopped",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-07T16:00:00.260Z"
+    },
+    "result": {
+      "exitPrice": 63244.0390625,
+      "exitAt": "2026-07-07T22:02:19.839Z",
+      "pnlPercent": -0.9681290026375714,
+      "pnlAbs": -618.26953125,
+      "holdBars": 0,
+      "reason": "sl"
     },
     "mode": "REAL"
   },
