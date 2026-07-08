@@ -285,12 +285,20 @@
       "fastMA": 579.5975006103515,
       "slowMA": 581.3815991210937
     },
-    "status": "open",
+    "status": "tp1_hit",
     "meshConsensus": {
       "vm1Score": 100,
       "vm2Score": 0,
       "matchPercent": 100,
       "validatedAt": "2026-07-08T02:00:00.478Z"
+    },
+    "result": {
+      "exitPrice": 567.6300048828125,
+      "exitAt": "2026-07-08T05:42:20.075Z",
+      "pnlPercent": -0.7240699069586716,
+      "pnlAbs": 4.1400146484375,
+      "holdBars": 0,
+      "reason": "tp1"
     },
     "mode": "REAL"
   },
