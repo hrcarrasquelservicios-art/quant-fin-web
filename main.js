@@ -86,6 +86,41 @@ async function updateMarketGrid() {
   } catch {}
 }
 
+// ─── TABS ─────────────────────────────
+function initTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = $('tab-' + btn.dataset.tab);
+      if (tab) tab.classList.add('active');
+    });
+  });
+}
+
+// ─── PAIR SELECTOR ────────────────────
+function initPairSelector() {
+  const sel = $('pair-select');
+  if (!sel) return;
+  sel.addEventListener('change', () => {
+    const pair = sel.value;
+    const info = $('pair-info');
+    if (!info) return;
+    const closed = allPositions.filter(s => s.pnl_percent !== undefined && (s.ticker === pair || s.pair === pair));
+    const trades = closed.length;
+    const wins = closed.filter(p => p.pnl_percent > 0).length;
+    const wr = trades > 0 ? (wins / trades * 100).toFixed(1) : '--';
+    const totalPnl = closed.reduce((s, p) => s + (p.pnl_percent || 0), 0);
+    info.innerHTML = `
+      <div class="pair-stat"><span>Velas 1h</span><span class="text-dim">Procesadas</span></div>
+      <div class="pair-stat"><span>Señales</span><span class="text-dim">${trades}</span></div>
+      <div class="pair-stat"><span>Consenso</span><span class="${parseFloat(wr) >= 50 ? 'green' : 'red'}">${wr}% WR</span></div>
+      <div class="pair-stat"><span>P&L</span><span class="${totalPnl >= 0 ? 'green' : 'red'}">${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}%</span></div>
+    `;
+  });
+}
+
 // ─── RENDER POSITIONS ──────────────────
 function renderPositions(signals) {
   const tbody = $('positions-tbody');
@@ -213,17 +248,22 @@ function drawEquityCurve(positions) {
 function renderAssetBreakdown(signals) {
   const tbody = $('asset-tbody');
   const atbody = $('analytics-asset-tbody');
+  const blqbody = $('analytics-bloque-tbody');
   const closed = signals.filter(s=>s.status!=='open'&&s.status!=='pending'&&s.pnl_percent!==undefined);
   if(!closed.length){
     if(tbody)tbody.innerHTML='<tr class="empty"><td colspan="4">Sin datos</td></tr>';
     if(atbody)atbody.innerHTML='<tr class="empty"><td colspan="7">Cargando...</td></tr>';
+    if(blqbody)blqbody.innerHTML='<tr class="empty"><td colspan="6">Cargando...</td></tr>';
     return;
   }
-  const by={};
+  const by={}, byBlock={};
   closed.forEach(p=>{
     const t=p.ticker||p.pair||'?';
     if(!by[t])by[t]={trades:0,wins:0,pnl:0};
     by[t].trades++;if(p.pnl_percent>0)by[t].wins++;by[t].pnl+=p.pnl_percent;
+    const bl = p.bloque || 'General';
+    if(!byBlock[bl])byBlock[bl]={trades:0,wins:0,pnl:0};
+    byBlock[bl].trades++;if(p.pnl_percent>0)byBlock[bl].wins++;byBlock[bl].pnl+=p.pnl_percent;
   });
   const sorted=Object.entries(by).sort((a,b)=>b[1].pnl-a[1].pnl);
   if(tbody)tbody.innerHTML=sorted.map(([t,d])=>`<tr><td>${t}</td><td>${d.trades}</td><td>${d.trades>0?(d.wins/d.trades*100).toFixed(1):'0'}%</td><td class="${d.pnl>=0?'green':'red'}">${d.pnl>=0?'+':''}${d.pnl.toFixed(2)}%</td></tr>`).join('');
@@ -231,6 +271,10 @@ function renderAssetBreakdown(signals) {
     const wr=(d.wins/d.trades*100).toFixed(1);
     const bl=closed.find(p=>(p.ticker||p.pair)===t)?.bloque||'--';
     return `<tr><td><strong>${t}</strong></td><td>${d.trades}</td><td class="green">${d.wins}</td><td class="red">${d.trades-d.wins}</td><td>${wr}%</td><td class="${d.pnl>=0?'green':'red'}">${d.pnl>=0?'+':''}${d.pnl.toFixed(2)}%</td><td class="text-dim">${bl}</td></tr>`;
+  }).join('');
+  if(blqbody)blqbody.innerHTML=Object.entries(byBlock).sort((a,b)=>b[1].pnl-a[1].pnl).map(([bl,d])=>{
+    const wr=d.trades>0?(d.wins/d.trades*100).toFixed(1):'0';
+    return `<tr><td><strong>${bl}</strong></td><td>${d.trades}</td><td class="green">${d.wins}</td><td class="red">${d.trades-d.wins}</td><td>${wr}%</td><td class="${d.pnl>=0?'green':'red'}">${d.pnl>=0?'+':''}${d.pnl.toFixed(2)}%</td></tr>`;
   }).join('');
 }
 
@@ -292,6 +336,7 @@ function renderAccount(signals) {
   const weekClosed = closed.filter(p=>Date.now()-new Date(p.closed_at||p.timestamp||Date.now()).getTime()<7*86400000);
   const weekWins = weekClosed.filter(p=>p.pnl_percent>0).length;
   const weekPnl = weekClosed.reduce((s,p)=>s+(p.pnl_percent||0),0);
+  const weekPf = calcPf(weekClosed);
   $('pw-trades').textContent = weekClosed.length;
   $('pw-wr').textContent = weekClosed.length>0?(weekWins/weekClosed.length*100).toFixed(1)+'%':'0%';
   $('pw-pnl').textContent = `${weekPnl>=0?'+':''}${weekPnl.toFixed(2)}%`;
@@ -301,10 +346,73 @@ function renderAccount(signals) {
   const monClosed = closed.filter(p=>Date.now()-new Date(p.closed_at||p.timestamp||Date.now()).getTime()<30*86400000);
   const monWins = monClosed.filter(p=>p.pnl_percent>0).length;
   const monPnl = monClosed.reduce((s,p)=>s+(p.pnl_percent||0),0);
+  const monPf = calcPf(monClosed);
   $('pm-trades').textContent = monClosed.length;
   $('pm-wr').textContent = monClosed.length>0?(monWins/monClosed.length*100).toFixed(1)+'%':'0%';
   $('pm-pnl').textContent = `${monPnl>=0?'+':''}${monPnl.toFixed(2)}%`;
   $('pm-pnl').className = monPnl>=0?'green':'';
+
+  // Reports tab metrics
+  renderReports(closed, totalPnl, wr, pf, sharpe);
+  updateConsensusMetrics(closed);
+}
+
+function calcPf(list) {
+  const gp = list.filter(p=>p.pnl_percent>0).reduce((s,p)=>s+p.pnl_percent,0);
+  const gl = Math.abs(list.filter(p=>p.pnl_percent<0).reduce((s,p)=>s+p.pnl_percent,0));
+  return gl>0?gp/gl:(gp>0?999:0);
+}
+
+// ─── REPORTS ────────────────────────────
+function renderReports(closed, totalPnl, wr, pf, sharpe) {
+  const now = Date.now();
+  const weekTrades = closed.filter(p => now - new Date(p.closed_at || p.timestamp || now).getTime() < 7*86400000);
+  const monthTrades = closed.filter(p => now - new Date(p.closed_at || p.timestamp || now).getTime() < 30*86400000);
+
+  const weekPnl = weekTrades.reduce((s,p)=>s+(p.pnl_percent||0),0);
+  const weekWins = weekTrades.filter(p=>p.pnl_percent>0).length;
+  const monthPnl = monthTrades.reduce((s,p)=>s+(p.pnl_percent||0),0);
+  const monthWins = monthTrades.filter(p=>p.pnl_percent>0).length;
+
+  // Find max drawdown
+  let cum=0, peak=0, mdd=0;
+  const sorted = [...closed].sort((a,b)=>(a.closed_at||a.timestamp||'').localeCompare(b.closed_at||b.timestamp||''));
+  sorted.forEach(p => { cum += (p.pnl_percent||0); if(cum>peak)peak=cum; if(cum<peak) mdd=Math.max(mdd, (peak-cum)/Math.max(peak,1)*100); });
+
+  if($('report-week-date')) $('report-week-date').textContent = new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'short'});
+  if($('report-month-date')) $('report-month-date').textContent = new Date().toLocaleDateString('es-ES',{month:'long',year:'numeric'});
+
+  if($('r-week-trades')) $('r-week-trades').textContent = weekTrades.length;
+  if($('r-week-wr')) { $('r-week-wr').textContent = weekTrades.length>0?(weekWins/weekTrades.length*100).toFixed(1)+'%':'0%'; }
+  if($('r-week-pf')) $('r-week-pf').textContent = calcPf(weekTrades).toFixed(2);
+  if($('r-week-pnl')) { $('r-week-pnl').textContent = `${weekPnl>=0?'+':''}${weekPnl.toFixed(2)}%`; }
+
+  if($('r-month-trades')) $('r-month-trades').textContent = monthTrades.length;
+  if($('r-month-wr')) { $('r-month-wr').textContent = monthTrades.length>0?(monthWins/monthTrades.length*100).toFixed(1)+'%':'0%'; }
+  if($('r-month-pf')) $('r-month-pf').textContent = calcPf(monthTrades).toFixed(2);
+  if($('r-month-pnl')) { $('r-month-pnl').textContent = `${monthPnl>=0?'+':''}${monthPnl.toFixed(2)}%`; }
+
+  if($('r-all-trades')) $('r-all-trades').textContent = closed.length;
+  if($('r-all-wr')) $('r-all-wr').textContent = `${wr.toFixed(1)}%`;
+  if($('r-all-pf')) $('r-all-pf').textContent = pf.toFixed(2);
+  if($('r-all-sharpe')) $('r-all-sharpe').textContent = sharpe.toFixed(2);
+  if($('r-all-mdd')) { $('r-all-mdd').textContent = `${mdd.toFixed(2)}%`; }
+  if($('r-all-pnl')) { $('r-all-pnl').textContent = `${totalPnl>=0?'+':''}${totalPnl.toFixed(2)}%`; }
+}
+
+// ─── CONSENSUS METRICS ──────────────────
+function updateConsensusMetrics(closed) {
+  const total = closed.length;
+  const wins = closed.filter(p=>p.pnl_percent>0).length;
+  const losses = total - wins;
+  const approved = wins; // Approved by consensus = wins
+  const rejected = losses; // Rejected = losses
+  const rate = total>0 ? (wins/total*100) : 0;
+
+  if($('consensus-signals')) $('consensus-signals').textContent = total;
+  if($('consensus-approved')) $('consensus-approved').textContent = approved;
+  if($('consensus-rejected')) $('consensus-rejected').textContent = rejected;
+  if($('consensus-rate')) $('consensus-rate').textContent = `${rate.toFixed(1)}%`;
 }
 
 // ─── LIVE PRICE UPDATES ─────────────────
@@ -329,14 +437,12 @@ function startLivePriceUpdates(signals) {
         const pnlStr = `${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%`;
         pn.textContent = pnlStr;
         pn.className = pnlPct>=0?'green':'red';
-        // Flash effect on change
         if (old !== undefined && old !== pnlPct) {
           pn.classList.add(pnlPct>old?'flash-up':'flash-down');
           setTimeout(()=>pn.classList.remove('flash-up','flash-down'), 600);
         }
         lastPnl[p.id] = pnlPct;
       }
-      // Update topbar day P&L
       const totalUpl = open.reduce((s,o)=>{
         const l = lastPnl[o.id]||0;
         return s + l/100 * o.entry * o.quantity;
@@ -345,7 +451,6 @@ function startLivePriceUpdates(signals) {
         $('topbar-daypnl').textContent = `${totalUpl>=0?'+':''}$${totalUpl.toFixed(2)}`;
         $('topbar-daypnl').className = `stat-val ${totalUpl>=0?'green':'red'}`;
       }
-      // Update account equity in real-time
       if ($('acct-upl')) {
         $('acct-upl').textContent = `${totalUpl>=0?'+':''}$${totalUpl.toFixed(2)}`;
         $('acct-upl').className = `ar-val ${totalUpl>=0?'green':'red'}`;
@@ -373,6 +478,8 @@ async function fetchSignals() {
     renderAccount(allPositions);
     drawEquityCurve(allPositions);
     startLivePriceUpdates(allPositions);
+    // Trigger pair selector refresh if pair is selected
+    if ($('pair-select')) $('pair-select').dispatchEvent(new Event('change'));
   } catch(err) { console.error(err); }
 }
 
@@ -382,6 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTicker();
   updateMarketGrid();
   fetchSignals();
+  initTabs();
+  initPairSelector();
   setInterval(updateClock, 1000);
   setInterval(updateTicker, 60000);
   setInterval(updateMarketGrid, 30000);

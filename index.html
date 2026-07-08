@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://quant-fin.online https://raw.githubusercontent.com https://query1.finance.yahoo.com; frame-src 'none'; object-src 'none';">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuantFin — Trading Platform</title>
+  <title>QuantFin — Broker Algorítmico | Nexus Flow Dynamics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
       <span class="topbar-sep"></span>
       <span class="topbar-clock" id="clock">--:--:--</span>
       <span class="topbar-sep"></span>
-      <span class="topbar-status"><span class="dot dot-green"></span> Trading</span>
+      <span class="topbar-status"><span class="dot dot-green"></span> RUF-Flow v5</span>
     </div>
     <div class="topbar-right">
       <span class="topbar-stat"><span class="stat-label">Balance</span> <span class="stat-val" id="balance-main">$1,000.00</span></span>
@@ -39,282 +39,454 @@
     <div class="market-grid" id="market-grid"></div>
   </section>
 
-  <!-- ─── TRADING DASHBOARD ───────────── -->
-  <main class="dash-body">
+  <!-- ─── TABS NAVIGATION ─────────────── -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="protocol">Protocolo RUF-Flow</button>
+    <button class="tab-btn" data-tab="analytics">Analytics</button>
+    <button class="tab-btn" data-tab="reports">Reportes</button>
+  </nav>
 
-    <!-- Left Column: Account + Feed -->
-    <div class="col-left">
-      <div class="card account-card">
-        <div class="card-header">
-          <span>CUENTA</span>
-          <span class="badge badge-demo">DEMO</span>
-        </div>
-        <div class="acct-balance" id="acct-balance">$1,000.00</div>
-        <div class="acct-equity">
-          <span>Equity</span>
-          <span class="eq-val" id="acct-equity">$1,000.00</span>
-        </div>
-        <div class="acct-row">
-          <span class="ar-label">Margen Usado</span>
-          <span class="ar-val" id="acct-margin">$0.00</span>
-        </div>
-        <div class="acct-row">
-          <span class="ar-label">Disponible</span>
-          <span class="ar-val green" id="acct-available">$1,000.00</span>
-        </div>
-        <div class="acct-row">
-          <span class="ar-label">P&L No Realizado</span>
-          <span class="ar-val" id="acct-upl">+$0.00</span>
-        </div>
-        <div class="acct-row">
-          <span class="ar-label">Posiciones</span>
-          <span class="ar-val" id="acct-positions">0</span>
-        </div>
-        <div class="acct-progress">
-          <div class="progress-track"><div class="progress-fill" id="acct-progress-fill" style="width:0%"></div></div>
-          <span class="progress-label">Margen: <span id="acct-margin-pct">0</span>%</span>
-        </div>
-        <div class="acct-leverage">
-          <span>Apalancamiento</span>
-          <span class="lev-val">1x</span>
-        </div>
-      </div>
+  <!-- ═══ TAB 1: DASHBOARD ══════════════ -->
+  <section class="tab-content active" id="tab-dashboard">
+    <main class="dash-body">
 
-      <div class="card">
-        <div class="card-header">
-          <span>RESUMEN</span>
-        </div>
-        <div class="stat-grid">
-          <div class="stat-item">
-            <span class="si-label">Win Rate</span>
-            <span class="si-val" id="dash-wr">--</span>
+      <!-- Left Column: Account + Feed -->
+      <div class="col-left">
+        <div class="card account-card">
+          <div class="card-header">
+            <span>CUENTA</span>
+            <span class="badge badge-demo">DEMO</span>
           </div>
-          <div class="stat-item">
-            <span class="si-label">Profit Factor</span>
-            <span class="si-val" id="dash-pf">--</span>
+          <div class="acct-balance" id="acct-balance">$1,000.00</div>
+          <div class="acct-equity">
+            <span>Equity</span>
+            <span class="eq-val" id="acct-equity">$1,000.00</span>
           </div>
-          <div class="stat-item">
-            <span class="si-label">Trades</span>
-            <span class="si-val" id="dash-trades">0</span>
+          <div class="acct-row">
+            <span class="ar-label">Margen Usado</span>
+            <span class="ar-val" id="acct-margin">$0.00</span>
           </div>
-          <div class="stat-item">
-            <span class="si-label">Sharpe</span>
-            <span class="si-val" id="dash-sharpe">--</span>
+          <div class="acct-row">
+            <span class="ar-label">Disponible</span>
+            <span class="ar-val green" id="acct-available">$1,000.00</span>
           </div>
-          <div class="stat-item full">
-            <span class="si-label">P&L Total</span>
-            <span class="si-val big" id="dash-pnl">$0.00</span>
+          <div class="acct-row">
+            <span class="ar-label">P&L No Realizado</span>
+            <span class="ar-val" id="acct-upl">+$0.00</span>
+          </div>
+          <div class="acct-row">
+            <span class="ar-label">Posiciones</span>
+            <span class="ar-val" id="acct-positions">0</span>
+          </div>
+          <div class="acct-progress">
+            <div class="progress-track"><div class="progress-fill" id="acct-progress-fill" style="width:0%"></div></div>
+            <span class="progress-label">Margen: <span id="acct-margin-pct">0</span>%</span>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-header">
-          <span>TRADE FEED</span>
-          <span class="badge badge-live">LIVE</span>
-        </div>
-        <div class="feed" id="trade-feed">
-          <div class="feed-empty">Esperando operaciones...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Center Column: Positions + History -->
-    <div class="col-center">
-      <div class="card">
-        <div class="card-header">
-          <span>POSICIONES ABIERTAS</span>
-          <div class="header-tabs">
-            <span class="htab active">Activas</span>
-            <span class="htab">Historial</span>
+        <div class="card">
+          <div class="card-header">
+            <span>RESUMEN</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <span class="si-label">Win Rate</span>
+              <span class="si-val" id="dash-wr">--</span>
+            </div>
+            <div class="stat-item">
+              <span class="si-label">Profit Factor</span>
+              <span class="si-val" id="dash-pf">--</span>
+            </div>
+            <div class="stat-item">
+              <span class="si-label">Trades</span>
+              <span class="si-val" id="dash-trades">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="si-label">Sharpe</span>
+              <span class="si-val" id="dash-sharpe">--</span>
+            </div>
+            <div class="stat-item full">
+              <span class="si-label">P&L Total</span>
+              <span class="si-val big" id="dash-pnl">$0.00</span>
+            </div>
           </div>
         </div>
-        <div class="table-scroll">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Par</th>
-                <th>Dir</th>
-                <th>Cant</th>
-                <th>Entrada</th>
-                <th>SL</th>
-                <th>TP</th>
-                <th>Precio</th>
-                <th>P&L</th>
-              </tr>
-            </thead>
-            <tbody id="positions-tbody">
-              <tr class="empty"><td colspan="8">Sin posiciones activas</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="card-header">
-          <span>EJECUCIONES RECIENTES</span>
-          <span class="badge badge-outline">Ultimas 30</span>
-        </div>
-        <div class="table-scroll">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Par</th>
-                <th>Dir</th>
-                <th>Entrada</th>
-                <th>Salida</th>
-                <th>P&L</th>
-                <th>Resultado</th>
-              </tr>
-            </thead>
-            <tbody id="history-tbody">
-              <tr class="empty"><td colspan="7">Sin historial aun</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span>LIBRO DE ORDENES</span>
-          <span class="badge badge-outline">Todas</span>
-        </div>
-        <div class="table-scroll">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>SL</th>
-                <th>TP1</th><th>TP2</th><th>TP3</th><th>P&L</th><th>Status</th><th>Hora</th>
-              </tr>
-            </thead>
-            <tbody id="orders-tbody">
-              <tr class="empty"><td colspan="11">No hay operaciones aun</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Column: Charts + Analytics -->
-    <div class="col-right">
-      <div class="card">
-        <div class="card-header">
-          <span>CURVA DE CAPITAL</span>
-        </div>
-        <div class="chart-box">
-          <canvas id="equity-curve" width="360" height="160"></canvas>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span>RENDIMIENTO</span>
-        </div>
-        <div class="perf-grid">
-          <div class="perf-block">
-            <span class="perf-label">Semanal</span>
-            <div class="perf-row"><span>Trades</span><span id="pw-trades">0</span></div>
-            <div class="perf-row"><span>WR</span><span class="green" id="pw-wr">0%</span></div>
-            <div class="perf-row big"><span>P&L</span><span id="pw-pnl">+0.00%</span></div>
+        <div class="card">
+          <div class="card-header">
+            <span>TRADE FEED</span>
+            <span class="badge badge-live">LIVE</span>
           </div>
-          <div class="perf-block">
-            <span class="perf-label">Mensual</span>
-            <div class="perf-row"><span>Trades</span><span id="pm-trades">0</span></div>
-            <div class="perf-row"><span>WR</span><span class="green" id="pm-wr">0%</span></div>
-            <div class="perf-row big"><span>P&L</span><span id="pm-pnl">+0.00%</span></div>
+          <div class="feed" id="trade-feed">
+            <div class="feed-empty">Esperando operaciones...</div>
           </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <span>DESGLOSE POR ACTIVO</span>
+      <!-- Center Column: Positions + History -->
+      <div class="col-center">
+        <div class="card">
+          <div class="card-header">
+            <span>POSICIONES ABIERTAS</span>
+            <div class="header-tabs">
+              <span class="htab active">Activas</span>
+              <span class="htab">Historial</span>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Par</th><th>Dir</th><th>Cant</th><th>Entrada</th>
+                  <th>SL</th><th>TP</th><th>Precio</th><th>P&L</th>
+                </tr>
+              </thead>
+              <tbody id="positions-tbody">
+                <tr class="empty"><td colspan="8">Sin posiciones activas</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="table-scroll compact-scroll">
-          <table class="table compact">
-            <thead>
-              <tr><th>Activo</th><th>Trades</th><th>WR</th><th>P&L</th></tr>
-            </thead>
-            <tbody id="asset-tbody">
-              <tr class="empty"><td colspan="4">Sin datos</td></tr>
-            </tbody>
-          </table>
+
+        <div class="card">
+          <div class="card-header">
+            <span>EJECUCIONES RECIENTES</span>
+            <span class="badge badge-outline">Ultimas 50</span>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th>
+                  <th>Salida</th><th>P&L</th><th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <tr class="empty"><td colspan="7">Sin historial aun</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>LIBRO DE ORDENES</span>
+            <div class="header-tabs">
+              <span class="htab active">Todas</span>
+              <span class="htab consenso-count" id="consenso-tag">RUF-Flow</span>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>SL</th>
+                  <th>TP1</th><th>TP2</th><th>TP3</th><th>P&L</th><th>Status</th><th>Hora</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody">
+                <tr class="empty"><td colspan="11">No hay operaciones aun</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      <div class="card vip-card">
-        <div class="vip-inner">
-          <h4>Acceso VIP</h4>
-          <p>Automatiza tus trades con ejecucion OCO en Binance</p>
-          <a href="https://t.me/QuantF" target="_blank" class="btn-gold">Unete a @QuantF</a>
+      <!-- Right Column: Charts + Analytics -->
+      <div class="col-right">
+        <div class="card">
+          <div class="card-header">
+            <span>CURVA DE CAPITAL</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="equity-curve" width="360" height="160"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>RENDIMIENTO</span>
+          </div>
+          <div class="perf-grid">
+            <div class="perf-block">
+              <span class="perf-label">Semanal</span>
+              <div class="perf-row"><span>Trades</span><span id="pw-trades">0</span></div>
+              <div class="perf-row"><span>WR</span><span class="green" id="pw-wr">0%</span></div>
+              <div class="perf-row big"><span>P&L</span><span id="pw-pnl">+0.00%</span></div>
+            </div>
+            <div class="perf-block">
+              <span class="perf-label">Mensual</span>
+              <div class="perf-row"><span>Trades</span><span id="pm-trades">0</span></div>
+              <div class="perf-row"><span>WR</span><span class="green" id="pm-wr">0%</span></div>
+              <div class="perf-row big"><span>P&L</span><span id="pm-pnl">+0.00%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>DESGLOSE POR ACTIVO</span>
+          </div>
+          <div class="table-scroll compact-scroll">
+            <table class="table compact">
+              <thead>
+                <tr><th>Activo</th><th>Trades</th><th>WR</th><th>P&L</th></tr>
+              </thead>
+              <tbody id="asset-tbody">
+                <tr class="empty"><td colspan="4">Sin datos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>SELECCION DE PAR</span>
+          </div>
+          <div class="pair-selector">
+            <select id="pair-select" class="pair-select">
+              <option value="BTC/USD">BTC/USD</option>
+              <option value="ETH/USD">ETH/USD</option>
+              <option value="SOL/USD">SOL/USD</option>
+              <option value="BNB/USD">BNB/USD</option>
+              <option value="DOGE/USD">DOGE/USD</option>
+              <option value="SPY">SPY</option>
+              <option value="QQQ">QQQ</option>
+              <option value="AAPL">AAPL</option>
+              <option value="MSFT">MSFT</option>
+              <option value="NVDA">NVDA</option>
+              <option value="TSLA">TSLA</option>
+              <option value="GOOGL">GOOGL</option>
+            </select>
+            <div class="pair-info" id="pair-info">
+              <div class="pair-stat"><span>Velas 1h</span><span class="text-dim">--</span></div>
+              <div class="pair-stat"><span>Señales</span><span class="text-dim">--</span></div>
+              <div class="pair-stat"><span>Consenso</span><span class="text-dim">--</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card vip-card">
+          <div class="vip-inner">
+            <h4>Acceso VIP</h4>
+            <p>Automatiza tus trades con ejecucion OCO en Binance + Protocolo RUF-Flow</p>
+            <a href="https://t.me/QuantF" target="_blank" class="btn-gold">Unete a @QuantF</a>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </section>
 
-  <!-- ─── ANALYTICS SECTION ────────────── -->
-  <section class="section" id="analytics">
-    <div class="section-title">
-      <h2>Analytics <span class="gold">Engine</span></h2>
-      <p>Metricas verificables del algoritmo QuantFin</p>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="m-value" id="metric-signals">0</div>
-        <div class="m-label">Senales</div>
+  <!-- ═══ TAB 2: PROTOCOLO RUF-FLOW ══════ -->
+  <section class="tab-content" id="tab-protocol">
+    <div class="section">
+      <div class="section-title">
+        <h2>Protocolo <span class="gold">RUF-Flow</span> v5</h2>
+        <p>Motor de agentes con consenso descentralizado para senales cuantitativas</p>
       </div>
-      <div class="metric-card">
-        <div class="m-value green" id="metric-wr">0%</div>
-        <div class="m-label">Win Rate</div>
+
+      <!-- VM Status -->
+      <div class="ruf-status-grid">
+        <div class="ruf-vm-card">
+          <div class="ruf-vm-header">
+            <span class="ruf-vm-icon">VM1</span>
+            <span class="ruf-vm-status" id="vm1-status">&#10003; Activo</span>
+          </div>
+          <div class="ruf-vm-body">
+            <div class="ruf-vm-row"><span>Orquestador</span><span class="green">Online</span></div>
+            <div class="ruf-vm-row"><span>Motor TA</span><span class="green">Sincronizado</span></div>
+            <div class="ruf-vm-row"><span>Ultimo consenso</span><span id="vm1-last-consensus" class="text-dim">--</span></div>
+          </div>
+        </div>
+        <div class="ruf-vm-card">
+          <div class="ruf-vm-header">
+            <span class="ruf-vm-icon">VM2</span>
+            <span class="ruf-vm-status" id="vm2-status">&#10003; Activo</span>
+          </div>
+          <div class="ruf-vm-body">
+            <div class="ruf-vm-row"><span>Validador</span><span class="green">Online</span></div>
+            <div class="ruf-vm-row"><span>Backtesting</span><span class="green">OK</span></div>
+            <div class="ruf-vm-row"><span>Ultimo consenso</span><span id="vm2-last-consensus" class="text-dim">--</span></div>
+          </div>
+        </div>
       </div>
-      <div class="metric-card">
-        <div class="m-value gold" id="metric-pf">0.00</div>
-        <div class="m-label">Profit Factor</div>
+
+      <!-- Consensus Pipeline -->
+      <div class="ruf-pipeline">
+        <div class="ruf-step">
+          <div class="ruf-step-num">1</div>
+          <div class="ruf-step-content">
+            <span class="ruf-step-title">Motor TA</span>
+            <span class="ruf-step-desc">Analisis tecnico multi-timeframe en VM1</span>
+            <span class="ruf-step-status green">&#10003; Operativo</span>
+          </div>
+        </div>
+        <div class="ruf-arrow">&#8594;</div>
+        <div class="ruf-step">
+          <div class="ruf-step-num">2</div>
+          <div class="ruf-step-content">
+            <span class="ruf-step-title">Consenso v5</span>
+            <span class="ruf-step-desc">Validacion cruzada VM1 + VM2</span>
+            <span class="ruf-step-status green">&#10003; Sincronizado</span>
+          </div>
+        </div>
+        <div class="ruf-arrow">&#8594;</div>
+        <div class="ruf-step">
+          <div class="ruf-step-num">3</div>
+          <div class="ruf-step-content">
+            <span class="ruf-step-title">Ejecucion OCO</span>
+            <span class="ruf-step-desc">Ordenes automaticas en Binance</span>
+            <span class="ruf-step-status green">&#10003; Activo</span>
+          </div>
+        </div>
+        <div class="ruf-arrow">&#8594;</div>
+        <div class="ruf-step">
+          <div class="ruf-step-num">4</div>
+          <div class="ruf-step-content">
+            <span class="ruf-step-title">Notificacion</span>
+            <span class="ruf-step-desc">Envio a Telegram + Dashboard en vivo</span>
+            <span class="ruf-step-status green">&#10003; Activo</span>
+          </div>
+        </div>
       </div>
-      <div class="metric-card">
-        <div class="m-value" id="metric-pnl">+0.00%</div>
-        <div class="m-label">P&L Total</div>
-      </div>
-      <div class="metric-card">
-        <div class="m-value green" id="metric-wins">0</div>
-        <div class="m-label">Ganadas</div>
-      </div>
-      <div class="metric-card">
-        <div class="m-value red" id="metric-losses">0</div>
-        <div class="m-label">Perdidas</div>
-      </div>
-    </div>
-    <div class="card" style="margin-top:1.5rem">
-      <div class="card-header"><span>RENDIMIENTO POR ACTIVO</span></div>
-      <div class="table-scroll">
-        <table class="table">
-          <thead>
-            <tr><th>Activo</th><th>Trades</th><th>Wins</th><th>Losses</th><th>WR</th><th>P&L Total</th><th>Bloque</th></tr>
-          </thead>
-          <tbody id="analytics-asset-tbody">
-            <tr class="empty"><td colspan="7">Cargando...</td></tr>
-          </tbody>
-        </table>
+
+      <!-- Consensus Stats -->
+      <div class="metrics-grid" style="margin-top: 24px;">
+        <div class="metric-card">
+          <div class="m-value gold" id="consensus-signals">0</div>
+          <div class="m-label">Senales Generadas</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value green" id="consensus-approved">0</div>
+          <div class="m-label">Aprobadas por Consenso</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value red" id="consensus-rejected">0</div>
+          <div class="m-label">Rechazadas</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value" id="consensus-rate">0%</div>
+          <div class="m-label">Tasa de Aprobacion</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── VIP SECTION ──────────────────── -->
-  <section class="section section-vip" id="vip">
-    <div class="vip-hero">
-      <h2>Desbloquea el <span class="gold">Poder Cuantitativo</span></h2>
-      <p>Senales REALES con ejecucion automatica en Binance, alertas instantaneas y soporte 24/7</p>
-      <div class="vip-grid">
-        <div class="vf"><span class="vf-icon">O</span> Ejecucion OCO</div>
-        <div class="vf"><span class="vf-icon">R</span> Reportes detallados</div>
-        <div class="vf"><span class="vf-icon">A</span> Alertas TP/SL</div>
-        <div class="vf"><span class="vf-icon">S</span> Soporte directo</div>
-        <div class="vf"><span class="vf-icon">D</span> Dashboard exclusivo</div>
-        <div class="vf"><span class="vf-icon">T</span> Senales 68%+ WR</div>
+  <!-- ═══ TAB 3: ANALYTICS ══════════════ -->
+  <section class="tab-content" id="tab-analytics">
+    <section class="section" id="analytics">
+      <div class="section-title">
+        <h2>Analytics <span class="gold">Engine</span></h2>
+        <p>Metricas verificables del algoritmo QuantFin con protocolo RUF-Flow v5</p>
       </div>
-      <a href="https://t.me/QuantF" target="_blank" class="btn-gold btn-lg">Comenzar</a>
-    </div>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="m-value" id="metric-signals">0</div>
+          <div class="m-label">Operaciones</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value green" id="metric-wr">0%</div>
+          <div class="m-label">Win Rate</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value gold" id="metric-pf">0.00</div>
+          <div class="m-label">Profit Factor</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value" id="metric-pnl">+0.00%</div>
+          <div class="m-label">P&L Total</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value green" id="metric-wins">0</div>
+          <div class="m-label">Ganadas</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value red" id="metric-losses">0</div>
+          <div class="m-label">Perdidas</div>
+        </div>
+      </div>
+
+      <!-- Desglose por activo (Analytics) -->
+      <div class="card" style="margin-top:1.5rem">
+        <div class="card-header"><span>RENDIMIENTO POR ACTIVO</span></div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr><th>Activo</th><th>Trades</th><th>Wins</th><th>Losses</th><th>WR</th><th>P&L Total</th><th>Bloque</th></tr>
+            </thead>
+            <tbody id="analytics-asset-tbody">
+              <tr class="empty"><td colspan="7">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Resumen por bloque -->
+      <div class="card" style="margin-top:1.5rem">
+        <div class="card-header"><span>RENDIMIENTO POR BLOQUE</span></div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr><th>Bloque</th><th>Trades</th><th>Wins</th><th>Losses</th><th>WR</th><th>P&L Total</th></tr>
+            </thead>
+            <tbody id="analytics-bloque-tbody">
+              <tr class="empty"><td colspan="6">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══ TAB 4: REPORTES ═══════════════ -->
+  <section class="tab-content" id="tab-reports">
+    <section class="section">
+      <div class="section-title">
+        <h2>Reportes <span class="gold">Auditables</span></h2>
+        <p>Rendimiento semanal y mensual del algoritmo QuantFin</p>
+      </div>
+
+      <div class="reports-grid">
+        <div class="report-card">
+          <div class="report-header">
+            <span class="report-badge weekly">Semanal</span>
+            <span class="report-date" id="report-week-date">--</span>
+          </div>
+          <div class="report-body">
+            <div class="report-row"><span>Trades</span><span id="r-week-trades">0</span></div>
+            <div class="report-row"><span>Win Rate</span><span id="r-week-wr" class="green">0%</span></div>
+            <div class="report-row"><span>Profit Factor</span><span id="r-week-pf">0.00</span></div>
+            <div class="report-row big"><span>P&L</span><span id="r-week-pnl" class="gold">+0.00%</span></div>
+          </div>
+        </div>
+        <div class="report-card">
+          <div class="report-header">
+            <span class="report-label monthly">Mensual</span>
+            <span class="report-date" id="report-month-date">--</span>
+          </div>
+          <div class="report-body">
+            <div class="report-row"><span>Trades</span><span id="r-month-trades">0</span></div>
+            <div class="report-row"><span>Win Rate</span><span id="r-month-wr" class="green">0%</span></div>
+            <div class="report-row"><span>Profit Factor</span><span id="r-month-pf">0.00</span></div>
+            <div class="report-row big"><span>P&L</span><span id="r-month-pnl" class="gold">+0.00%</span></div>
+          </div>
+        </div>
+        <div class="report-card full">
+          <div class="report-header">
+            <span class="report-label alltime">Todo el periodo</span>
+          </div>
+          <div class="report-body">
+            <div class="report-row"><span>Trades Totales</span><span id="r-all-trades">0</span></div>
+            <div class="report-row"><span>Win Rate</span><span id="r-all-wr" class="green">0%</span></div>
+            <div class="report-row"><span>Profit Factor</span><span id="r-all-pf">0.00</span></div>
+            <div class="report-row"><span>Ratio Sharpe</span><span id="r-all-sharpe">0.00</span></div>
+            <div class="report-row"><span>Max Drawdown</span><span id="r-all-mdd" class="red">0.00%</span></div>
+            <div class="report-row big"><span>P&L Total</span><span id="r-all-pnl" class="gold">+0.00%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 
   <!-- ─── FOOTER ───────────────────────── -->
@@ -322,7 +494,7 @@
     <div class="footer-inner">
       <div>
         <span class="brand"><span class="brand-gold">Q</span>uant<span class="brand-gold">F</span>in</span>
-        <p class="footer-text">Broker algoritmico cuantitativo</p>
+        <p class="footer-text">Broker algoritmico cuantitativo — Powered by Nexus Flow Dynamics</p>
       </div>
       <div class="footer-links">
         <a href="https://t.me/QuantF">@QuantF</a>
@@ -330,7 +502,9 @@
         <a href="#">Privacidad</a>
       </div>
     </div>
-    <p class="disc">El trading conlleva riesgo. Resultados pasados no garantizan rendimientos futuros.</p>
+    <p class="footer-signature">QuantFin — Powered by <strong>Nexus Flow Dynamics</strong></p>
+    <p class="footer-signature">CEO &amp; Founder: <strong>Hector Carrasquel</strong></p>
+    <p class="disc">Todos los derechos reservados. &copy; 2026. El trading conlleva riesgo. Resultados pasados no garantizan rendimientos futuros.</p>
   </footer>
 
   <script type="module" src="/main.js"></script>
