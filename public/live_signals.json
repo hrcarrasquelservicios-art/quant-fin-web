@@ -1,5 +1,76 @@
 [
   {
+    "id": "QFS-0131",
+    "bloque": "A_CRYPTO",
+    "timestamp": "2026-07-08T06:00:00.544Z",
+    "asset": {
+      "ticker": "BNB-USD",
+      "name": "Binance Coin",
+      "yahooSymbol": "BNB-USD",
+      "marketType": "crypto",
+      "bloque": "A_CRYPTO",
+      "estrategia": "MA_CROSSOVER",
+      "active": true,
+      "minWinRate": 60,
+      "backtestYears": 5
+    },
+    "direction": "SELL",
+    "entry": 567.9199829101562,
+    "takeProfits": [
+      {
+        "level": 1,
+        "price": 564.4547728510225,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 2,
+        "price": 560.9895627918887,
+        "hit": false,
+        "pnlPercent": 0
+      },
+      {
+        "level": 3,
+        "price": 555.7917477031881,
+        "hit": false,
+        "pnlPercent": 0
+      }
+    ],
+    "stopLoss": {
+      "price": 569.780009765625,
+      "hit": false,
+      "pnlPercent": 0
+    },
+    "estrategia": "MA_CROSSOVER",
+    "confidence": 65,
+    "indicators": {
+      "rsi": 32.0327606606362,
+      "macd": {
+        "macdLine": -3.083110070601151,
+        "signalLine": -1.744005962588101,
+        "histogram": -1.3391041080130501
+      },
+      "volume": 4438528,
+      "volumeAvg": 4464919.04,
+      "volumeAvg20": 3205216,
+      "ema200": 572.2099294758517,
+      "atr14": 3.4652100591337662,
+      "upperWickPct": 26.848267508965257,
+      "lowerWickPct": 28.40382834208089,
+      "close": 567.9199829101562,
+      "fastMA": 577.6600006103515,
+      "slowMA": 579.6269982910156
+    },
+    "status": "open",
+    "meshConsensus": {
+      "vm1Score": 100,
+      "vm2Score": 0,
+      "matchPercent": 100,
+      "validatedAt": "2026-07-08T06:00:00.558Z"
+    },
+    "mode": "REAL"
+  },
+  {
     "id": "QFS-0130",
     "bloque": "A_CRYPTO",
     "timestamp": "2026-07-08T05:00:00.692Z",
@@ -3867,86 +3938,6 @@
       "exitAt": "2026-07-04T06:24:21.723Z",
       "pnlPercent": -0.20176316278147866,
       "pnlAbs": -125.96875,
-      "holdBars": 0,
-      "reason": "sl"
-    },
-    "mode": "REAL"
-  },
-  {
-    "id": "QFS-0081",
-    "bloque": "A_CRYPTO",
-    "timestamp": "2026-07-04T00:00:00.214Z",
-    "asset": {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "yahooSymbol": "BTC-USD",
-      "marketType": "crypto",
-      "bloque": "A_CRYPTO",
-      "estrategia": "MA_CROSSOVER",
-      "active": true,
-      "minWinRate": 65,
-      "backtestYears": 10
-    },
-    "direction": "BUY",
-    "entry": 62601.8515625,
-    "takeProfits": [
-      {
-        "level": 1,
-        "price": 62911.08794902114,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 2,
-        "price": 63220.324335542275,
-        "hit": false,
-        "pnlPercent": 0
-      },
-      {
-        "level": 3,
-        "price": 63684.17891532399,
-        "hit": false,
-        "pnlPercent": 0
-      }
-    ],
-    "stopLoss": {
-      "price": 62597.26953125,
-      "hit": true,
-      "pnlPercent": -0.07963272851479407,
-      "hitAt": "2026-07-04T00:00:21.549Z"
-    },
-    "estrategia": "MA_CROSSOVER",
-    "confidence": 75,
-    "indicators": {
-      "rsi": 69.69633009667515,
-      "macd": {
-        "macdLine": 344.65917155777424,
-        "signalLine": 299.7551986434627,
-        "histogram": 44.90397291431157
-      },
-      "volume": 808556544,
-      "volumeAvg": 312896552.96,
-      "volumeAvg20": 72545689.6,
-      "ema200": 60763.31935771674,
-      "atr14": 309.2363865211388,
-      "upperWickPct": 19.13704653719311,
-      "lowerWickPct": 3.02766581165262,
-      "close": 62601.8515625,
-      "fastMA": 61948.6841796875,
-      "slowMA": 61389.520078125
-    },
-    "status": "stopped",
-    "meshConsensus": {
-      "vm1Score": 100,
-      "vm2Score": 0,
-      "matchPercent": 100,
-      "validatedAt": "2026-07-04T00:00:00.216Z"
-    },
-    "result": {
-      "exitPrice": 62552,
-      "exitAt": "2026-07-04T00:00:21.549Z",
-      "pnlPercent": -0.07963272851479407,
-      "pnlAbs": -49.8515625,
       "holdBars": 0,
       "reason": "sl"
     },
