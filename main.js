@@ -11,7 +11,10 @@ function norm(s) {
   const ticker = s.asset?.ticker || s.pair || s.ticker || '--';
   const tps = s.takeProfits || [];
   return {
-    id: s.id,
+    id: s.id || s.signal_id,
+    signal_id: s.signal_id || s.id,
+    score_pts: s.score_pts,
+    score_label: s.score_label,
     ticker, pair: ticker,
     direction: s.direction,
     entry: s.entry || 0,
@@ -151,7 +154,7 @@ function renderHistory(signals) {
     const pnl = p.pnl_percent||0;
     const dir = (p.direction||'').toUpperCase();
     return `<tr>
-      <td class="text-dim">${(p.id||'').slice(-8)}</td>
+      <td class="text-dim" title="${p.signal_id||p.id}">${((p.signal_id||p.id||'').slice(-12))}</td>
       <td><strong>${p.pair||p.ticker}</strong></td>
       <td><span class="dir-badge ${dir==='BUY'?'buy':'sell'}">${dir}</span></td>
       <td>$${(p.entry||0).toFixed(4)}</td>
@@ -165,14 +168,16 @@ function renderHistory(signals) {
 // ─── RENDER ORDERS ─────────────────────
 function renderOrders(signals) {
   const tbody = $('orders-tbody');
-  if (!signals||!signals.length) { tbody.innerHTML = '<tr class="empty"><td colspan="11">No hay operaciones aun</td></tr>'; return; }
+  if (!signals||!signals.length) { tbody.innerHTML = '<tr class="empty"><td colspan="12">No hay operaciones aun</td></tr>'; return; }
   const sorted = [...signals].sort((a,b)=>((b.timestamp||'')).localeCompare((a.timestamp||'')));
   tbody.innerHTML = sorted.map(p => {
     const pnl = p.pnl_percent||0;
     const dir = (p.direction||'').toUpperCase();
     const st = p.status||'open';
+    const score = p.score_pts ? `<span class="text-dim">${p.score_pts}/6</span>` : '<span class="text-dim">--</span>';
     return `<tr>
-      <td class="text-dim">${(p.id||'').slice(-8)}</td>
+      <td class="text-dim" title="${p.signal_id||p.id}">${((p.signal_id||p.id||'').slice(-12))}</td>
+      <td>${score}</td>
       <td><strong>${p.pair||p.ticker}</strong></td>
       <td><span class="dir-badge ${dir==='BUY'?'buy':'sell'}">${dir}</span></td>
       <td>$${(p.entry||0).toFixed(4)}</td>
