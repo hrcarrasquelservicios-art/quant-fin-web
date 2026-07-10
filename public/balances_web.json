@@ -1,0 +1,14 @@
+{
+  "balances": {
+    "LDACE": {
+      "free": 1.01418945,
+      "locked": 0.0
+    },
+    "SPCXB": {
+      "free": 0.000932,
+      "locked": 0.0
+    }
+  },
+  "canTrade": true,
+  "timestamp": "2026-07-10T20:09:52.396859+00:00"
+}
