@@ -1,6 +1,6 @@
 [
   {
-    "id": "QFS-0146",
+    "id": "QFS-0165",
     "ticker": "AAPL",
     "name": "AAPL",
     "symbol": "AAPL",
@@ -16,8 +16,8 @@
     "rs_score": 0.57,
     "gc_trend": "uptrend",
     "ibs": 0.5,
-    "vol_ratio": 0.46,
-    "timestamp": "2026-07-10T20:02:06.781075+00:00",
+    "vol_ratio": 0.5,
+    "timestamp": "2026-07-10T22:02:05.746279+00:00",
     "source": "RUF-Flow v7 / Motor SC",
     "consensus_id": "",
     "vm1_confirmed": false,
@@ -27,7 +27,7 @@
     "current_price": 315.32
   },
   {
-    "id": "QFS-0133",
+    "id": "QFS-0151",
     "ticker": "QQQ",
     "name": "QQQ",
     "symbol": "QQQ",
@@ -44,7 +44,7 @@
     "gc_trend": "uptrend",
     "ibs": 0.5,
     "vol_ratio": 0.5,
-    "timestamp": "2026-07-10T20:02:06.777015+00:00",
+    "timestamp": "2026-07-10T22:02:05.741575+00:00",
     "source": "RUF-Flow v7 / Motor SC",
     "consensus_id": "",
     "vm1_confirmed": false,
