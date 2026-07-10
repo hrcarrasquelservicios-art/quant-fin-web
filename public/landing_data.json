@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T17:50:17.046000+00:00",
+  "generated_at": "2026-07-10T17:55:17.008100+00:00",
   "signals": [
     {
       "id": "QFS-0115",
@@ -26,7 +26,7 @@
       "vm2_confirmed": false,
       "quantity": 0.001,
       "mode": "demo",
-      "current_price": 314.09
+      "current_price": 314.287
     },
     {
       "id": "QFS-0104",
@@ -53,7 +53,7 @@
       "vm2_confirmed": false,
       "quantity": 0.001,
       "mode": "demo",
-      "current_price": 726.1599
+      "current_price": 725.8
     }
   ],
   "market_data": [
@@ -65,7 +65,7 @@
       "high": null,
       "low": null,
       "volume": 26824050688,
-      "timestamp": "2026-07-10T17:50:02.262417+00:00",
+      "timestamp": "2026-07-10T17:55:02.259894+00:00",
       "source": "yahoo"
     },
     {
@@ -76,7 +76,7 @@
       "high": null,
       "low": null,
       "volume": 9340041216,
-      "timestamp": "2026-07-10T17:50:02.993243+00:00",
+      "timestamp": "2026-07-10T17:55:02.958525+00:00",
       "source": "yahoo"
     },
     {
@@ -87,7 +87,7 @@
       "high": null,
       "low": null,
       "volume": 2027847552,
-      "timestamp": "2026-07-10T17:50:03.701441+00:00",
+      "timestamp": "2026-07-10T17:55:03.789901+00:00",
       "source": "yahoo"
     },
     {
@@ -98,7 +98,7 @@
       "high": null,
       "low": null,
       "volume": 1044397696,
-      "timestamp": "2026-07-10T17:50:04.428245+00:00",
+      "timestamp": "2026-07-10T17:55:04.506778+00:00",
       "source": "yahoo"
     },
     {
@@ -109,172 +109,172 @@
       "high": null,
       "low": null,
       "volume": 501905888,
-      "timestamp": "2026-07-10T17:50:05.157722+00:00",
+      "timestamp": "2026-07-10T17:55:05.362857+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "AAPL",
-      "close": 314.09,
+      "close": 314.287,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 15281767,
-      "timestamp": "2026-07-10T17:50:05.819675+00:00",
+      "volume": 15416790,
+      "timestamp": "2026-07-10T17:55:06.068917+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "MSFT",
-      "close": 383.31,
+      "close": 383.68,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 13720871,
-      "timestamp": "2026-07-10T17:50:06.675294+00:00",
+      "volume": 13808937,
+      "timestamp": "2026-07-10T17:55:06.854403+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "GOOGL",
-      "close": 354.24,
+      "close": 354.59,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 9633221,
-      "timestamp": "2026-07-10T17:50:07.494009+00:00",
+      "volume": 9734836,
+      "timestamp": "2026-07-10T17:55:07.610786+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "AMZN",
-      "close": 244.745,
+      "close": 245.038,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 17536153,
-      "timestamp": "2026-07-10T17:50:08.147415+00:00",
+      "volume": 17748382,
+      "timestamp": "2026-07-10T17:55:08.332088+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "TSLA",
-      "close": 408.845,
+      "close": 408.73,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 23472572,
-      "timestamp": "2026-07-10T17:50:08.811245+00:00",
+      "volume": 23619960,
+      "timestamp": "2026-07-10T17:55:09.021572+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "NVDA",
-      "close": 210.63,
+      "close": 210.449,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 94643530,
-      "timestamp": "2026-07-10T17:50:09.498803+00:00",
+      "volume": 95799124,
+      "timestamp": "2026-07-10T17:55:09.746598+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "META",
-      "close": 663.28,
+      "close": 663.6,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 28339138,
-      "timestamp": "2026-07-10T17:50:10.204177+00:00",
+      "volume": 28460962,
+      "timestamp": "2026-07-10T17:55:10.442179+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "JPM",
-      "close": 336.52,
+      "close": 336.485,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 2018594,
-      "timestamp": "2026-07-10T17:50:11.008610+00:00",
+      "volume": 2054134,
+      "timestamp": "2026-07-10T17:55:11.151806+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "COST",
-      "close": 914.075,
+      "close": 914.255,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 1045881,
-      "timestamp": "2026-07-10T17:50:11.833441+00:00",
+      "volume": 1052881,
+      "timestamp": "2026-07-10T17:55:11.911939+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "LLY",
-      "close": 1184.1,
+      "close": 1184.725,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 1153845,
-      "timestamp": "2026-07-10T17:50:12.789511+00:00",
+      "volume": 1169627,
+      "timestamp": "2026-07-10T17:55:12.716665+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "SPCX",
-      "close": 148.73,
+      "close": 148.74,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 26597105,
-      "timestamp": "2026-07-10T17:50:13.513849+00:00",
+      "volume": 26721600,
+      "timestamp": "2026-07-10T17:55:13.438601+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "SPY",
-      "close": 754.3,
+      "close": 754.235,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 20720528,
-      "timestamp": "2026-07-10T17:50:14.303736+00:00",
+      "volume": 20880856,
+      "timestamp": "2026-07-10T17:55:14.143939+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "QQQ",
-      "close": 726.1599,
+      "close": 725.8,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 17990163,
-      "timestamp": "2026-07-10T17:50:15.032574+00:00",
+      "volume": 18157105,
+      "timestamp": "2026-07-10T17:55:14.994501+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "DIA",
-      "close": 525.88,
+      "close": 525.97,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 2051248,
-      "timestamp": "2026-07-10T17:50:15.794184+00:00",
+      "volume": 2065177,
+      "timestamp": "2026-07-10T17:55:15.778593+00:00",
       "source": "yahoo"
     },
     {
       "ticker": "IWM",
-      "close": 296.365,
+      "close": 296.375,
       "previousClose": null,
       "open": null,
       "high": null,
       "low": null,
-      "volume": 9864960,
-      "timestamp": "2026-07-10T17:50:16.597315+00:00",
+      "volume": 9962551,
+      "timestamp": "2026-07-10T17:55:16.585999+00:00",
       "source": "yahoo"
     }
   ],
@@ -285,7 +285,7 @@
     "total_pnl": 0
   },
   "exchange_rates": {
-    "timestamp": "10/07/2026 17:50",
+    "timestamp": "10/07/2026 17:55",
     "bcv_usd": 1510,
     "paralelo": 1510,
     "usdt": 1562.06
