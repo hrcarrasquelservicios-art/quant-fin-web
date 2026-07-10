@@ -24,7 +24,7 @@
     "vm2_confirmed": false,
     "quantity": 0.001,
     "mode": "demo",
-    "current_price": 313.415
+    "current_price": 313.125
   },
   {
     "id": "QFS-0091",
@@ -51,6 +51,6 @@
     "vm2_confirmed": false,
     "quantity": 0.001,
     "mode": "demo",
-    "current_price": 721.62
+    "current_price": 722.41
   }
 ]
