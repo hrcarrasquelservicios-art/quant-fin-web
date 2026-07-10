@@ -1,22 +1,22 @@
 [
   {
     "ticker": "BTC-USD",
-    "close": 63834.76,
+    "close": 63820.0,
     "open": null,
     "high": null,
     "low": null,
     "volume": null,
-    "timestamp": "2026-07-10T20:10:01.837329+00:00",
+    "timestamp": "2026-07-10T20:12:43.569283+00:00",
     "source": "binance_live"
   },
   {
     "ticker": "ETH-USD",
-    "close": 1791.43,
+    "close": 1792.3,
     "open": null,
     "high": null,
     "low": null,
     "volume": null,
-    "timestamp": "2026-07-10T20:10:02.250364+00:00",
+    "timestamp": "2026-07-10T20:12:43.973245+00:00",
     "source": "binance_live"
   },
   {
@@ -26,83 +26,28 @@
     "high": null,
     "low": null,
     "volume": null,
-    "timestamp": "2026-07-10T20:10:02.660965+00:00",
+    "timestamp": "2026-07-10T20:12:44.378015+00:00",
     "source": "binance_live"
   },
   {
     "ticker": "BNB-USD",
-    "close": 576.18,
+    "close": 576.34,
     "open": null,
     "high": null,
     "low": null,
     "volume": null,
-    "timestamp": "2026-07-10T20:10:03.069076+00:00",
+    "timestamp": "2026-07-10T20:12:44.780050+00:00",
     "source": "binance_live"
   },
   {
     "ticker": "DOGE-USD",
-    "close": 0.0742,
+    "close": 0.07419,
     "open": null,
     "high": null,
     "low": null,
     "volume": null,
-    "timestamp": "2026-07-10T20:10:03.481944+00:00",
+    "timestamp": "2026-07-10T20:12:45.188996+00:00",
     "source": "binance_live"
-  },
-  {
-    "ticker": "BTC-USD",
-    "close": 63746.67,
-    "previousClose": null,
-    "open": null,
-    "high": null,
-    "low": null,
-    "volume": 26699575296,
-    "timestamp": "2026-07-10T20:10:03.969078+00:00",
-    "source": "yahoo"
-  },
-  {
-    "ticker": "ETH-USD",
-    "close": 1783.55,
-    "previousClose": null,
-    "open": null,
-    "high": null,
-    "low": null,
-    "volume": 9466214400,
-    "timestamp": "2026-07-10T20:10:04.651515+00:00",
-    "source": "yahoo"
-  },
-  {
-    "ticker": "SOL-USD",
-    "close": 77.6,
-    "previousClose": null,
-    "open": null,
-    "high": null,
-    "low": null,
-    "volume": 2048202368,
-    "timestamp": "2026-07-10T20:10:05.412796+00:00",
-    "source": "yahoo"
-  },
-  {
-    "ticker": "BNB-USD",
-    "close": 574.7,
-    "previousClose": null,
-    "open": null,
-    "high": null,
-    "low": null,
-    "volume": 1046536960,
-    "timestamp": "2026-07-10T20:10:06.165156+00:00",
-    "source": "yahoo"
-  },
-  {
-    "ticker": "DOGE-USD",
-    "close": 0.07394,
-    "previousClose": null,
-    "open": null,
-    "high": null,
-    "low": null,
-    "volume": 498101696,
-    "timestamp": "2026-07-10T20:10:06.896931+00:00",
-    "source": "yahoo"
   },
   {
     "ticker": "AAPL",
@@ -112,7 +57,7 @@
     "high": null,
     "low": null,
     "volume": 30481375,
-    "timestamp": "2026-07-10T20:10:07.625839+00:00",
+    "timestamp": "2026-07-10T20:12:45.774156+00:00",
     "source": "yahoo"
   },
   {
@@ -123,7 +68,7 @@
     "high": null,
     "low": null,
     "volume": 23091275,
-    "timestamp": "2026-07-10T20:10:08.397411+00:00",
+    "timestamp": "2026-07-10T20:12:46.472955+00:00",
     "source": "yahoo"
   },
   {
@@ -134,7 +79,7 @@
     "high": null,
     "low": null,
     "volume": 17441180,
-    "timestamp": "2026-07-10T20:10:09.114278+00:00",
+    "timestamp": "2026-07-10T20:12:47.303458+00:00",
     "source": "yahoo"
   },
   {
@@ -145,7 +90,7 @@
     "high": null,
     "low": null,
     "volume": 29208814,
-    "timestamp": "2026-07-10T20:10:09.762234+00:00",
+    "timestamp": "2026-07-10T20:12:47.998940+00:00",
     "source": "yahoo"
   },
   {
@@ -156,7 +101,7 @@
     "high": null,
     "low": null,
     "volume": 32768180,
-    "timestamp": "2026-07-10T20:10:10.454036+00:00",
+    "timestamp": "2026-07-10T20:12:48.687442+00:00",
     "source": "yahoo"
   },
   {
@@ -167,7 +112,7 @@
     "high": null,
     "low": null,
     "volume": 142154059,
-    "timestamp": "2026-07-10T20:10:11.143888+00:00",
+    "timestamp": "2026-07-10T20:12:49.428323+00:00",
     "source": "yahoo"
   },
   {
@@ -178,7 +123,7 @@
     "high": null,
     "low": null,
     "volume": 39408342,
-    "timestamp": "2026-07-10T20:10:11.816049+00:00",
+    "timestamp": "2026-07-10T20:12:50.068827+00:00",
     "source": "yahoo"
   },
   {
@@ -189,7 +134,7 @@
     "high": null,
     "low": null,
     "volume": 3749315,
-    "timestamp": "2026-07-10T20:10:12.559769+00:00",
+    "timestamp": "2026-07-10T20:12:50.839416+00:00",
     "source": "yahoo"
   },
   {
@@ -200,7 +145,7 @@
     "high": null,
     "low": null,
     "volume": 2062445,
-    "timestamp": "2026-07-10T20:10:13.321272+00:00",
+    "timestamp": "2026-07-10T20:12:51.559564+00:00",
     "source": "yahoo"
   },
   {
@@ -211,7 +156,7 @@
     "high": null,
     "low": null,
     "volume": 1597562,
-    "timestamp": "2026-07-10T20:10:14.023627+00:00",
+    "timestamp": "2026-07-10T20:12:52.325885+00:00",
     "source": "yahoo"
   },
   {
@@ -222,7 +167,7 @@
     "high": null,
     "low": null,
     "volume": 44690964,
-    "timestamp": "2026-07-10T20:10:14.715661+00:00",
+    "timestamp": "2026-07-10T20:12:53.098330+00:00",
     "source": "yahoo"
   },
   {
@@ -233,7 +178,7 @@
     "high": null,
     "low": null,
     "volume": 36604688,
-    "timestamp": "2026-07-10T20:10:15.421637+00:00",
+    "timestamp": "2026-07-10T20:12:53.835036+00:00",
     "source": "yahoo"
   },
   {
@@ -244,7 +189,7 @@
     "high": null,
     "low": null,
     "volume": 25289640,
-    "timestamp": "2026-07-10T20:10:16.158652+00:00",
+    "timestamp": "2026-07-10T20:12:54.549606+00:00",
     "source": "yahoo"
   },
   {
@@ -255,7 +200,7 @@
     "high": null,
     "low": null,
     "volume": 3176516,
-    "timestamp": "2026-07-10T20:10:16.908973+00:00",
+    "timestamp": "2026-07-10T20:12:55.309118+00:00",
     "source": "yahoo"
   },
   {
@@ -266,7 +211,7 @@
     "high": null,
     "low": null,
     "volume": 15016907,
-    "timestamp": "2026-07-10T20:10:17.674010+00:00",
+    "timestamp": "2026-07-10T20:12:56.086886+00:00",
     "source": "yahoo"
   }
 ]
