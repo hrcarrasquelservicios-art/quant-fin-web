@@ -167,6 +167,17 @@ tr:last-child td{border-bottom:none;}
 
   <div class="panel">
     <div class="panel-head">
+      <div>
+        <div class="panel-title">Selección de par</div>
+        <div class="panel-sub" id="candle-price">BTC/USDT &middot; velas 1h</div>
+      </div>
+      <div class="panel-sub" id="candle-status">conectando...</div>
+    </div>
+    <div id="candle-chart" style="height:320px; padding:8px 12px;"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
       <div class="panel-title">Resumen</div>
     </div>
     <div class="stats">
@@ -184,6 +195,256 @@ tr:last-child td{border-bottom:none;}
 
 </div>
 
-<script src="/src/main.js" type="module"></script>
+<script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+let positions = [
+  {id:'QFS-0172', symbol:'QQQ', side:'BUY', qty:0.0010, entry:723.80, sl:700.04, tp1:755.48, tp2:771.32, tp3:795.08, price:723.80, opened:'20:05'},
+  {id:'QFS-0187', symbol:'AAPL', side:'BUY', qty:0.0010, entry:315.32, sl:303.185, tp1:331.50, tp2:339.59, tp3:351.725, price:315.32, opened:'20:05'}
+];
+let history = [];
+let balance = 1000;
+let idCounter = 188;
+
+function fmt(n, d=2){ return n.toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d}); }
+function fmtMoney(n){ return (n<0?'-$':'+$') + fmt(Math.abs(n)); }
+function fmtPct(n){ return (n>=0?'+':'') + fmt(n) + '%'; }
+
+function pnlOf(p){
+  const diff = p.side==='BUY' ? (p.price - p.entry) : (p.entry - p.price);
+  const abs = diff * p.qty;
+  const pct = (diff / p.entry) * 100;
+  return {abs, pct};
+}
+
+function renderTicker(){
+  const items = positions.map(p => {
+    const {pct} = pnlOf(p);
+    const cls = pct>=0 ? 'style="color:var(--green)"' : 'style="color:var(--red)"';
+    return `<span>${p.symbol} <b>${fmt(p.price,2)}</b> <span ${cls}>${fmtPct(pct)}</span></span>`;
+  });
+  document.getElementById('ticker').innerHTML = items.concat(items).join('');
+}
+
+function renderOpen(){
+  const body = document.getElementById('open-body');
+  if(positions.length === 0){
+    body.innerHTML = `<tr><td colspan="8" class="empty">Sin posiciones abiertas</td></tr>`;
+  } else {
+    body.innerHTML = positions.map(p => {
+      const {abs, pct} = pnlOf(p);
+      const dirCls = p.side==='BUY' ? 'dir-buy' : 'dir-sell';
+      const pnlCls = abs>=0 ? 'up' : 'down';
+      return `<tr class="flash">
+        <td class="sym">${p.symbol}</td>
+        <td><span class="${dirCls}">${p.side}</span></td>
+        <td>${fmt(p.qty,4)}</td>
+        <td>$${fmt(p.entry)}</td>
+        <td>$${fmt(p.sl)}</td>
+        <td>$${fmt(p.tp1)}</td>
+        <td>$${fmt(p.price)}</td>
+        <td class="${pnlCls}">${fmtMoney(abs)} (${fmtPct(pct)})</td>
+      </tr>`;
+    }).join('');
+  }
+  document.getElementById('m-open').textContent = positions.length;
+}
+
+function renderHistory(){
+  const body = document.getElementById('history-body');
+  if(history.length === 0){
+    body.innerHTML = `<tr><td colspan="7" class="empty">Sin historial aún</td></tr>`;
+    return;
+  }
+  body.innerHTML = history.slice(0,50).map(h => {
+    const dirCls = h.side==='BUY' ? 'dir-buy' : 'dir-sell';
+    const pnlCls = h.pnl>=0 ? 'up' : 'down';
+    const badge = h.reason==='TP_HIT' ? 'badge-tp' : 'badge-sl';
+    return `<tr>
+      <td class="sym">${h.id}</td>
+      <td class="sym">${h.symbol}</td>
+      <td><span class="${dirCls}">${h.side}</span></td>
+      <td>$${fmt(h.entry)}</td>
+      <td>$${fmt(h.exit)}</td>
+      <td class="${pnlCls}">${fmtMoney(h.pnl)}</td>
+      <td><span class="${badge}">${h.reason==='TP_HIT'?'TP':'SL'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderBook(){
+  const body = document.getElementById('book-body');
+  const all = positions.map(p => ({...p, status:'open'})).concat(
+    history.map(h => ({id:h.id, symbol:h.symbol, side:h.side, entry:h.entry, sl:h.sl, tp1:h.tp1, tp2:h.tp2, tp3:h.tp3, status:h.reason==='TP_HIT'?'closed_tp':'closed_sl', pnlPct:h.pnlPct, opened:h.opened}))
+  );
+  body.innerHTML = all.map(o => {
+    const badge = o.status==='open' ? 'badge-open' : (o.status==='closed_tp' ? 'badge-tp' : 'badge-sl');
+    const label = o.status==='open' ? 'open' : (o.status==='closed_tp' ? 'closed' : 'closed');
+    const pct = o.status==='open' ? pnlOf(positions.find(p=>p.id===o.id) || o).pct : o.pnlPct;
+    const pnlCls = pct>=0 ? 'up' : 'down';
+    return `<tr>
+      <td class="sym">${o.id}</td>
+      <td class="sym">${o.symbol}</td>
+      <td>${o.side}</td>
+      <td>$${fmt(o.entry)}</td>
+      <td>$${fmt(o.sl)}</td>
+      <td>$${fmt(o.tp1)}</td>
+      <td>$${o.tp2?fmt(o.tp2):'--'}</td>
+      <td>$${o.tp3?fmt(o.tp3):'--'}</td>
+      <td class="${pnlCls}">${fmtPct(pct)}</td>
+      <td><span class="${badge}">${label}</span></td>
+      <td>${o.opened}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderStats(){
+  const closed = history.length;
+  const wins = history.filter(h => h.pnl > 0).length;
+  const wr = closed ? (wins/closed*100) : 0;
+  const gp = history.filter(h=>h.pnl>0).reduce((a,h)=>a+h.pnl,0);
+  const gl = Math.abs(history.filter(h=>h.pnl<=0).reduce((a,h)=>a+h.pnl,0));
+  const pf = gl ? gp/gl : 0;
+  const pnlTotalPct = ((balance - 1000) / 1000) * 100;
+
+  document.getElementById('s-wr').textContent = fmt(wr,1) + '%';
+  document.getElementById('s-pf').textContent = fmt(pf,2);
+  document.getElementById('s-tr').textContent = closed;
+  document.getElementById('s-pnl').textContent = fmtPct(pnlTotalPct);
+  document.getElementById('s-pnl').className = 'stat-value ' + (pnlTotalPct>=0?'up':'down');
+}
+
+function renderAccount(){
+  const totalUnrealized = positions.reduce((a,p)=>a+pnlOf(p).abs, 0);
+  const equity = balance + totalUnrealized;
+  const marginUsed = positions.reduce((a,p)=>a + p.entry*p.qty, 0);
+  document.getElementById('m-balance').textContent = '$'+fmt(balance);
+  document.getElementById('m-equity').textContent = '$'+fmt(equity);
+  document.getElementById('m-margin').textContent = '$'+fmt(marginUsed);
+  document.getElementById('m-avail').textContent = '$'+fmt(balance - marginUsed);
+  const upnlEl = document.getElementById('m-upnl');
+  upnlEl.textContent = fmtMoney(totalUnrealized);
+  upnlEl.className = 'metric-value ' + (totalUnrealized>=0?'up':'down');
+}
+
+function renderAll(){
+  renderTicker(); renderOpen(); renderHistory(); renderBook(); renderStats(); renderAccount();
+}
+
+function closePosition(p, reason){
+  const {abs, pct} = pnlOf(p);
+  const exitPrice = reason==='TP_HIT' ? p.tp1 : p.sl;
+  const finalDiff = p.side==='BUY' ? (exitPrice - p.entry) : (p.entry - exitPrice);
+  const finalPnl = finalDiff * p.qty;
+  const finalPct = (finalDiff / p.entry) * 100;
+  history.unshift({
+    id:p.id, symbol:p.symbol, side:p.side, entry:p.entry, exit:exitPrice,
+    pnl:finalPnl, pnlPct:finalPct, reason, opened:p.opened
+  });
+  balance += finalPnl;
+  positions = positions.filter(x => x.id !== p.id);
+}
+
+function tick(){
+  positions.forEach(p => {
+    const drift = (Math.random() - 0.48) * p.entry * 0.0018;
+    p.price = Math.max(0.01, p.price + drift);
+  });
+
+  positions.slice().forEach(p => {
+    if(p.side==='BUY'){
+      if(p.price >= p.tp1) closePosition(p, 'TP_HIT');
+      else if(p.price <= p.sl) closePosition(p, 'SL_HIT');
+    } else {
+      if(p.price <= p.tp1) closePosition(p, 'TP_HIT');
+      else if(p.price >= p.sl) closePosition(p, 'SL_HIT');
+    }
+  });
+
+  renderAll();
+}
+
+document.getElementById('force-btn').addEventListener('click', () => {
+  if(positions.length === 0) return;
+  const p = positions[0];
+  const reason = Math.random() > 0.5 ? 'TP_HIT' : 'SL_HIT';
+  closePosition(p, reason);
+  renderAll();
+});
+
+function updateClock(){
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('es-VE', {hour12:false});
+}
+
+renderAll();
+updateClock();
+setInterval(tick, 3000);
+setInterval(updateClock, 1000);
+
+let candleSeries = null;
+
+function initCandles(){
+  const el = document.getElementById('candle-chart');
+  const chart = LightweightCharts.createChart(el, {
+    layout:{ background:{color:'transparent'}, textColor:'#8A8F98', fontFamily:'SF Mono, Consolas, monospace', fontSize:11 },
+    grid:{ vertLines:{color:'#1D2129'}, horzLines:{color:'#1D2129'} },
+    rightPriceScale:{ borderColor:'#262B32' },
+    timeScale:{ borderColor:'#262B32', timeVisible:true },
+    crosshair:{ mode:0 },
+    width: el.clientWidth,
+    height: 320
+  });
+  candleSeries = chart.addCandlestickSeries({
+    upColor:'#1FCB86', downColor:'#E5484D',
+    borderUpColor:'#1FCB86', borderDownColor:'#E5484D',
+    wickUpColor:'#1FCB86', wickDownColor:'#E5484D'
+  });
+  window.addEventListener('resize', () => chart.applyOptions({width: el.clientWidth}));
+  return chart;
+}
+
+async function loadCandles(){
+  const statusEl = document.getElementById('candle-status');
+  try{
+    const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=100');
+    const raw = await res.json();
+    const data = raw.map(k => ({
+      time: Math.floor(k[0]/1000),
+      open: parseFloat(k[1]), high: parseFloat(k[2]),
+      low: parseFloat(k[3]), close: parseFloat(k[4])
+    }));
+    candleSeries.setData(data);
+    const last = data[data.length-1];
+    document.getElementById('candle-price').textContent = `BTC/USDT · velas 1h · $${fmt(last.close,2)}`;
+    statusEl.textContent = 'en vivo';
+    statusEl.style.color = 'var(--green)';
+  } catch(e){
+    statusEl.textContent = 'sin conexión (offline)';
+    statusEl.style.color = 'var(--red)';
+  }
+}
+
+async function refreshLastCandle(){
+  try{
+    const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=1');
+    const raw = await res.json();
+    const k = raw[0];
+    candleSeries.update({
+      time: Math.floor(k[0]/1000),
+      open: parseFloat(k[1]), high: parseFloat(k[2]),
+      low: parseFloat(k[3]), close: parseFloat(k[4])
+    });
+    document.getElementById('candle-price').textContent = `BTC/USDT · velas 1h · $${fmt(parseFloat(k[4]),2)}`;
+  } catch(e){}
+}
+
+if(typeof LightweightCharts !== 'undefined'){
+  initCandles();
+  loadCandles();
+  setInterval(refreshLastCandle, 10000);
+} else {
+  document.getElementById('candle-status').textContent = 'librería no cargada';
+}
+</script>
 </body>
 </html>
