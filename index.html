@@ -58,7 +58,6 @@ body{
 .panel-title{font-size:13px; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-dim);}
 .panel-sub{font-size:11px; color:var(--text-mute);}
 
-/* Tables */
 table{width:100%; border-collapse:collapse;}
 th{text-align:left; font-size:10px; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.8px; font-weight:400; padding:10px 18px; border-bottom:1px solid var(--border-soft);}
 td{padding:11px 18px; font-family:var(--mono); font-size:12.5px; border-bottom:1px solid var(--border-soft); font-variant-numeric:tabular-nums;}
@@ -72,7 +71,6 @@ tr:last-child td{border-bottom:none;}
 .badge-tp{font-size:10px; color:var(--green); border:1px solid var(--green); padding:2px 8px; text-transform:uppercase;}
 .badge-sl{font-size:10px; color:var(--red); border:1px solid var(--red); padding:2px 8px; text-transform:uppercase;}
 
-/* Flowchart */
 .flowchart{padding:24px; font-family:var(--mono); font-size:12px;}
 .flow-node{display:flex; flex-direction:column; align-items:center; margin-bottom:16px;}
 .flow-box{border:1px solid var(--border); background:var(--panel-2); padding:10px 20px; min-width:180px; text-align:center; color:var(--text-dim); transition:all 0.3s;}
@@ -80,7 +78,6 @@ tr:last-child td{border-bottom:none;}
 .flow-line{width:1px; height:20px; background:var(--border); margin-top:16px;}
 .flow-arrow{width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:6px solid var(--border); margin-bottom:4px;}
 
-/* Analytics layout */
 .analytics-grid{display:grid; grid-template-columns:3fr 1fr; gap:20px;}
 .side-panel{background:var(--panel); border:1px solid var(--border); padding:16px;}
 .side-item{display:flex; justify-content:space-between; margin-bottom:12px; border-bottom:1px solid var(--border-soft); padding-bottom:8px;}
@@ -88,7 +85,6 @@ tr:last-child td{border-bottom:none;}
 .side-label{color:var(--text-mute); font-size:11px; text-transform:uppercase;}
 .side-value{font-family:var(--mono); font-size:13px;}
 
-/* Markets view */
 .markets-grid{display:grid; grid-template-columns:1fr; gap:24px;}
 .market-block h3{font-size:11px; text-transform:uppercase; color:var(--text-mute); letter-spacing:1px; margin-bottom:12px; padding-bottom:4px; border-bottom:1px solid var(--border);}
 .market-table{background:var(--panel); border:1px solid var(--border);}
@@ -180,32 +176,41 @@ tr:last-child td{border-bottom:none;}
             <div class="panel-title">Selección de par</div>
             <select id="symbolSelect" style="background:var(--panel-2); color:var(--text); border:1px solid var(--border); padding:4px 8px; font-family:var(--sans); font-size:12px; outline:none; margin-top:4px;">
               <optgroup label="CRYPTO">
-                <option value="BTC-USD" data-type="crypto">BTC</option>
-                <option value="ETH-USD" data-type="crypto">ETH</option>
-                <option value="BNB-USD" data-type="crypto">BNB</option>
-                <option value="SOL-USD" data-type="crypto">SOL</option>
-                <option value="DOGE-USD" data-type="crypto">DOGE</option>
+                <option value="BTC-USD">BTC</option>
+                <option value="ETH-USD">ETH</option>
+                <option value="BNB-USD">BNB</option>
+                <option value="SOL-USD">SOL</option>
+                <option value="DOGE-USD">DOGE</option>
               </optgroup>
               <optgroup label="US MARKET">
-                <option value="SPY" data-type="stock">SPY</option>
-                <option value="QQQ" data-type="stock">QQQ</option>
-                <option value="AAPL" data-type="stock">AAPL</option>
-                <option value="NVDA" data-type="stock">NVDA</option>
-                <option value="TSLA" data-type="stock">TSLA</option>
+                <option value="SPY">SPY</option>
+                <option value="QQQ">QQQ</option>
+                <option value="AAPL">AAPL</option>
+                <option value="MSFT">MSFT</option>
+                <option value="GOOGL">GOOGL</option>
+                <option value="AMZN">AMZN</option>
+                <option value="TSLA">TSLA</option>
+                <option value="NVDA">NVDA</option>
+                <option value="META">META</option>
+                <option value="JPM">JPM</option>
+                <option value="COST">COST</option>
+                <option value="LLY">LLY</option>
+                <option value="DIA">DIA</option>
+                <option value="IWM">IWM</option>
               </optgroup>
               <optgroup label="EUROPE">
-                <option value="SAP.DE" data-type="stock">SAP.DE</option>
-                <option value="MC.PA" data-type="stock">MC.PA (LVMH)</option>
-                <option value="AIR.PA" data-type="stock">AIR.PA (Airbus)</option>
-                <option value="NESN.SW" data-type="stock">NESN.SW (Nestle)</option>
-                <option value="DBK.DE" data-type="stock">DBK.DE</option>
-                <option value="^STOXX50E" data-type="stock">STOXX50</option>
+                <option value="SAP.DE">SAP.DE</option>
+                <option value="MC.PA">MC.PA (LVMH)</option>
+                <option value="AIR.PA">AIR.PA (Airbus)</option>
+                <option value="NESN.SW">NESN.SW (Nestle)</option>
+                <option value="DBK.DE">DBK.DE</option>
+                <option value="^STOXX50E">STOXX50</option>
               </optgroup>
               <optgroup label="ASIA">
-                <option value="7203.T" data-type="stock">7203.T (Toyota)</option>
-                <option value="9984.T" data-type="stock">9984.T (Softbank)</option>
-                <option value="0700.HK" data-type="stock">0700.HK (Tencent)</option>
-                <option value="0005.HK" data-type="stock">0005.HK (HSBC)</option>
+                <option value="7203.T">7203.T (Toyota)</option>
+                <option value="9984.T">9984.T (Softbank)</option>
+                <option value="0700.HK">0700.HK (Tencent)</option>
+                <option value="0005.HK">0005.HK (HSBC)</option>
               </optgroup>
             </select>
             <div class="panel-sub" id="candle-price" style="margin-top:4px;">velas 1h</div>
@@ -259,7 +264,6 @@ tr:last-child td{border-bottom:none;}
   <!-- MERCADOS -->
   <div id="view-mercados" class="view">
     <div class="markets-grid" id="markets-container">
-      <!-- Generado por JS -->
     </div>
   </div>
 
@@ -278,7 +282,10 @@ let balance = 1000;
 let tracking = {};
 let marketData = [];
 
-// TABS LOGIC
+// ─── SYMBOL MAP: unified endpoint for all 20 assets ───
+const API_BASE = 'https://85.215.73.107.nip.io/api';
+const API_KEY = '?key=Rufflow777';
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -375,14 +382,14 @@ function renderMarkets(){
   const container = document.getElementById('markets-container');
   const blocks = {
     'A_CRYPTO': 'Crypto',
-    'B_INDICES': 'US Market',
+    'B_US_MARKET': 'US Market',
     'C_EUROPEAN_MARKET': 'Europe',
     'D_ASIAN_MARKET': 'Asia'
   };
   
   let html = '';
   for(const [key, name] of Object.entries(blocks)){
-    const assets = marketData.filter(m => m.bloque === key || (!m.bloque && key==='B_INDICES'));
+    const assets = marketData.filter(m => m.bloque === key);
     if(assets.length === 0) continue;
     
     html += `<div class="market-block">
@@ -452,7 +459,7 @@ function updateSidePanel() {
 
 async function fetchRealData() {
     try {
-        const res = await fetch("https://85.215.73.107.nip.io/api/landing_data.json?key=Rufflow777");
+        const res = await fetch(`${API_BASE}/landing_data.json${API_KEY}`);
         const data = await res.json();
         
         if(data.signals) {
@@ -482,10 +489,9 @@ async function fetchRealData() {
     }
 }
 
-// Chart Logic
+// ─── UNIFIED CANDLE LOADER ──────────────────────────
 let candleSeries = null;
 let currentSymbol = 'BTC-USD';
-let currentType = 'crypto';
 
 function initCandles(){
   const el = document.getElementById('candle-chart');
@@ -507,67 +513,43 @@ function initCandles(){
   return chart;
 }
 
-async function loadCryptoCandles(symbol) {
+async function loadCandles() {
     const statusEl = document.getElementById('candle-status');
-    statusEl.textContent = 'conectando Binance...';
-    try{
-        const binanceSym = symbol.replace('-USD', 'USDT');
-        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${binanceSym}&interval=1h&limit=100`);
-        const raw = await res.json();
-        const data = raw.map(k => ({
-            time: Math.floor(k[0]/1000),
-            open: parseFloat(k[1]), high: parseFloat(k[2]),
-            low: parseFloat(k[3]), close: parseFloat(k[4])
-        }));
-        candleSeries.setData(data);
-        const last = data[data.length-1];
-        document.getElementById('candle-price').textContent = `${symbol} · velas 1h · $${fmt(last.close,2)}`;
-        statusEl.textContent = 'en vivo (Binance)';
-        statusEl.style.color = 'var(--green)';
-    } catch(e){
-        statusEl.textContent = 'sin conexión';
-        statusEl.style.color = 'var(--red)';
-    }
-}
-
-async function loadStockCandles(symbol) {
-    const statusEl = document.getElementById('candle-status');
-    statusEl.textContent = 'conectando IONOS (YFinance)...';
-    try{
-        const res = await fetch(`https://85.215.73.107.nip.io/api/candles_${symbol}.json?key=Rufflow777`);
+    const priceEl = document.getElementById('candle-price');
+    statusEl.textContent = 'cargando velas...';
+    
+    try {
+        const res = await fetch(`${API_BASE}/candles_${currentSymbol}.json${API_KEY}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const raw = await res.json();
         
         const data = raw.map(k => {
-            let t = new Date(k.t).getTime() / 1000;
+            let t = Math.floor(new Date(k.t).getTime() / 1000);
+            if (isNaN(t)) t = 0;
             return {
                 time: t,
                 open: parseFloat(k.o), high: parseFloat(k.h),
                 low: parseFloat(k.l), close: parseFloat(k.c)
             };
-        });
+        }).filter(d => d.time > 0);
+        
+        if (data.length === 0) throw new Error('No data');
+        
         candleSeries.setData(data);
         const last = data[data.length-1];
-        document.getElementById('candle-price').textContent = `${symbol} · velas 1h · $${fmt(last.close,2)}`;
-        statusEl.textContent = 'conectado (Yahoo)';
+        priceEl.textContent = `${currentSymbol} · velas 1h · $${fmt(last.close,2)}`;
+        statusEl.textContent = 'en vivo';
         statusEl.style.color = 'var(--green)';
-    } catch(e){
+    } catch(e) {
         statusEl.textContent = 'sin conexión';
         statusEl.style.color = 'var(--red)';
-    }
-}
-
-function loadCandles() {
-    if(currentType === 'crypto') {
-        loadCryptoCandles(currentSymbol);
-    } else {
-        loadStockCandles(currentSymbol);
+        console.error('Candle error:', e);
     }
     updateSidePanel();
 }
 
 document.getElementById('symbolSelect').addEventListener('change', (e) => {
     currentSymbol = e.target.value;
-    currentType = e.target.options[e.target.selectedIndex].dataset.type;
     loadCandles();
 });
 
@@ -576,7 +558,6 @@ function updateClock(){
   document.getElementById('clock').textContent = now.toLocaleTimeString('es-VE', {hour12:false});
 }
 
-// Initial boot
 updateClock();
 fetchRealData();
 setInterval(fetchRealData, 60000);
