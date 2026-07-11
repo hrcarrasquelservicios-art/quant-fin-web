@@ -1,7 +1,7 @@
 [
   {
-    "id": "QFS-0165",
-    "qfs_id": "QFS-0168",
+    "id": "QFS-0187",
+    "qfs_id": "QFS-0188",
     "ticker": "AAPL",
     "direction": "BUY",
     "entry": 315.32,
@@ -16,12 +16,12 @@
     "vm1_confirmed": true,
     "vm2_confirmed": true,
     "consensus_status": "approved",
-    "timestamp": "2026-07-11T00:00:14.151755+00:00",
+    "timestamp": "2026-07-11T00:05:02.371096+00:00",
     "current_price": 315.32
   },
   {
-    "id": "QFS-0151",
-    "qfs_id": "QFS-0169",
+    "id": "QFS-0172",
+    "qfs_id": "QFS-0189",
     "ticker": "QQQ",
     "direction": "BUY",
     "entry": 723.8,
@@ -36,7 +36,7 @@
     "vm1_confirmed": true,
     "vm2_confirmed": true,
     "consensus_status": "approved",
-    "timestamp": "2026-07-11T00:00:14.158817+00:00",
+    "timestamp": "2026-07-11T00:05:02.378921+00:00",
     "current_price": 725.51
   }
 ]
