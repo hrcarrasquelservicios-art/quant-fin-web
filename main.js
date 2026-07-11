@@ -1,6 +1,6 @@
 import './style.css';
 
-const SIGNALS_URL = 'https://85.215.73.107.nip.io/api/live_positions.json?key=Rufflow777';
+const SIGNALS_URL = 'https://85.215.73.107.nip.io/api/positions.json?key=Rufflow777';
 const RATES_URL = 'https://85.215.73.107.nip.io/api/exchange_rates.json?key=Rufflow777';
 const TICKER_SYMBOLS = ['BTC-USD', 'ETH-USD', 'SOL-USD', 'BNB-USD', 'DOGE-USD', 'SPY', 'QQQ', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'GOOGL'];
 
@@ -519,8 +519,9 @@ async function fetchSignals() {
   try {
     const res = await fetch(SIGNALS_URL + '&t=' + new Date().getTime());
     if (!res.ok) throw new Error('HTTP '+res.status);
-    const signals = await res.json();
-    allPositions = (Array.isArray(signals)?signals:[]).map(norm);
+    const data = await res.json();
+    const signalsArray = Array.isArray(data) ? data : [...(data.abiertas || []), ...(data.historial || [])];
+    allPositions = signalsArray.map(norm);
     renderPositions(allPositions);
     renderHistory(allPositions);
     renderOrders(allPositions);
