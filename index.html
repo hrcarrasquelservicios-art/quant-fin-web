@@ -110,10 +110,10 @@ tr:last-child td{border-bottom:none;}
   </div>
 
   <div class="metrics">
-    <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="m-balance">$1,000.00</div></div>
-    <div class="metric"><div class="metric-label">Equity</div><div class="metric-value neutral" id="m-equity">$1,000.00</div></div>
+    <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="m-balance">$0.00</div></div>
+    <div class="metric"><div class="metric-label">Equity</div><div class="metric-value neutral" id="m-equity">$0.00</div></div>
     <div class="metric"><div class="metric-label">Margen usado</div><div class="metric-value" id="m-margin">$0.00</div></div>
-    <div class="metric"><div class="metric-label">Disponible</div><div class="metric-value" id="m-avail">$1,000.00</div></div>
+    <div class="metric"><div class="metric-label">Disponible</div><div class="metric-value" id="m-avail">$0.00</div></div>
     <div class="metric"><div class="metric-label">P&amp;L no realizado</div><div class="metric-value" id="m-upnl">+$0.00</div></div>
     <div class="metric"><div class="metric-label">Posiciones</div><div class="metric-value" id="m-open">0</div></div>
   </div>
@@ -125,7 +125,7 @@ tr:last-child td{border-bottom:none;}
   <div class="panel">
     <div class="panel-head">
       <div class="panel-title">Posiciones abiertas</div>
-      <div class="panel-sub">Precio en vivo &middot; actualiza cada 3s</div>
+      <div class="panel-sub">Precio en vivo &middot; actualiza dinámico</div>
     </div>
     <table>
       <thead><tr>
@@ -133,10 +133,6 @@ tr:last-child td{border-bottom:none;}
       </tr></thead>
       <tbody id="open-body"></tbody>
     </table>
-    <div class="footer-row">
-      <span style="font-size:11px; color:var(--text-mute);">Simulación de demo &mdash; sin ejecución real</span>
-      <button class="sim-btn" id="force-btn">Forzar cierre de una posición</button>
-    </div>
   </div>
 
   <div class="panel">
@@ -169,7 +165,14 @@ tr:last-child td{border-bottom:none;}
     <div class="panel-head">
       <div>
         <div class="panel-title">Selección de par</div>
-        <div class="panel-sub" id="candle-price">BTC/USDT &middot; velas 1h</div>
+        <select id="pair-selector" style="background:var(--panel-2); color:var(--text); border:1px solid var(--border); padding:4px 8px; font-family:var(--sans); font-size:12px; outline:none; margin-top:4px;">
+          <option value="BTCUSDT" data-type="crypto">BTC/USDT</option>
+          <option value="ETHUSDT" data-type="crypto">ETH/USDT</option>
+          <option value="SOLUSDT" data-type="crypto">SOL/USDT</option>
+          <option value="AAPL" data-type="stock">AAPL</option>
+          <option value="QQQ" data-type="stock">QQQ</option>
+        </select>
+        <div class="panel-sub" id="candle-price" style="margin-top:4px;">velas 1h</div>
       </div>
       <div class="panel-sub" id="candle-status">conectando...</div>
     </div>
@@ -184,7 +187,7 @@ tr:last-child td{border-bottom:none;}
       <div class="stat"><div class="stat-label">Win rate</div><div class="stat-value" id="s-wr">0.0%</div></div>
       <div class="stat"><div class="stat-label">Profit factor</div><div class="stat-value" id="s-pf">0.00</div></div>
       <div class="stat"><div class="stat-label">Trades</div><div class="stat-value" id="s-tr">0</div></div>
-      <div class="stat"><div class="stat-label">P&amp;L total</div><div class="stat-value" id="s-pnl">+0.00%</div></div>
+      <div class="stat"><div class="stat-label">P&amp;L total</div><div class="stat-value" id="s-pnl">+0.00</div></div>
     </div>
   </div>
 
@@ -197,30 +200,27 @@ tr:last-child td{border-bottom:none;}
 
 <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
 <script>
-let positions = [
-  {id:'QFS-0172', symbol:'QQQ', side:'BUY', qty:0.0010, entry:723.80, sl:700.04, tp1:755.48, tp2:771.32, tp3:795.08, price:723.80, opened:'20:05'},
-  {id:'QFS-0187', symbol:'AAPL', side:'BUY', qty:0.0010, entry:315.32, sl:303.185, tp1:331.50, tp2:339.59, tp3:351.725, price:315.32, opened:'20:05'}
-];
-let history = [];
+let positions = [];
+let history_trades = [];
 let balance = 1000;
-let idCounter = 188;
+let tracking = {};
+let marketData = [];
 
-function fmt(n, d=2){ return n.toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d}); }
+function fmt(n, d=2){ return (n||0).toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d}); }
 function fmtMoney(n){ return (n<0?'-$':'+$') + fmt(Math.abs(n)); }
 function fmtPct(n){ return (n>=0?'+':'') + fmt(n) + '%'; }
 
 function pnlOf(p){
-  const diff = p.side==='BUY' ? (p.price - p.entry) : (p.entry - p.price);
-  const abs = diff * p.qty;
+  const price = p.current_price || p.entry;
+  const diff = p.direction === 'LONG' ? (price - p.entry) : (p.entry - price);
+  const abs = diff * p.quantity;
   const pct = (diff / p.entry) * 100;
   return {abs, pct};
 }
 
 function renderTicker(){
-  const items = positions.map(p => {
-    const {pct} = pnlOf(p);
-    const cls = pct>=0 ? 'style="color:var(--green)"' : 'style="color:var(--red)"';
-    return `<span>${p.symbol} <b>${fmt(p.price,2)}</b> <span ${cls}>${fmtPct(pct)}</span></span>`;
+  const items = marketData.map(m => {
+    return `<span>${m.ticker} <b>${fmt(m.close,2)}</b></span>`;
   });
   document.getElementById('ticker').innerHTML = items.concat(items).join('');
 }
@@ -232,16 +232,17 @@ function renderOpen(){
   } else {
     body.innerHTML = positions.map(p => {
       const {abs, pct} = pnlOf(p);
-      const dirCls = p.side==='BUY' ? 'dir-buy' : 'dir-sell';
+      const dirCls = p.direction === 'LONG' ? 'dir-buy' : 'dir-sell';
+      const sideText = p.direction === 'LONG' ? 'BUY' : 'SELL';
       const pnlCls = abs>=0 ? 'up' : 'down';
       return `<tr class="flash">
-        <td class="sym">${p.symbol}</td>
-        <td><span class="${dirCls}">${p.side}</span></td>
-        <td>${fmt(p.qty,4)}</td>
+        <td class="sym">${p.ticker || p.asset?.ticker || '--'}</td>
+        <td><span class="${dirCls}">${sideText}</span></td>
+        <td>${fmt(p.quantity,4)}</td>
         <td>$${fmt(p.entry)}</td>
         <td>$${fmt(p.sl)}</td>
         <td>$${fmt(p.tp1)}</td>
-        <td>$${fmt(p.price)}</td>
+        <td>$${fmt(p.current_price || p.entry)}</td>
         <td class="${pnlCls}">${fmtMoney(abs)} (${fmtPct(pct)})</td>
       </tr>`;
     }).join('');
@@ -251,14 +252,14 @@ function renderOpen(){
 
 function renderHistory(){
   const body = document.getElementById('history-body');
-  if(history.length === 0){
+  if(history_trades.length === 0){
     body.innerHTML = `<tr><td colspan="7" class="empty">Sin historial aún</td></tr>`;
     return;
   }
-  body.innerHTML = history.slice(0,50).map(h => {
-    const dirCls = h.side==='BUY' ? 'dir-buy' : 'dir-sell';
+  body.innerHTML = history_trades.map(h => {
+    const dirCls = h.side === 'BUY' ? 'dir-buy' : 'dir-sell';
     const pnlCls = h.pnl>=0 ? 'up' : 'down';
-    const badge = h.reason==='TP_HIT' ? 'badge-tp' : 'badge-sl';
+    const badge = h.reason === 'TP_HIT' ? 'badge-tp' : 'badge-sl';
     return `<tr>
       <td class="sym">${h.id}</td>
       <td class="sym">${h.symbol}</td>
@@ -273,13 +274,26 @@ function renderHistory(){
 
 function renderBook(){
   const body = document.getElementById('book-body');
-  const all = positions.map(p => ({...p, status:'open'})).concat(
-    history.map(h => ({id:h.id, symbol:h.symbol, side:h.side, entry:h.entry, sl:h.sl, tp1:h.tp1, tp2:h.tp2, tp3:h.tp3, status:h.reason==='TP_HIT'?'closed_tp':'closed_sl', pnlPct:h.pnlPct, opened:h.opened}))
+  const all = positions.map(p => ({
+    id: p.id || '--', symbol: p.ticker || '--', side: p.direction === 'LONG'?'BUY':'SELL', 
+    entry: p.entry, sl: p.sl, tp1: p.tp1, tp2: p.tp2, tp3: p.tp3, 
+    status: 'open', opened: p.timestamp || p.time || '--'
+  })).concat(
+    history_trades.map(h => ({
+      id:h.id, symbol:h.symbol, side:h.side, entry:h.entry, sl:0, tp1:0, tp2:0, tp3:0, 
+      status: h.reason==='TP_HIT'?'closed_tp':'closed_sl', pnlPct:h.pnlPct, opened:h.opened
+    }))
   );
+  
+  if(all.length === 0) {
+      body.innerHTML = `<tr><td colspan="11" class="empty">Sin órdenes</td></tr>`;
+      return;
+  }
+  
   body.innerHTML = all.map(o => {
     const badge = o.status==='open' ? 'badge-open' : (o.status==='closed_tp' ? 'badge-tp' : 'badge-sl');
     const label = o.status==='open' ? 'open' : (o.status==='closed_tp' ? 'closed' : 'closed');
-    const pct = o.status==='open' ? pnlOf(positions.find(p=>p.id===o.id) || o).pct : o.pnlPct;
+    const pct = o.status==='open' ? pnlOf(positions.find(p=>p.id===o.id) || o).pct : (o.pnlPct||0);
     const pnlCls = pct>=0 ? 'up' : 'down';
     return `<tr>
       <td class="sym">${o.id}</td>
@@ -298,25 +312,22 @@ function renderBook(){
 }
 
 function renderStats(){
-  const closed = history.length;
-  const wins = history.filter(h => h.pnl > 0).length;
-  const wr = closed ? (wins/closed*100) : 0;
-  const gp = history.filter(h=>h.pnl>0).reduce((a,h)=>a+h.pnl,0);
-  const gl = Math.abs(history.filter(h=>h.pnl<=0).reduce((a,h)=>a+h.pnl,0));
-  const pf = gl ? gp/gl : 0;
-  const pnlTotalPct = ((balance - 1000) / 1000) * 100;
+  const total = tracking.total_trades || 0;
+  const wins = tracking.wins || 0;
+  const wr = total ? (wins/total*100) : 0;
 
   document.getElementById('s-wr').textContent = fmt(wr,1) + '%';
-  document.getElementById('s-pf').textContent = fmt(pf,2);
-  document.getElementById('s-tr').textContent = closed;
-  document.getElementById('s-pnl').textContent = fmtPct(pnlTotalPct);
-  document.getElementById('s-pnl').className = 'stat-value ' + (pnlTotalPct>=0?'up':'down');
+  document.getElementById('s-pf').textContent = "N/A";
+  document.getElementById('s-tr').textContent = total;
+  const pnlTotal = tracking.total_pnl || 0;
+  document.getElementById('s-pnl').textContent = fmtMoney(pnlTotal);
+  document.getElementById('s-pnl').className = 'stat-value ' + (pnlTotal>=0?'up':'down');
 }
 
 function renderAccount(){
   const totalUnrealized = positions.reduce((a,p)=>a+pnlOf(p).abs, 0);
   const equity = balance + totalUnrealized;
-  const marginUsed = positions.reduce((a,p)=>a + p.entry*p.qty, 0);
+  const marginUsed = positions.reduce((a,p)=>a + p.entry*p.quantity, 0);
   document.getElementById('m-balance').textContent = '$'+fmt(balance);
   document.getElementById('m-equity').textContent = '$'+fmt(equity);
   document.getElementById('m-margin').textContent = '$'+fmt(marginUsed);
@@ -330,58 +341,40 @@ function renderAll(){
   renderTicker(); renderOpen(); renderHistory(); renderBook(); renderStats(); renderAccount();
 }
 
-function closePosition(p, reason){
-  const {abs, pct} = pnlOf(p);
-  const exitPrice = reason==='TP_HIT' ? p.tp1 : p.sl;
-  const finalDiff = p.side==='BUY' ? (exitPrice - p.entry) : (p.entry - exitPrice);
-  const finalPnl = finalDiff * p.qty;
-  const finalPct = (finalDiff / p.entry) * 100;
-  history.unshift({
-    id:p.id, symbol:p.symbol, side:p.side, entry:p.entry, exit:exitPrice,
-    pnl:finalPnl, pnlPct:finalPct, reason, opened:p.opened
-  });
-  balance += finalPnl;
-  positions = positions.filter(x => x.id !== p.id);
-}
+async function fetchRealData() {
+    try {
+        const res = await fetch("https://85.215.73.107.nip.io/api/landing_data.json?key=Rufflow777");
+        const data = await res.json();
+        
+        if(data.signals) {
+            positions = data.signals.filter(s => s.status === 'OPEN');
+        }
+        if(data.history) history_trades = data.history;
+        if(data.tracking) tracking = data.tracking;
+        if(data.market_data) marketData = data.market_data;
+        
+        // For balance, try to parse from Binance payload if available, else fallback
+        if (data.account && data.account.balances) {
+            let total = 0;
+            for(const [asset, amnts] of Object.entries(data.account.balances)) {
+                if(asset === 'USDT') {
+                    total += amnts.free + amnts.locked;
+                }
+            }
+            if(total > 0) balance = total;
+        }
 
-function tick(){
-  positions.forEach(p => {
-    const drift = (Math.random() - 0.48) * p.entry * 0.0018;
-    p.price = Math.max(0.01, p.price + drift);
-  });
-
-  positions.slice().forEach(p => {
-    if(p.side==='BUY'){
-      if(p.price >= p.tp1) closePosition(p, 'TP_HIT');
-      else if(p.price <= p.sl) closePosition(p, 'SL_HIT');
-    } else {
-      if(p.price <= p.tp1) closePosition(p, 'TP_HIT');
-      else if(p.price >= p.sl) closePosition(p, 'SL_HIT');
+        renderAll();
+    } catch(err) {
+        console.error("Error fetching data:", err);
     }
-  });
-
-  renderAll();
 }
 
-document.getElementById('force-btn').addEventListener('click', () => {
-  if(positions.length === 0) return;
-  const p = positions[0];
-  const reason = Math.random() > 0.5 ? 'TP_HIT' : 'SL_HIT';
-  closePosition(p, reason);
-  renderAll();
-});
-
-function updateClock(){
-  const now = new Date();
-  document.getElementById('clock').textContent = now.toLocaleTimeString('es-VE', {hour12:false});
-}
-
-renderAll();
-updateClock();
-setInterval(tick, 3000);
-setInterval(updateClock, 1000);
-
+// Chart Logic
 let candleSeries = null;
+let currentSymbol = 'BTCUSDT';
+let currentType = 'crypto';
+let candleInterval = null;
 
 function initCandles(){
   const el = document.getElementById('candle-chart');
@@ -403,45 +396,104 @@ function initCandles(){
   return chart;
 }
 
-async function loadCandles(){
-  const statusEl = document.getElementById('candle-status');
-  try{
-    const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=100');
-    const raw = await res.json();
-    const data = raw.map(k => ({
-      time: Math.floor(k[0]/1000),
-      open: parseFloat(k[1]), high: parseFloat(k[2]),
-      low: parseFloat(k[3]), close: parseFloat(k[4])
-    }));
-    candleSeries.setData(data);
-    const last = data[data.length-1];
-    document.getElementById('candle-price').textContent = `BTC/USDT · velas 1h · $${fmt(last.close,2)}`;
-    statusEl.textContent = 'en vivo';
-    statusEl.style.color = 'var(--green)';
-  } catch(e){
-    statusEl.textContent = 'sin conexión (offline)';
-    statusEl.style.color = 'var(--red)';
-  }
+async function loadCryptoCandles(symbol) {
+    const statusEl = document.getElementById('candle-status');
+    statusEl.textContent = 'conectando Binance...';
+    try{
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=100`);
+        const raw = await res.json();
+        const data = raw.map(k => ({
+            time: Math.floor(k[0]/1000),
+            open: parseFloat(k[1]), high: parseFloat(k[2]),
+            low: parseFloat(k[3]), close: parseFloat(k[4])
+        }));
+        candleSeries.setData(data);
+        const last = data[data.length-1];
+        document.getElementById('candle-price').textContent = `${symbol.replace('USDT','/USDT')} · velas 1h · $${fmt(last.close,2)}`;
+        statusEl.textContent = 'en vivo (Binance)';
+        statusEl.style.color = 'var(--green)';
+    } catch(e){
+        statusEl.textContent = 'sin conexión (offline)';
+        statusEl.style.color = 'var(--red)';
+    }
+}
+
+async function loadStockCandles(symbol) {
+    const statusEl = document.getElementById('candle-status');
+    statusEl.textContent = 'conectando Alpaca...';
+    try{
+        // Fetch from our backend exported JSON
+        const res = await fetch(`https://85.215.73.107.nip.io/api/candles_${symbol}.json?key=Rufflow777`);
+        const raw = await res.json();
+        
+        // Alpaca bars format: { t: timestamp, o, h, l, c, v }
+        const data = raw.map(k => {
+            let t = new Date(k.t).getTime() / 1000;
+            return {
+                time: t,
+                open: parseFloat(k.o), high: parseFloat(k.h),
+                low: parseFloat(k.l), close: parseFloat(k.c)
+            };
+        });
+        candleSeries.setData(data);
+        const last = data[data.length-1];
+        document.getElementById('candle-price').textContent = `${symbol} · velas 1h · $${fmt(last.close,2)}`;
+        statusEl.textContent = 'conectado (IONOS/Alpaca)';
+        statusEl.style.color = 'var(--green)';
+    } catch(e){
+        statusEl.textContent = 'sin conexión (offline)';
+        statusEl.style.color = 'var(--red)';
+    }
+}
+
+function loadCandles() {
+    if(currentType === 'crypto') {
+        loadCryptoCandles(currentSymbol);
+    } else {
+        loadStockCandles(currentSymbol);
+    }
 }
 
 async function refreshLastCandle(){
-  try{
-    const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=1');
-    const raw = await res.json();
-    const k = raw[0];
-    candleSeries.update({
-      time: Math.floor(k[0]/1000),
-      open: parseFloat(k[1]), high: parseFloat(k[2]),
-      low: parseFloat(k[3]), close: parseFloat(k[4])
-    });
-    document.getElementById('candle-price').textContent = `BTC/USDT · velas 1h · $${fmt(parseFloat(k[4]),2)}`;
-  } catch(e){}
+    if(currentType === 'crypto') {
+        try{
+            const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${currentSymbol}&interval=1h&limit=1`);
+            const raw = await res.json();
+            const k = raw[0];
+            candleSeries.update({
+                time: Math.floor(k[0]/1000),
+                open: parseFloat(k[1]), high: parseFloat(k[2]),
+                low: parseFloat(k[3]), close: parseFloat(k[4])
+            });
+            document.getElementById('candle-price').textContent = `${currentSymbol.replace('USDT','/USDT')} · velas 1h · $${fmt(parseFloat(k[4]),2)}`;
+        } catch(e){}
+    } else {
+        loadCandles(); // For stocks, just reload the JSON
+    }
 }
+
+document.getElementById('pair-selector').addEventListener('change', (e) => {
+    currentSymbol = e.target.value;
+    currentType = e.target.options[e.target.selectedIndex].dataset.type;
+    loadCandles();
+});
+
+function updateClock(){
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('es-VE', {hour12:false});
+}
+
+// Initial boot
+renderAll();
+updateClock();
+fetchRealData();
+setInterval(fetchRealData, 8000);
+setInterval(updateClock, 1000);
 
 if(typeof LightweightCharts !== 'undefined'){
   initCandles();
   loadCandles();
-  setInterval(refreshLastCandle, 10000);
+  candleInterval = setInterval(refreshLastCandle, 10000);
 } else {
   document.getElementById('candle-status').textContent = 'librería no cargada';
 }
