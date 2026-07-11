@@ -588,8 +588,9 @@ async function actualizarSystemHealth() {
     const text = document.getElementById('health-text');
 
     if (dot && text) {
-      dot.className = 'dot ' + (data.status === 'ok' ? 'green' : data.status === 'warning' ? 'yellow' : 'red');
-      text.textContent = data.status === 'ok' ? 'Sistema operativo' : data.status === 'warning' ? 'Advertencia' : 'Error';
+      let isOk = data.services && data.services.n8n === 'active';
+      dot.className = 'dot ' + (isOk ? 'green' : 'red');
+      text.textContent = isOk ? 'Sistema operativo' : 'Error';
     }
   } catch (e) {
     const dot = document.getElementById('health-dot');
@@ -657,8 +658,18 @@ async function loadCandles() {
         
         if (data.length === 0) throw new Error('No data');
         
-        candleSeries.setData(data);
-        const last = data[data.length-1];
+        data.sort((a,b) => a.time - b.time);
+        const uniqueData = [];
+        const seen = new Set();
+        for (const d of data) {
+            if (!seen.has(d.time)) {
+                seen.add(d.time);
+                uniqueData.push(d);
+            }
+        }
+        
+        candleSeries.setData(uniqueData);
+        const last = uniqueData[uniqueData.length-1];
         priceEl.textContent = `${currentSymbol} · velas 1h · $${fmt(last.close,2)}`;
         statusEl.textContent = 'en vivo';
         statusEl.style.color = 'var(--green)';
