@@ -106,9 +106,10 @@ tr:last-child td{border-bottom:none;}
     <div class="clock" id="clock">--:--:--</div>
   </div>
 
-  <div class="tabs" id="tabs">
+    <div class="tabs" id="tabs">
     <div class="tab active" data-view="dashboard">Dashboard</div>
     <div class="tab" data-view="protocolo">Protocolo RUF-Flow</div>
+    <div class="tab" data-view="health">System Health</div>
     <div class="tab" data-view="analytics">Analytics</div>
     <div class="tab" data-view="reportes">Reportes</div>
     <div class="tab" data-view="mercados">Mercados</div>
@@ -148,6 +149,18 @@ tr:last-child td{border-bottom:none;}
 
   <!-- PROTOCOLO RUF-FLOW -->
   <div id="view-protocolo" class="view">
+    <div class="panel" style="margin-bottom: 20px;">
+      <div class="panel-head">
+        <div class="panel-title">¿Qué es RUF-Flow?</div>
+      </div>
+      <div style="padding: 0 16px 16px; color: var(--text-dim); line-height: 1.5; font-size: 14px;">
+        RUF-Flow es un sistema algorítmico de Trading Cuantitativo desarrollado por Nexus Flow Dynamics. 
+        El sistema procesa y evalúa datos del mercado crypto y tradicional, identificando tendencias a través 
+        de un Triple Motor de Consenso (Ruflo Primary, Validator, Stock Checker). Sólo se ejecutan operaciones 
+        cuando existe una alineación total en los parámetros de volatilidad, RSI, MACD, y Bandas de Gaussian, 
+        asegurando una gestión de riesgo óptima.
+      </div>
+    </div>
     <div class="panel">
       <div class="panel-head">
         <div class="panel-title">Flujo de Señal en Vivo</div>
@@ -163,6 +176,30 @@ tr:last-child td{border-bottom:none;}
         <div class="flow-node"><div class="flow-box active" id="f-risk">✔ Risk Manager</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
         <div class="flow-node"><div class="flow-box active" id="f-signal">✔ Signal Generated</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
         <div class="flow-node"><div class="flow-box active">✔ Broker Execution</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM HEALTH -->
+  <div id="view-health" class="view">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Salud del Sistema (System Health)</div>
+        <div class="panel-sub" id="health-time">Actualizando...</div>
+      </div>
+      <div style="padding: 16px;">
+        <table class="market-table" style="width: 100%;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:8px; border-bottom:1px solid var(--border);">Componente</th>
+              <th style="text-align:center; padding:8px; border-bottom:1px solid var(--border);">Estado</th>
+              <th style="text-align:right; padding:8px; border-bottom:1px solid var(--border);">Métricas</th>
+            </tr>
+          </thead>
+          <tbody id="health-tbody">
+            <tr><td colspan="3" style="text-align:center; padding:20px; color:var(--text-dim);">Cargando telemetría...</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

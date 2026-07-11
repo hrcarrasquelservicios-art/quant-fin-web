@@ -89,6 +89,52 @@ async function updateMarketGrid() {
   } catch {}
 }
 
+// ─── HEALTH REPORT ───────────────────────
+async function fetchRealData() {
+  await Promise.all([
+    fetchPositions(),
+    fetchHistory(),
+    fetchPortfolio(),
+    fetchAnalytics(),
+    fetchHealthData()
+  ]);
+  updateSidePanel();
+}
+
+async function fetchHealthData() {
+  try {
+    const res = await fetch(`${API_BASE}/system_health.json${API_KEY}`);
+    if (!res.ok) throw new Error('Health data not available');
+    const health = await res.json();
+    
+    document.getElementById('health-time').textContent = `Última sinc: ${new Date(health.last_sync).toLocaleString('es-VE')}`;
+    let rows = '';
+    
+    // VMs
+    for (const [name, data] of Object.entries(health.vms)) {
+      const statusColor = data.status === 'active' ? 'var(--green)' : 'var(--red)';
+      rows += `<tr>
+        <td style="text-transform: uppercase;">Servidor ${name}</td>
+        <td style="text-align:center; color:${statusColor}; font-weight:bold;">${data.status.toUpperCase()}</td>
+        <td style="text-align:right;">CPU: ${data.cpu}% | RAM: ${data.ram}%</td>
+      </tr>`;
+    }
+    // Services
+    for (const [name, status] of Object.entries(health.services)) {
+      const statusColor = status === 'active' ? 'var(--green)' : 'var(--red)';
+      rows += `<tr>
+        <td style="text-transform: capitalize;">${name.replace('_', ' ')}</td>
+        <td style="text-align:center; color:${statusColor}; font-weight:bold;">${status.toUpperCase()}</td>
+        <td style="text-align:right;">OK</td>
+      </tr>`;
+    }
+    
+    document.getElementById('health-tbody').innerHTML = rows;
+  } catch(e) {
+    document.getElementById('health-tbody').innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--red);">Error cargando telemetría</td></tr>`;
+  }
+}
+
 // ─── TABS ─────────────────────────────
 function initTabs() {
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -485,6 +531,11 @@ async function fetchSignals() {
     startLivePriceUpdates(allPositions);
     // Trigger pair selector refresh if pair is selected
     if ($('pair-select')) $('pair-select').dispatchEvent(new Event('change'));
+    
+    // Fetch System Health
+    if (typeof fetchHealthData === 'function') {
+      fetchHealthData();
+    }
   } catch(err) { console.error(err); }
 }
 
