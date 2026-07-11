@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>RUF-Flow v7</title>
+<title>RUF-Flow v7 Terminal</title>
 <style>
 :root{
   --bg:#0A0C0F;
@@ -32,7 +32,7 @@ body{
   padding:0;
   -webkit-font-smoothing:antialiased;
 }
-.app{max-width:1180px; margin:0 auto; padding:24px 20px 60px;}
+.app{max-width:1280px; margin:0 auto; padding:24px 20px 60px;}
 
 .topbar{display:flex; align-items:center; justify-content:space-between; padding:16px 0 20px; border-bottom:1px solid var(--border);}
 .brand{display:flex; align-items:center; gap:10px;}
@@ -44,6 +44,8 @@ body{
 .tabs{display:flex; gap:2px; margin:20px 0 24px; border-bottom:1px solid var(--border);}
 .tab{font-size:13px; color:var(--text-dim); padding:10px 16px; cursor:pointer; border-bottom:2px solid transparent; user-select:none;}
 .tab.active{color:var(--gold); border-bottom-color:var(--gold);}
+.view{display:none;}
+.view.active{display:block;}
 
 .metrics{display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:24px;}
 .metric{background:var(--panel); padding:14px 16px;}
@@ -51,17 +53,12 @@ body{
 .metric-value{font-family:var(--mono); font-size:17px; font-variant-numeric:tabular-nums;}
 .up{color:var(--green);} .down{color:var(--red);} .neutral{color:var(--gold);}
 
-.ticker-wrap{overflow:hidden; border:1px solid var(--border); background:var(--panel); margin-bottom:28px; padding:9px 0;}
-.ticker{display:flex; gap:36px; white-space:nowrap; animation:scroll 22s linear infinite; font-family:var(--mono); font-size:12px;}
-.ticker span{color:var(--text-dim);}
-.ticker b{color:var(--text); font-weight:400;}
-@keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
-
 .panel{border:1px solid var(--border); background:var(--panel); margin-bottom:28px;}
 .panel-head{display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid var(--border);}
 .panel-title{font-size:13px; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-dim);}
 .panel-sub{font-size:11px; color:var(--text-mute);}
 
+/* Tables */
 table{width:100%; border-collapse:collapse;}
 th{text-align:left; font-size:10px; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.8px; font-weight:400; padding:10px 18px; border-bottom:1px solid var(--border-soft);}
 td{padding:11px 18px; font-family:var(--mono); font-size:12.5px; border-bottom:1px solid var(--border-soft); font-variant-numeric:tabular-nums;}
@@ -69,21 +66,32 @@ tr:last-child td{border-bottom:none;}
 .sym{font-family:var(--sans); font-size:12.5px; color:var(--text);}
 .dir-buy{color:var(--green); font-size:11px; border:1px solid var(--green); padding:2px 7px;}
 .dir-sell{color:var(--red); font-size:11px; border:1px solid var(--red); padding:2px 7px;}
-.flash{animation:flash 0.5s ease;}
-@keyframes flash{0%{background:var(--gold-fill);} 100%{background:transparent;}}
+.dir-hold{color:var(--gold); font-size:11px; border:1px solid var(--gold); padding:2px 7px;}
 .empty{padding:32px 18px; text-align:center; color:var(--text-mute); font-size:12px;}
 .badge-open{font-size:10px; color:var(--gold); border:1px solid var(--gold-dim); padding:2px 8px; text-transform:uppercase;}
 .badge-tp{font-size:10px; color:var(--green); border:1px solid var(--green); padding:2px 8px; text-transform:uppercase;}
 .badge-sl{font-size:10px; color:var(--red); border:1px solid var(--red); padding:2px 8px; text-transform:uppercase;}
 
-.footer-row{display:flex; justify-content:space-between; align-items:center; padding:10px 18px; border-top:1px solid var(--border-soft);}
-.sim-btn{font-family:var(--sans); font-size:11px; color:var(--text-dim); background:transparent; border:1px solid var(--border); padding:6px 12px; cursor:pointer;}
-.sim-btn:hover{border-color:var(--gold-dim); color:var(--gold);}
+/* Flowchart */
+.flowchart{padding:24px; font-family:var(--mono); font-size:12px;}
+.flow-node{display:flex; flex-direction:column; align-items:center; margin-bottom:16px;}
+.flow-box{border:1px solid var(--border); background:var(--panel-2); padding:10px 20px; min-width:180px; text-align:center; color:var(--text-dim); transition:all 0.3s;}
+.flow-box.active{border-color:var(--green); color:var(--green); background:var(--green-fill); box-shadow:0 0 10px rgba(31,203,134,0.1);}
+.flow-line{width:1px; height:20px; background:var(--border); margin-top:16px;}
+.flow-arrow{width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:6px solid var(--border); margin-bottom:4px;}
 
-.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border);}
-.stat{background:var(--panel); padding:16px 18px;}
-.stat-label{font-size:10px; color:var(--text-mute); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;}
-.stat-value{font-family:var(--mono); font-size:20px;}
+/* Analytics layout */
+.analytics-grid{display:grid; grid-template-columns:3fr 1fr; gap:20px;}
+.side-panel{background:var(--panel); border:1px solid var(--border); padding:16px;}
+.side-item{display:flex; justify-content:space-between; margin-bottom:12px; border-bottom:1px solid var(--border-soft); padding-bottom:8px;}
+.side-item:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+.side-label{color:var(--text-mute); font-size:11px; text-transform:uppercase;}
+.side-value{font-family:var(--mono); font-size:13px;}
+
+/* Markets view */
+.markets-grid{display:grid; grid-template-columns:1fr; gap:24px;}
+.market-block h3{font-size:11px; text-transform:uppercase; color:var(--text-mute); letter-spacing:1px; margin-bottom:12px; padding-bottom:4px; border-bottom:1px solid var(--border);}
+.market-table{background:var(--panel); border:1px solid var(--border);}
 
 .foot{margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:10px; color:var(--text-mute); display:flex; justify-content:space-between;}
 </style>
@@ -96,98 +104,162 @@ tr:last-child td{border-bottom:none;}
       <div class="brand-mark">R</div>
       <div>
         <div class="brand-name">RUF-Flow <span style="color:var(--gold)">v7</span></div>
-        <div class="brand-tag">Broker algorítmico &middot; Nexus Flow Dynamics</div>
+        <div class="brand-tag">Terminal Cuantitativo &middot; Nexus Flow Dynamics</div>
       </div>
     </div>
     <div class="clock" id="clock">--:--:--</div>
   </div>
 
-  <div class="tabs">
-    <div class="tab active">Dashboard</div>
-    <div class="tab">Protocolo RUF-Flow</div>
-    <div class="tab">Analytics</div>
-    <div class="tab">Reportes</div>
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-view="dashboard">Dashboard</div>
+    <div class="tab" data-view="protocolo">Protocolo RUF-Flow</div>
+    <div class="tab" data-view="analytics">Analytics</div>
+    <div class="tab" data-view="reportes">Reportes</div>
+    <div class="tab" data-view="mercados">Mercados</div>
   </div>
 
-  <div class="metrics">
-    <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="m-balance">$0.00</div></div>
-    <div class="metric"><div class="metric-label">Equity</div><div class="metric-value neutral" id="m-equity">$0.00</div></div>
-    <div class="metric"><div class="metric-label">Margen usado</div><div class="metric-value" id="m-margin">$0.00</div></div>
-    <div class="metric"><div class="metric-label">Disponible</div><div class="metric-value" id="m-avail">$0.00</div></div>
-    <div class="metric"><div class="metric-label">P&amp;L no realizado</div><div class="metric-value" id="m-upnl">+$0.00</div></div>
-    <div class="metric"><div class="metric-label">Posiciones</div><div class="metric-value" id="m-open">0</div></div>
-  </div>
-
-  <div class="ticker-wrap">
-    <div class="ticker" id="ticker"></div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <div class="panel-title">Posiciones abiertas</div>
-      <div class="panel-sub">Precio en vivo &middot; actualiza dinámico</div>
+  <!-- DASHBOARD -->
+  <div id="view-dashboard" class="view active">
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="m-balance">$0.00</div></div>
+      <div class="metric"><div class="metric-label">Equity</div><div class="metric-value neutral" id="m-equity">$0.00</div></div>
+      <div class="metric"><div class="metric-label">Margen usado</div><div class="metric-value" id="m-margin">$0.00</div></div>
+      <div class="metric"><div class="metric-label">Disponible</div><div class="metric-value" id="m-avail">$0.00</div></div>
+      <div class="metric"><div class="metric-label">P&amp;L no realizado</div><div class="metric-value" id="m-upnl">+$0.00</div></div>
+      <div class="metric"><div class="metric-label">Posiciones</div><div class="metric-value" id="m-open">0</div></div>
     </div>
-    <table>
-      <thead><tr>
-        <th>Par</th><th>Dir</th><th>Cant</th><th>Entrada</th><th>SL</th><th>TP1</th><th>Precio</th><th>P&amp;L</th>
-      </tr></thead>
-      <tbody id="open-body"></tbody>
-    </table>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <div class="panel-title">Ejecuciones recientes</div>
-      <div class="panel-sub">Últimas 50</div>
-    </div>
-    <table>
-      <thead><tr>
-        <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>Salida</th><th>P&amp;L</th><th>Resultado</th>
-      </tr></thead>
-      <tbody id="history-body"></tbody>
-    </table>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <div class="panel-title">Libro de órdenes</div>
-      <div class="panel-sub">Todas &middot; RUF-Flow</div>
-    </div>
-    <table>
-      <thead><tr>
-        <th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>SL</th><th>TP1</th><th>TP2</th><th>TP3</th><th>P&amp;L</th><th>Status</th><th>Hora</th>
-      </tr></thead>
-      <tbody id="book-body"></tbody>
-    </table>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <div>
-        <div class="panel-title">Selección de par</div>
-        <select id="pair-selector" style="background:var(--panel-2); color:var(--text); border:1px solid var(--border); padding:4px 8px; font-family:var(--sans); font-size:12px; outline:none; margin-top:4px;">
-          <option value="BTCUSDT" data-type="crypto">BTC/USDT</option>
-          <option value="ETHUSDT" data-type="crypto">ETH/USDT</option>
-          <option value="SOLUSDT" data-type="crypto">SOL/USDT</option>
-          <option value="AAPL" data-type="stock">AAPL</option>
-          <option value="QQQ" data-type="stock">QQQ</option>
-        </select>
-        <div class="panel-sub" id="candle-price" style="margin-top:4px;">velas 1h</div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Posiciones abiertas</div>
+        <div class="panel-sub">Precio en vivo &middot; actualiza cada 60s</div>
       </div>
-      <div class="panel-sub" id="candle-status">conectando...</div>
+      <table>
+        <thead><tr><th>Par</th><th>Dir</th><th>Cant</th><th>Entrada</th><th>SL</th><th>TP1</th><th>Precio</th><th>P&amp;L</th></tr></thead>
+        <tbody id="open-body"></tbody>
+      </table>
     </div>
-    <div id="candle-chart" style="height:320px; padding:8px 12px;"></div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Ejecuciones recientes</div>
+        <div class="panel-sub">Últimas 50</div>
+      </div>
+      <table>
+        <thead><tr><th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>Salida</th><th>P&amp;L</th><th>Resultado</th></tr></thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-head">
-      <div class="panel-title">Resumen</div>
+  <!-- PROTOCOLO RUF-FLOW -->
+  <div id="view-protocolo" class="view">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Flujo de Señal en Vivo</div>
+        <div class="panel-sub">Pipeline Algorítmico</div>
+      </div>
+      <div class="flowchart" id="flowchart">
+        <div class="flow-node"><div class="flow-box active">✔ Market Scanner</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active">✔ Universe Filter</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active">✔ Liquidity Filter</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active" id="f-trend">✔ Trend Engine</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active" id="f-momentum">✔ Momentum</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active" id="f-volatility">✔ Volatility</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active" id="f-risk">✔ Risk Manager</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active" id="f-signal">✔ Signal Generated</div><div class="flow-line"></div><div class="flow-arrow"></div></div>
+        <div class="flow-node"><div class="flow-box active">✔ Broker Execution</div></div>
+      </div>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Win rate</div><div class="stat-value" id="s-wr">0.0%</div></div>
-      <div class="stat"><div class="stat-label">Profit factor</div><div class="stat-value" id="s-pf">0.00</div></div>
-      <div class="stat"><div class="stat-label">Trades</div><div class="stat-value" id="s-tr">0</div></div>
-      <div class="stat"><div class="stat-label">P&amp;L total</div><div class="stat-value" id="s-pnl">+0.00</div></div>
+  </div>
+
+  <!-- ANALYTICS -->
+  <div id="view-analytics" class="view">
+    <div class="analytics-grid">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Selección de par</div>
+            <select id="symbolSelect" style="background:var(--panel-2); color:var(--text); border:1px solid var(--border); padding:4px 8px; font-family:var(--sans); font-size:12px; outline:none; margin-top:4px;">
+              <optgroup label="CRYPTO">
+                <option value="BTC-USD" data-type="crypto">BTC</option>
+                <option value="ETH-USD" data-type="crypto">ETH</option>
+                <option value="BNB-USD" data-type="crypto">BNB</option>
+                <option value="SOL-USD" data-type="crypto">SOL</option>
+                <option value="DOGE-USD" data-type="crypto">DOGE</option>
+              </optgroup>
+              <optgroup label="US MARKET">
+                <option value="SPY" data-type="stock">SPY</option>
+                <option value="QQQ" data-type="stock">QQQ</option>
+                <option value="AAPL" data-type="stock">AAPL</option>
+                <option value="NVDA" data-type="stock">NVDA</option>
+                <option value="TSLA" data-type="stock">TSLA</option>
+              </optgroup>
+              <optgroup label="EUROPE">
+                <option value="SAP.DE" data-type="stock">SAP.DE</option>
+                <option value="MC.PA" data-type="stock">MC.PA (LVMH)</option>
+                <option value="AIR.PA" data-type="stock">AIR.PA (Airbus)</option>
+                <option value="NESN.SW" data-type="stock">NESN.SW (Nestle)</option>
+                <option value="DBK.DE" data-type="stock">DBK.DE</option>
+                <option value="^STOXX50E" data-type="stock">STOXX50</option>
+              </optgroup>
+              <optgroup label="ASIA">
+                <option value="7203.T" data-type="stock">7203.T (Toyota)</option>
+                <option value="9984.T" data-type="stock">9984.T (Softbank)</option>
+                <option value="0700.HK" data-type="stock">0700.HK (Tencent)</option>
+                <option value="0005.HK" data-type="stock">0005.HK (HSBC)</option>
+              </optgroup>
+            </select>
+            <div class="panel-sub" id="candle-price" style="margin-top:4px;">velas 1h</div>
+          </div>
+          <div class="panel-sub" id="candle-status">conectando...</div>
+        </div>
+        <div id="candle-chart" style="height:400px; padding:8px 12px;"></div>
+      </div>
+      <div class="side-panel">
+        <div style="font-size:12px; color:var(--text-dim); text-transform:uppercase; margin-bottom:16px;">Live Signal</div>
+        <div class="side-item"><span class="side-label">Signal</span><span class="side-value" id="sig-val">--</span></div>
+        <div class="side-item"><span class="side-label">Confidence</span><span class="side-value" id="sig-conf">--</span></div>
+        <div class="side-item"><span class="side-label">Trend</span><span class="side-value" id="sig-trend">--</span></div>
+        <div class="side-item"><span class="side-label">Risk</span><span class="side-value" id="sig-risk">0.50%</span></div>
+        <div class="side-item"><span class="side-label">ATR</span><span class="side-value" id="sig-atr">--</span></div>
+        <div class="side-item"><span class="side-label">Spread</span><span class="side-value" id="sig-spread">--</span></div>
+        <div class="side-item"><span class="side-label">Stop</span><span class="side-value" id="sig-sl">--</span></div>
+        <div class="side-item"><span class="side-label">TP1</span><span class="side-value" id="sig-tp1">--</span></div>
+        <div class="side-item"><span class="side-label">TP2</span><span class="side-value" id="sig-tp2">--</span></div>
+        <div class="side-item"><span class="side-label">TP3</span><span class="side-value" id="sig-tp3">--</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTES -->
+  <div id="view-reportes" class="view">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Métricas del Sistema</div>
+      </div>
+      <div class="metrics" style="margin:0; border:none;">
+        <div class="metric"><div class="metric-label">Win rate</div><div class="metric-value" id="s-wr">0.0%</div></div>
+        <div class="metric"><div class="metric-label">Profit factor</div><div class="metric-value" id="s-pf">N/A</div></div>
+        <div class="metric"><div class="metric-label">Trades</div><div class="metric-value" id="s-tr">0</div></div>
+        <div class="metric"><div class="metric-label">P&amp;L total</div><div class="metric-value" id="s-pnl">+0.00</div></div>
+        <div class="metric"><div class="metric-label">Drawdown</div><div class="metric-value down">0.00%</div></div>
+        <div class="metric"><div class="metric-label">Sharpe</div><div class="metric-value neutral">0.00</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Exportar Datos</div>
+      </div>
+      <div style="padding:20px; display:flex; gap:10px;">
+        <button style="background:var(--panel-2); border:1px solid var(--border); color:var(--text); padding:8px 16px; cursor:pointer;">Trading Journal (CSV)</button>
+        <button style="background:var(--panel-2); border:1px solid var(--border); color:var(--text); padding:8px 16px; cursor:pointer;">Reporte IA (JSON)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MERCADOS -->
+  <div id="view-mercados" class="view">
+    <div class="markets-grid" id="markets-container">
+      <!-- Generado por JS -->
     </div>
   </div>
 
@@ -206,6 +278,16 @@ let balance = 1000;
 let tracking = {};
 let marketData = [];
 
+// TABS LOGIC
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+  });
+});
+
 function fmt(n, d=2){ return (n||0).toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d}); }
 function fmtMoney(n){ return (n<0?'-$':'+$') + fmt(Math.abs(n)); }
 function fmtPct(n){ return (n>=0?'+':'') + fmt(n) + '%'; }
@@ -218,13 +300,6 @@ function pnlOf(p){
   return {abs, pct};
 }
 
-function renderTicker(){
-  const items = marketData.map(m => {
-    return `<span>${m.ticker} <b>${fmt(m.close,2)}</b></span>`;
-  });
-  document.getElementById('ticker').innerHTML = items.concat(items).join('');
-}
-
 function renderOpen(){
   const body = document.getElementById('open-body');
   if(positions.length === 0){
@@ -235,7 +310,7 @@ function renderOpen(){
       const dirCls = p.direction === 'LONG' ? 'dir-buy' : 'dir-sell';
       const sideText = p.direction === 'LONG' ? 'BUY' : 'SELL';
       const pnlCls = abs>=0 ? 'up' : 'down';
-      return `<tr class="flash">
+      return `<tr>
         <td class="sym">${p.ticker || p.asset?.ticker || '--'}</td>
         <td><span class="${dirCls}">${sideText}</span></td>
         <td>${fmt(p.quantity,4)}</td>
@@ -272,56 +347,15 @@ function renderHistory(){
   }).join('');
 }
 
-function renderBook(){
-  const body = document.getElementById('book-body');
-  const all = positions.map(p => ({
-    id: p.id || '--', symbol: p.ticker || '--', side: p.direction === 'LONG'?'BUY':'SELL', 
-    entry: p.entry, sl: p.sl, tp1: p.tp1, tp2: p.tp2, tp3: p.tp3, 
-    status: 'open', opened: p.timestamp || p.time || '--'
-  })).concat(
-    history_trades.map(h => ({
-      id:h.id, symbol:h.symbol, side:h.side, entry:h.entry, sl:0, tp1:0, tp2:0, tp3:0, 
-      status: h.reason==='TP_HIT'?'closed_tp':'closed_sl', pnlPct:h.pnlPct, opened:h.opened
-    }))
-  );
-  
-  if(all.length === 0) {
-      body.innerHTML = `<tr><td colspan="11" class="empty">Sin órdenes</td></tr>`;
-      return;
-  }
-  
-  body.innerHTML = all.map(o => {
-    const badge = o.status==='open' ? 'badge-open' : (o.status==='closed_tp' ? 'badge-tp' : 'badge-sl');
-    const label = o.status==='open' ? 'open' : (o.status==='closed_tp' ? 'closed' : 'closed');
-    const pct = o.status==='open' ? pnlOf(positions.find(p=>p.id===o.id) || o).pct : (o.pnlPct||0);
-    const pnlCls = pct>=0 ? 'up' : 'down';
-    return `<tr>
-      <td class="sym">${o.id}</td>
-      <td class="sym">${o.symbol}</td>
-      <td>${o.side}</td>
-      <td>$${fmt(o.entry)}</td>
-      <td>$${fmt(o.sl)}</td>
-      <td>$${fmt(o.tp1)}</td>
-      <td>$${o.tp2?fmt(o.tp2):'--'}</td>
-      <td>$${o.tp3?fmt(o.tp3):'--'}</td>
-      <td class="${pnlCls}">${fmtPct(pct)}</td>
-      <td><span class="${badge}">${label}</span></td>
-      <td>${o.opened}</td>
-    </tr>`;
-  }).join('');
-}
-
 function renderStats(){
   const total = tracking.total_trades || 0;
   const wins = tracking.wins || 0;
   const wr = total ? (wins/total*100) : 0;
-
   document.getElementById('s-wr').textContent = fmt(wr,1) + '%';
-  document.getElementById('s-pf').textContent = "N/A";
   document.getElementById('s-tr').textContent = total;
   const pnlTotal = tracking.total_pnl || 0;
   document.getElementById('s-pnl').textContent = fmtMoney(pnlTotal);
-  document.getElementById('s-pnl').className = 'stat-value ' + (pnlTotal>=0?'up':'down');
+  document.getElementById('s-pnl').className = 'metric-value ' + (pnlTotal>=0?'up':'down');
 }
 
 function renderAccount(){
@@ -337,8 +371,83 @@ function renderAccount(){
   upnlEl.className = 'metric-value ' + (totalUnrealized>=0?'up':'down');
 }
 
-function renderAll(){
-  renderTicker(); renderOpen(); renderHistory(); renderBook(); renderStats(); renderAccount();
+function renderMarkets(){
+  const container = document.getElementById('markets-container');
+  const blocks = {
+    'A_CRYPTO': 'Crypto',
+    'B_INDICES': 'US Market',
+    'C_EUROPEAN_MARKET': 'Europe',
+    'D_ASIAN_MARKET': 'Asia'
+  };
+  
+  let html = '';
+  for(const [key, name] of Object.entries(blocks)){
+    const assets = marketData.filter(m => m.bloque === key || (!m.bloque && key==='B_INDICES'));
+    if(assets.length === 0) continue;
+    
+    html += `<div class="market-block">
+      <h3>${name}</h3>
+      <table class="market-table">
+        <thead><tr>
+          <th>Activo</th><th>Signal</th><th>Score</th><th>Trend</th><th>ATR</th><th>Spread</th><th>Volatilidad</th><th>Última</th>
+        </tr></thead>
+        <tbody>
+    `;
+    html += assets.map(m => {
+        let sigCls = 'dir-hold';
+        let sigText = m.signal || 'HOLD';
+        if(sigText === 'BUY') sigCls = 'dir-buy';
+        if(sigText === 'SELL') sigCls = 'dir-sell';
+        
+        let scoreVal = m.score || 50;
+        let scoreCls = scoreVal >= 70 ? 'up' : (scoreVal <= 30 ? 'down' : 'neutral');
+        
+        return `<tr>
+            <td class="sym">${m.ticker}</td>
+            <td><span class="${sigCls}">${sigText}</span></td>
+            <td class="${scoreCls}">${scoreVal}</td>
+            <td>${m.trend || '--'}</td>
+            <td>${m.atr ? fmt(m.atr) : '--'}</td>
+            <td>${m.spread ? fmt(m.spread, 4) : '--'}</td>
+            <td>${m.volatility ? fmt(m.volatility)+'%' : '--'}</td>
+            <td>$${fmt(m.close)}</td>
+        </tr>`;
+    }).join('');
+    html += `</tbody></table></div>`;
+  }
+  container.innerHTML = html;
+}
+
+function updateSidePanel() {
+    const asset = marketData.find(m => m.ticker === currentSymbol);
+    if(asset) {
+        let sigCls = 'neutral';
+        if(asset.signal === 'BUY') sigCls = 'up';
+        if(asset.signal === 'SELL') sigCls = 'down';
+        
+        document.getElementById('sig-val').innerHTML = `<span class="${sigCls}" style="font-weight:bold">${asset.signal || 'HOLD'}</span>`;
+        document.getElementById('sig-conf').textContent = (asset.score || 50) + '%';
+        document.getElementById('sig-trend').textContent = asset.trend || 'Neutral';
+        document.getElementById('sig-atr').textContent = asset.atr ? fmt(asset.atr) : '--';
+        document.getElementById('sig-spread').textContent = asset.spread ? fmt(asset.spread, 4) : '--';
+        
+        if(asset.signal === 'BUY') {
+            document.getElementById('sig-sl').textContent = '$'+fmt(asset.close - asset.atr*2);
+            document.getElementById('sig-tp1').textContent = '$'+fmt(asset.close + asset.atr*1);
+            document.getElementById('sig-tp2').textContent = '$'+fmt(asset.close + asset.atr*2);
+            document.getElementById('sig-tp3').textContent = '$'+fmt(asset.close + asset.atr*3);
+        } else if(asset.signal === 'SELL') {
+            document.getElementById('sig-sl').textContent = '$'+fmt(asset.close + asset.atr*2);
+            document.getElementById('sig-tp1').textContent = '$'+fmt(asset.close - asset.atr*1);
+            document.getElementById('sig-tp2').textContent = '$'+fmt(asset.close - asset.atr*2);
+            document.getElementById('sig-tp3').textContent = '$'+fmt(asset.close - asset.atr*3);
+        } else {
+            document.getElementById('sig-sl').textContent = '--';
+            document.getElementById('sig-tp1').textContent = '--';
+            document.getElementById('sig-tp2').textContent = '--';
+            document.getElementById('sig-tp3').textContent = '--';
+        }
+    }
 }
 
 async function fetchRealData() {
@@ -351,9 +460,12 @@ async function fetchRealData() {
         }
         if(data.history) history_trades = data.history;
         if(data.tracking) tracking = data.tracking;
-        if(data.market_data) marketData = data.market_data;
+        if(data.market_data) {
+            marketData = data.market_data;
+            renderMarkets();
+            updateSidePanel();
+        }
         
-        // For balance, try to parse from Binance payload if available, else fallback
         if (data.account && data.account.balances) {
             let total = 0;
             for(const [asset, amnts] of Object.entries(data.account.balances)) {
@@ -364,7 +476,7 @@ async function fetchRealData() {
             if(total > 0) balance = total;
         }
 
-        renderAll();
+        renderOpen(); renderHistory(); renderStats(); renderAccount();
     } catch(err) {
         console.error("Error fetching data:", err);
     }
@@ -372,9 +484,8 @@ async function fetchRealData() {
 
 // Chart Logic
 let candleSeries = null;
-let currentSymbol = 'BTCUSDT';
+let currentSymbol = 'BTC-USD';
 let currentType = 'crypto';
-let candleInterval = null;
 
 function initCandles(){
   const el = document.getElementById('candle-chart');
@@ -385,7 +496,7 @@ function initCandles(){
     timeScale:{ borderColor:'#262B32', timeVisible:true },
     crosshair:{ mode:0 },
     width: el.clientWidth,
-    height: 320
+    height: 400
   });
   candleSeries = chart.addCandlestickSeries({
     upColor:'#1FCB86', downColor:'#E5484D',
@@ -400,7 +511,8 @@ async function loadCryptoCandles(symbol) {
     const statusEl = document.getElementById('candle-status');
     statusEl.textContent = 'conectando Binance...';
     try{
-        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=100`);
+        const binanceSym = symbol.replace('-USD', 'USDT');
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${binanceSym}&interval=1h&limit=100`);
         const raw = await res.json();
         const data = raw.map(k => ({
             time: Math.floor(k[0]/1000),
@@ -409,24 +521,22 @@ async function loadCryptoCandles(symbol) {
         }));
         candleSeries.setData(data);
         const last = data[data.length-1];
-        document.getElementById('candle-price').textContent = `${symbol.replace('USDT','/USDT')} · velas 1h · $${fmt(last.close,2)}`;
+        document.getElementById('candle-price').textContent = `${symbol} · velas 1h · $${fmt(last.close,2)}`;
         statusEl.textContent = 'en vivo (Binance)';
         statusEl.style.color = 'var(--green)';
     } catch(e){
-        statusEl.textContent = 'sin conexión (offline)';
+        statusEl.textContent = 'sin conexión';
         statusEl.style.color = 'var(--red)';
     }
 }
 
 async function loadStockCandles(symbol) {
     const statusEl = document.getElementById('candle-status');
-    statusEl.textContent = 'conectando Alpaca...';
+    statusEl.textContent = 'conectando IONOS (YFinance)...';
     try{
-        // Fetch from our backend exported JSON
         const res = await fetch(`https://85.215.73.107.nip.io/api/candles_${symbol}.json?key=Rufflow777`);
         const raw = await res.json();
         
-        // Alpaca bars format: { t: timestamp, o, h, l, c, v }
         const data = raw.map(k => {
             let t = new Date(k.t).getTime() / 1000;
             return {
@@ -438,10 +548,10 @@ async function loadStockCandles(symbol) {
         candleSeries.setData(data);
         const last = data[data.length-1];
         document.getElementById('candle-price').textContent = `${symbol} · velas 1h · $${fmt(last.close,2)}`;
-        statusEl.textContent = 'conectado (IONOS/Alpaca)';
+        statusEl.textContent = 'conectado (Yahoo)';
         statusEl.style.color = 'var(--green)';
     } catch(e){
-        statusEl.textContent = 'sin conexión (offline)';
+        statusEl.textContent = 'sin conexión';
         statusEl.style.color = 'var(--red)';
     }
 }
@@ -452,27 +562,10 @@ function loadCandles() {
     } else {
         loadStockCandles(currentSymbol);
     }
+    updateSidePanel();
 }
 
-async function refreshLastCandle(){
-    if(currentType === 'crypto') {
-        try{
-            const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${currentSymbol}&interval=1h&limit=1`);
-            const raw = await res.json();
-            const k = raw[0];
-            candleSeries.update({
-                time: Math.floor(k[0]/1000),
-                open: parseFloat(k[1]), high: parseFloat(k[2]),
-                low: parseFloat(k[3]), close: parseFloat(k[4])
-            });
-            document.getElementById('candle-price').textContent = `${currentSymbol.replace('USDT','/USDT')} · velas 1h · $${fmt(parseFloat(k[4]),2)}`;
-        } catch(e){}
-    } else {
-        loadCandles(); // For stocks, just reload the JSON
-    }
-}
-
-document.getElementById('pair-selector').addEventListener('change', (e) => {
+document.getElementById('symbolSelect').addEventListener('change', (e) => {
     currentSymbol = e.target.value;
     currentType = e.target.options[e.target.selectedIndex].dataset.type;
     loadCandles();
@@ -484,18 +577,14 @@ function updateClock(){
 }
 
 // Initial boot
-renderAll();
 updateClock();
 fetchRealData();
-setInterval(fetchRealData, 8000);
+setInterval(fetchRealData, 60000);
 setInterval(updateClock, 1000);
 
 if(typeof LightweightCharts !== 'undefined'){
   initCandles();
   loadCandles();
-  candleInterval = setInterval(refreshLastCandle, 10000);
-} else {
-  document.getElementById('candle-status').textContent = 'librería no cargada';
 }
 </script>
 </body>
