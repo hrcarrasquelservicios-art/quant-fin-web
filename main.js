@@ -1,7 +1,7 @@
 import './style.css';
 
-const SIGNALS_URL = 'https://raw.githubusercontent.com/hrcarrasquelservicios-art/quant-fin-web/main/public/live_signals.json';
-const RATES_URL = 'https://raw.githubusercontent.com/hrcarrasquelservicios-art/quant-fin-web/main/public/exchange_rates.json';
+const SIGNALS_URL = 'https://85.215.73.107.nip.io/api/live_positions.json?key=Rufflow777';
+const RATES_URL = 'https://85.215.73.107.nip.io/api/exchange_rates.json?key=Rufflow777';
 const TICKER_SYMBOLS = ['BTC-USD', 'ETH-USD', 'SOL-USD', 'BNB-USD', 'DOGE-USD', 'SPY', 'QQQ', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'GOOGL'];
 
 const $ = id => document.getElementById(id);
@@ -471,7 +471,7 @@ function startLivePriceUpdates(signals) {
 // ─── FETCH SIGNALS ──────────────────────
 async function fetchSignals() {
   try {
-    const res = await fetch(SIGNALS_URL);
+    const res = await fetch(SIGNALS_URL + '&t=' + new Date().getTime());
     if (!res.ok) throw new Error('HTTP '+res.status);
     const signals = await res.json();
     allPositions = (Array.isArray(signals)?signals:[]).map(norm);
