@@ -90,6 +90,12 @@ tr:last-child td{border-bottom:none;}
 .market-table{background:var(--panel); border:1px solid var(--border);}
 
 .foot{margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:10px; color:var(--text-mute); display:flex; justify-content:space-between;}
+
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.dot.green  { background: #26a69a; box-shadow: 0 0 6px #26a69a; }
+.dot.yellow { background: #f5c542; box-shadow: 0 0 6px #f5c542; }
+.dot.red    { background: #ef5350; box-shadow: 0 0 6px #ef5350; }
+.dot.gray   { background: #888; }
 </style>
 </head>
 <body>
@@ -103,6 +109,12 @@ tr:last-child td{border-bottom:none;}
         <div class="brand-tag">Terminal Cuantitativo &middot; Nexus Flow Dynamics</div>
       </div>
     </div>
+    
+    <div id="system-health" style="display:flex; align-items:center;">
+      <span id="health-dot" class="dot gray"></span>
+      <span id="health-text" style="font-size:12px; color:var(--text-dim);">Verificando...</span>
+    </div>
+
     <div class="clock" id="clock">--:--:--</div>
   </div>
 
@@ -350,19 +362,25 @@ function renderOpen(){
     body.innerHTML = `<tr><td colspan="8" class="empty">Sin posiciones abiertas</td></tr>`;
   } else {
     body.innerHTML = positions.map(p => {
-      const {abs, pct} = pnlOf(p);
-      const dirCls = p.direction === 'LONG' ? 'dir-buy' : 'dir-sell';
-      const sideText = p.direction === 'LONG' ? 'BUY' : 'SELL';
-      const pnlCls = abs>=0 ? 'up' : 'down';
+      const dirCls = p.direction === 'BUY' ? 'dir-buy' : 'dir-sell';
+      const current_price = marketData.find(m => m.ticker === p.ticker || m.ticker === p.ticker.replace('-USD',''))?.close || p.entry_real;
+      const abs = 0; // Not available for paper trading
+      let pct = 0;
+      if (p.direction === 'BUY') {
+        pct = ((current_price - p.entry_real) / p.entry_real) * 100;
+      } else {
+        pct = ((p.entry_real - current_price) / p.entry_real) * 100;
+      }
+      const pnlCls = pct >= 0 ? 'up' : 'down';
       return `<tr>
-        <td class="sym">${p.ticker || p.asset?.ticker || '--'}</td>
-        <td><span class="${dirCls}">${sideText}</span></td>
-        <td>${fmt(p.quantity,4)}</td>
-        <td>$${fmt(p.entry)}</td>
+        <td class="sym">${p.ticker || '--'}</td>
+        <td><span class="${dirCls}">${p.direction}</span></td>
+        <td>--</td>
+        <td>$${fmt(p.entry_real)}</td>
         <td>$${fmt(p.sl)}</td>
         <td>$${fmt(p.tp1)}</td>
-        <td>$${fmt(p.current_price || p.entry)}</td>
-        <td class="${pnlCls}">${fmtMoney(abs)} (${fmtPct(pct)})</td>
+        <td>$${fmt(current_price)}</td>
+        <td class="${pnlCls}">${fmtPct(pct)}</td>
       </tr>`;
     }).join('');
   }
@@ -376,17 +394,17 @@ function renderHistory(){
     return;
   }
   body.innerHTML = history_trades.map(h => {
-    const dirCls = h.side === 'BUY' ? 'dir-buy' : 'dir-sell';
-    const pnlCls = h.pnl>=0 ? 'up' : 'down';
-    const badge = h.reason === 'TP_HIT' ? 'badge-tp' : 'badge-sl';
+    const dirCls = h.direction === 'BUY' ? 'dir-buy' : 'dir-sell';
+    const pnlCls = h.pnl_pct >= 0 ? 'up' : 'down';
+    const badge = h.resultado === 'TP' ? 'badge-tp' : 'badge-sl';
     return `<tr>
       <td class="sym">${h.id}</td>
-      <td class="sym">${h.symbol}</td>
-      <td><span class="${dirCls}">${h.side}</span></td>
-      <td>$${fmt(h.entry)}</td>
-      <td>$${fmt(h.exit)}</td>
-      <td class="${pnlCls}">${fmtMoney(h.pnl)}</td>
-      <td><span class="${badge}">${h.reason==='TP_HIT'?'TP':'SL'}</span></td>
+      <td class="sym">${h.ticker}</td>
+      <td><span class="${dirCls}">${h.direction}</span></td>
+      <td>$${fmt(h.entry_real)}</td>
+      <td>$${fmt(h.exit_price)}</td>
+      <td class="${pnlCls}">${fmtPct(h.pnl_pct)}</td>
+      <td><span class="${badge}">${h.resultado}</span></td>
     </tr>`;
   }).join('');
 }
@@ -496,14 +514,25 @@ function updateSidePanel() {
 
 async function fetchRealData() {
     try {
-        const res = await fetch(`${API_BASE}/landing_data.json${API_KEY}`);
-        const data = await res.json();
+        const [resLanding, resPos] = await Promise.all([
+            fetch(`${API_BASE}/landing_data.json${API_KEY}`),
+            fetch(`${API_BASE}/positions.json${API_KEY}`)
+        ]);
+        const data = await resLanding.json();
+        const posData = await resPos.json();
         
-        if(data.signals) {
-            positions = data.signals.filter(s => s.status === 'OPEN');
+        if(posData.abiertas) {
+            positions = posData.abiertas;
         }
-        if(data.history) history_trades = data.history;
-        if(data.tracking) tracking = data.tracking;
+        if(posData.historial) {
+            history_trades = posData.historial;
+        }
+        if(posData.resumen) {
+            tracking.total_trades = posData.historial.length + posData.abiertas.length;
+            tracking.wins = posData.historial.filter(h => h.resultado === 'TP').length;
+            tracking.total_pnl = posData.resumen.pnl_acumulado_30d || 0;
+        }
+        
         if(data.market_data) {
             marketData = data.market_data;
             renderMarkets();
@@ -550,6 +579,62 @@ function initCandles(){
   return chart;
 }
 
+async function actualizarSystemHealth() {
+  try {
+    const res = await fetch(`${API_BASE}/system_health.json${API_KEY}`);
+    const data = await res.json();
+
+    const dot = document.getElementById('health-dot');
+    const text = document.getElementById('health-text');
+
+    if (dot && text) {
+      dot.className = 'dot ' + (data.status === 'ok' ? 'green' : data.status === 'warning' ? 'yellow' : 'red');
+      text.textContent = data.status === 'ok' ? 'Sistema operativo' : data.status === 'warning' ? 'Advertencia' : 'Error';
+    }
+  } catch (e) {
+    const dot = document.getElementById('health-dot');
+    const text = document.getElementById('health-text');
+    if (dot && text) {
+      dot.className = 'dot gray';
+      text.textContent = 'Sin conexión';
+    }
+  }
+}
+
+async function actualizarPosicionesEnGrafico(candleSeries, parSeleccionado) {
+  if (!candleSeries) return;
+  try {
+    const res = await fetch(`${API_BASE}/positions.json${API_KEY}`);
+    const data = await res.json();
+
+    const todas = [...data.abiertas, ...data.historial].filter(p => p.ticker === parSeleccionado || p.ticker === parSeleccionado.replace('-USD',''));
+
+    const markers = todas.flatMap(p => {
+      const entrada = {
+        time: Math.floor(new Date(p.opened_at).getTime() / 1000),
+        position: p.direction === 'BUY' ? 'belowBar' : 'aboveBar',
+        color: p.direction === 'BUY' ? '#26a69a' : '#ef5350',
+        shape: p.direction === 'BUY' ? 'arrowUp' : 'arrowDown',
+        text: `${p.direction} @ ${p.entry_real.toFixed(2)}`
+      };
+      if (p.status !== 'CLOSED') return [entrada];
+
+      const salida = {
+        time: Math.floor(new Date(p.closed_at).getTime() / 1000),
+        position: p.direction === 'BUY' ? 'aboveBar' : 'belowBar',
+        color: p.resultado === 'TP' ? '#26a69a' : '#ef5350',
+        shape: 'circle',
+        text: `${p.resultado} ${p.pnl_pct > 0 ? '+' : ''}${p.pnl_pct.toFixed(2)}%`
+      };
+      return [entrada, salida];
+    });
+
+    candleSeries.setMarkers(markers.sort((a, b) => a.time - b.time));
+  } catch (e) {
+    console.error('Error actualizarPosicionesEnGrafico:', e);
+  }
+}
+
 async function loadCandles() {
     const statusEl = document.getElementById('candle-status');
     const priceEl = document.getElementById('candle-price');
@@ -577,6 +662,8 @@ async function loadCandles() {
         priceEl.textContent = `${currentSymbol} · velas 1h · $${fmt(last.close,2)}`;
         statusEl.textContent = 'en vivo';
         statusEl.style.color = 'var(--green)';
+        
+        actualizarPosicionesEnGrafico(candleSeries, currentSymbol);
     } catch(e) {
         statusEl.textContent = 'sin conexión';
         statusEl.style.color = 'var(--red)';
@@ -603,6 +690,11 @@ setInterval(updateClock, 1000);
 if(typeof LightweightCharts !== 'undefined'){
   initCandles();
   loadCandles();
+  actualizarSystemHealth();
+  
+  setInterval(() => loadCandles(), 30000);
+  setInterval(() => actualizarSystemHealth(), 10000);
+  setInterval(() => actualizarPosicionesEnGrafico(candleSeries, currentSymbol), 30000);
 }
 </script>
 </body>
