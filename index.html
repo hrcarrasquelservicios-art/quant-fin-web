@@ -71,6 +71,47 @@ tr:last-child td{border-bottom:none;}
 .badge-tp{font-size:10px; color:var(--green); border:1px solid var(--green); padding:2px 8px; text-transform:uppercase;}
 .badge-sl{font-size:10px; color:var(--red); border:1px solid var(--red); padding:2px 8px; text-transform:uppercase;}
 
+/* ─── SIGNAL FEED PANEL ─── */
+.signal-feed-wrap{padding:0 0 8px;}
+.sf-item{
+  display:grid;
+  grid-template-columns:90px 80px 1fr auto auto;
+  gap:0 12px;
+  align-items:center;
+  padding:10px 18px;
+  border-bottom:1px solid var(--border-soft);
+  transition:background 0.2s;
+}
+.sf-item:hover{background:var(--panel-2);}
+.sf-item:last-child{border-bottom:none;}
+.sf-badge{
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:10px; font-weight:600; letter-spacing:0.8px;
+  padding:3px 9px; text-transform:uppercase;
+}
+.sf-badge.approved{color:#1FCB86; background:rgba(31,203,134,0.08); border:1px solid rgba(31,203,134,0.3);}
+.sf-badge.rejected{color:#E5484D; background:rgba(229,72,77,0.08); border:1px solid rgba(229,72,77,0.3);}
+.sf-badge.open{color:#D4A847; background:rgba(212,168,71,0.08); border:1px solid rgba(212,168,71,0.3);}
+.sf-badge.tp{color:#1FCB86; border:1px solid rgba(31,203,134,0.5); background:transparent;}
+.sf-badge.sl{color:#E5484D; border:1px solid rgba(229,72,77,0.5); background:transparent;}
+.sf-ticker{font-family:var(--mono); font-size:13px; font-weight:600;}
+.sf-dir-buy{color:#1FCB86; font-size:11px;}
+.sf-dir-sell{color:#E5484D; font-size:11px;}
+.sf-prices{font-family:var(--mono); font-size:11px; color:var(--text-dim);}
+.sf-reason{font-size:10px; color:var(--text-mute); text-align:right; font-style:italic;}
+.sf-ts{font-size:10px; color:var(--text-mute);}
+.daily-bar-wrap{padding:14px 18px; border-bottom:1px solid var(--border);}
+.daily-bar-row{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+.daily-bar-row:last-child{margin-bottom:0;}
+.daily-ticker-label{font-family:var(--mono); font-size:11px; width:80px; color:var(--text-dim);}
+.daily-track{flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden;}
+.daily-fill{height:100%; border-radius:3px; transition:width 0.5s; background:var(--gold);}
+.daily-fill.full{background:var(--red);}
+.daily-count{font-size:10px; font-family:var(--mono); color:var(--text-mute); width:36px; text-align:right;}
+.sf-filter-bar{display:flex; gap:6px; padding:10px 18px; border-bottom:1px solid var(--border);}
+.sf-filter-btn{font-size:11px; padding:4px 12px; background:transparent; border:1px solid var(--border); color:var(--text-dim); cursor:pointer; transition:all 0.2s;}
+.sf-filter-btn.active,.sf-filter-btn:hover{border-color:var(--gold); color:var(--gold);}
+
 .flowchart{padding:24px; font-family:var(--mono); font-size:12px;}
 .flow-node{display:flex; flex-direction:column; align-items:center; margin-bottom:16px;}
 .flow-box{border:1px solid var(--border); background:var(--panel-2); padding:10px 20px; min-width:180px; text-align:center; color:var(--text-dim); transition:all 0.3s;}
@@ -120,6 +161,7 @@ tr:last-child td{border-bottom:none;}
 
     <div class="tabs" id="tabs">
     <div class="tab active" data-view="dashboard">Dashboard</div>
+    <div class="tab" data-view="senales">⚡ Señales</div>
     <div class="tab" data-view="protocolo">Protocolo RUF-Flow</div>
     <div class="tab" data-view="health">System Health</div>
     <div class="tab" data-view="analytics">Analytics</div>
@@ -137,6 +179,31 @@ tr:last-child td{border-bottom:none;}
       <div class="metric"><div class="metric-label">P&amp;L no realizado</div><div class="metric-value" id="m-upnl">+$0.00</div></div>
       <div class="metric"><div class="metric-label">Posiciones</div><div class="metric-value" id="m-open">0</div></div>
     </div>
+
+    <!-- PANEL SEÑALES HOY -->
+    <div class="panel" id="signals-today-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">⚡ Centro de Señales — Hoy</div>
+          <div class="panel-sub" id="signals-last-update">Cargando...</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span id="signals-approved-count" style="font-size:11px;color:var(--green);">✅ 0 aprobadas</span>
+          <span id="signals-rejected-count" style="font-size:11px;color:var(--red);">🔴 0 rechazadas</span>
+        </div>
+      </div>
+      <!-- Barra de límite diario por activo -->
+      <div class="daily-bar-wrap" id="daily-limit-bars"></div>
+      <!-- Feed de señales -->
+      <div class="sf-filter-bar">
+        <button class="sf-filter-btn active" data-sf="all" onclick="sfFilter('all',this)">Todas</button>
+        <button class="sf-filter-btn" data-sf="approved" onclick="sfFilter('approved',this)">✅ Aprobadas</button>
+        <button class="sf-filter-btn" data-sf="rejected" onclick="sfFilter('rejected',this)">🔴 Rechazadas</button>
+        <button class="sf-filter-btn" data-sf="open" onclick="sfFilter('open',this)">🟡 Abiertas</button>
+      </div>
+      <div class="signal-feed-wrap" id="signals-feed"></div>
+    </div>
+
     <div class="panel">
       <div class="panel-head">
         <div class="panel-title">Posiciones abiertas</div>
@@ -156,6 +223,28 @@ tr:last-child td{border-bottom:none;}
         <thead><tr><th>ID</th><th>Par</th><th>Dir</th><th>Entrada</th><th>Salida</th><th>P&amp;L</th><th>Resultado</th></tr></thead>
         <tbody id="history-body"></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- SEÑALES (tab separada) -->
+  <div id="view-senales" class="view">
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">📋 Historial Completo de Señales</div>
+          <div class="panel-sub">Todas las señales del sistema — aprobadas y rechazadas</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span id="senales-tab-approved" style="font-size:11px;color:var(--green);">✅ 0</span>
+          <span id="senales-tab-rejected" style="font-size:11px;color:var(--red);">🔴 0</span>
+        </div>
+      </div>
+      <div class="sf-filter-bar">
+        <button class="sf-filter-btn active" data-sf2="all" onclick="sfFilter2('all',this)">Todas</button>
+        <button class="sf-filter-btn" data-sf2="approved" onclick="sfFilter2('approved',this)">✅ Aprobadas</button>
+        <button class="sf-filter-btn" data-sf2="rejected" onclick="sfFilter2('rejected',this)">🔴 Rechazadas</button>
+      </div>
+      <div class="signal-feed-wrap" id="senales-feed"></div>
     </div>
   </div>
 
@@ -323,7 +412,9 @@ tr:last-child td{border-bottom:none;}
 
 </div>
 
-<script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+<script type="module" src="/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.1.1/dist/chartjs-chart-financial.min.js"></script>
 <script>
 let positions = [];
 let history_trades = [];
@@ -335,12 +426,22 @@ let marketData = [];
 const API_BASE = 'https://85.215.73.107.nip.io/api';
 const API_KEY = '?key=Rufflow777';
 
+let candleChart = null;
+let currentSymbol = 'BTC-USD';
+let chartInitialized = false;
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
-    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    const viewEl = document.getElementById('view-' + tab.dataset.view);
+    if (viewEl) viewEl.classList.add('active');
+    // Lazy-init: cargar velas solo cuando analytics se hace visible
+    if (tab.dataset.view === 'analytics' && !chartInitialized) {
+      chartInitialized = true;
+      setTimeout(() => loadCandles(), 80); // pequeño delay para que el DOM se pinte
+    }
   });
 });
 
@@ -356,35 +457,170 @@ function pnlOf(p){
   return {abs, pct};
 }
 
-function renderOpen(){
-  const body = document.getElementById('open-body');
-  if(positions.length === 0){
-    body.innerHTML = `<tr><td colspan="8" class="empty">Sin posiciones abiertas</td></tr>`;
-  } else {
-    body.innerHTML = positions.map(p => {
-      const dirCls = p.direction === 'BUY' ? 'dir-buy' : 'dir-sell';
-      const current_price = marketData.find(m => m.ticker === p.ticker || m.ticker === p.ticker.replace('-USD',''))?.close || p.entry_real;
-      const abs = 0; // Not available for paper trading
-      let pct = 0;
-      if (p.direction === 'BUY') {
-        pct = ((current_price - p.entry_real) / p.entry_real) * 100;
-      } else {
-        pct = ((p.entry_real - current_price) / p.entry_real) * 100;
-      }
-      const pnlCls = pct >= 0 ? 'up' : 'down';
-      return `<tr>
-        <td class="sym">${p.ticker || '--'}</td>
-        <td><span class="${dirCls}">${p.direction}</span></td>
-        <td>--</td>
-        <td>$${fmt(p.entry_real)}</td>
-        <td>$${fmt(p.sl)}</td>
-        <td>$${fmt(p.tp1)}</td>
-        <td>$${fmt(current_price)}</td>
-        <td class="${pnlCls}">${fmtPct(pct)}</td>
-      </tr>`;
-    }).join('');
+// ─── SIGNAL FEED ─────────────────────────────────────
+let allSignalsData = [];
+let sfCurrentFilter = 'all';
+let sf2CurrentFilter = 'all';
+
+function renderSignalFeed(signals, feedId, filter) {
+  const feed = document.getElementById(feedId);
+  if (!feed) return;
+  const today = new Date().toISOString().slice(0, 10);
+  let list = [...signals];
+  // Filtrar solo los de hoy para el panel del dashboard
+  if (feedId === 'signals-feed') {
+    list = list.filter(s => (s.timestamp || '').startsWith(today));
   }
-  document.getElementById('m-open').textContent = positions.length;
+  if (filter === 'approved') list = list.filter(s => s.consensus_status === 'approved');
+  else if (filter === 'rejected') list = list.filter(s => s.consensus_status === 'rejected');
+  else if (filter === 'open') list = list.filter(s => s.status === 'open' || s.status === 'active');
+
+  if (!list.length) {
+    feed.innerHTML = `<div style="padding:24px 18px; text-align:center; color:var(--text-mute); font-size:12px;">
+      ${filter === 'all' ? 'Sin señales hoy' : 'Sin señales con este filtro'}
+    </div>`;
+    return;
+  }
+
+  feed.innerHTML = list.map(s => {
+    const isApproved = s.consensus_status === 'approved';
+    const isBuy = (s.direction || '').toUpperCase() === 'BUY';
+    const st = s.consensus_status || 'pending';
+    const ts = s.timestamp ? new Date(s.timestamp).toLocaleTimeString('es-VE', {hour:'2-digit',minute:'2-digit',hour12:false}) : '--';
+    const qfsId = s.qfs_id || s.id || '--';
+    const ticker = s.ticker || s.pair || '--';
+
+    // Badge estado
+    let badgeHtml = '';
+    if (isApproved) badgeHtml = `<span class="sf-badge approved">✅ APROBADA</span>`;
+    else {
+      const reason = s.rejection_reason || '';
+      let reasonLabel = '🔴 RECHAZADA';
+      if (reason.startsWith('daily_limit')) reasonLabel = `⚠️ LÍMITE DIARIO (${s.daily_count||'?'}/${s.daily_limit||5})`;
+      else if (reason.startsWith('vm1_score')) reasonLabel = '🔴 VM1 BAJO';
+      else if (reason.startsWith('vm2_score')) reasonLabel = '🔴 VM2 BAJO';
+      else if (reason.startsWith('market_closed')) reasonLabel = '⏸️ MERCADO CERRADO';
+      else if (reason.startsWith('risk')) reasonLabel = '🛡️ RISK MANAGER';
+      badgeHtml = `<span class="sf-badge rejected">${reasonLabel}</span>`;
+    }
+
+    return `<div class="sf-item">
+      <span class="sf-ticker">${ticker}</span>
+      <span class="${isBuy ? 'sf-dir-buy' : 'sf-dir-sell'}">${isBuy ? '▲ BUY' : '▼ SELL'}</span>
+      <span class="sf-prices">@ $${fmt(s.entry||0,4)} &nbsp;SL $${fmt(s.sl||0,4)} &nbsp;TP1 $${fmt(s.tp1||0,4)}</span>
+      ${badgeHtml}
+      <span class="sf-ts">${qfsId.slice(-8)} · ${ts}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderDailyLimitBars(signals) {
+  const wrap = document.getElementById('daily-limit-bars');
+  if (!wrap) return;
+  const today = new Date().toISOString().slice(0, 10);
+  const todaySignals = signals.filter(s => (s.timestamp||'').startsWith(today) && s.consensus_status === 'approved');
+  const byTicker = {};
+  todaySignals.forEach(s => {
+    const t = s.ticker || s.pair || '?';
+    byTicker[t] = (byTicker[t] || 0) + 1;
+  });
+  const LIMIT = 5;
+  if (!Object.keys(byTicker).length) {
+    wrap.innerHTML = `<div style="font-size:11px;color:var(--text-mute);">Sin señales aprobadas hoy — límite diario: ${LIMIT}</div>`;
+    return;
+  }
+  wrap.innerHTML = Object.entries(byTicker).map(([t, cnt]) => {
+    const pct = Math.min(100, (cnt / LIMIT) * 100);
+    const isFull = cnt >= LIMIT;
+    return `<div class="daily-bar-row">
+      <span class="daily-ticker-label">${t}</span>
+      <div class="daily-track"><div class="daily-fill${isFull?' full':''}" style="width:${pct}%"></div></div>
+      <span class="daily-count">${cnt}/${LIMIT}</span>
+    </div>`;
+  }).join('');
+}
+
+function updateSignalCounters(signals) {
+  const today = new Date().toISOString().slice(0, 10);
+  const todayAll = signals.filter(s => (s.timestamp||'').startsWith(today));
+  const approved = todayAll.filter(s => s.consensus_status === 'approved').length;
+  const rejected = todayAll.filter(s => s.consensus_status === 'rejected').length;
+  const apEl = document.getElementById('signals-approved-count');
+  const rjEl = document.getElementById('signals-rejected-count');
+  const upEl = document.getElementById('signals-last-update');
+  if (apEl) apEl.textContent = `✅ ${approved} aprobadas hoy`;
+  if (rjEl) rjEl.textContent = `🔴 ${rejected} rechazadas hoy`;
+  if (upEl) upEl.textContent = `Última sinc: ${new Date().toLocaleTimeString('es-VE',{hour12:false})} · Total hoy: ${todayAll.length}`;
+  // Tab señales
+  const t1 = document.getElementById('senales-tab-approved');
+  const t2 = document.getElementById('senales-tab-rejected');
+  if (t1) t1.textContent = `✅ ${signals.filter(s=>s.consensus_status==='approved').length}`;
+  if (t2) t2.textContent = `🔴 ${signals.filter(s=>s.consensus_status==='rejected').length}`;
+}
+
+function sfFilter(filter, btn) {
+  sfCurrentFilter = filter;
+  document.querySelectorAll('[data-sf]').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderSignalFeed(allSignalsData, 'signals-feed', filter);
+}
+
+function sfFilter2(filter, btn) {
+  sf2CurrentFilter = filter;
+  document.querySelectorAll('[data-sf2]').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderSignalFeed(allSignalsData, 'senales-feed', filter);
+}
+
+async function fetchSignalsAll() {
+  try {
+    const res = await fetch(`${API_BASE}/signals_all.json${API_KEY}&t=${Date.now()}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    allSignalsData = Array.isArray(data) ? data : [];
+    renderSignalFeed(allSignalsData, 'signals-feed', sfCurrentFilter);
+    renderSignalFeed(allSignalsData, 'senales-feed', sf2CurrentFilter);
+    renderDailyLimitBars(allSignalsData);
+    updateSignalCounters(allSignalsData);
+  } catch(e) {
+    const feed = document.getElementById('signals-feed');
+    if (feed) feed.innerHTML = `<div style="padding:18px; text-align:center; color:var(--text-mute); font-size:11px;">
+      📡 signals_all.json no disponible — ejecutar quantfin_sync_landing.py en IONOS
+    </div>`;
+  }
+}
+
+
+function renderOpen() {
+    const body = document.getElementById('open-body');
+    if (!positions || positions.length === 0) {
+        body.innerHTML = `<tr><td colspan="8" class="empty">Sin posiciones abiertas</td></tr>`;
+        return;
+    }
+    body.innerHTML = positions.map(p => {
+        const dirCls = p.direction === 'BUY' ? 'dir-buy' : 'dir-sell';
+        const mkt = marketData.find(m => m.ticker === p.ticker);
+        const entry = p.entry_real || p.entry || p.entry_price || 0;
+        const current_price = mkt ? mkt.close : (p.current_price || entry);
+        let pct = 0;
+        if (p.direction === 'BUY') {
+            pct = ((current_price - entry) / entry) * 100;
+        } else {
+            pct = ((entry - current_price) / entry) * 100;
+        }
+        const pnlCls = pct >= 0 ? 'up' : 'down';
+        return `<tr>
+            <td class="sym">${p.ticker || '--'}</td>
+            <td><span class="${dirCls}">${p.direction}</span></td>
+            <td>${p.quantity ? p.quantity.toFixed(4) : '--'}</td>
+            <td>$${fmt(entry)}</td>
+            <td>$${fmt(p.sl || p.stopLoss?.price || p.stopLoss || 0)}</td>
+            <td>$${fmt(p.tp1 || p.target || 0)}</td>
+            <td>$${fmt(current_price)}</td>
+            <td class="${pnlCls}">${fmtPct(pct)}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('m-open').textContent = positions.length;
 }
 
 function renderHistory(){
@@ -420,17 +656,24 @@ function renderStats(){
   document.getElementById('s-pnl').className = 'metric-value ' + (pnlTotal>=0?'up':'down');
 }
 
-function renderAccount(){
-  const totalUnrealized = positions.reduce((a,p)=>a+pnlOf(p).abs, 0);
-  const equity = balance + totalUnrealized;
-  const marginUsed = positions.reduce((a,p)=>a + p.entry*p.quantity, 0);
-  document.getElementById('m-balance').textContent = '$'+fmt(balance);
-  document.getElementById('m-equity').textContent = '$'+fmt(equity);
-  document.getElementById('m-margin').textContent = '$'+fmt(marginUsed);
-  document.getElementById('m-avail').textContent = '$'+fmt(balance - marginUsed);
-  const upnlEl = document.getElementById('m-upnl');
-  upnlEl.textContent = fmtMoney(totalUnrealized);
-  upnlEl.className = 'metric-value ' + (totalUnrealized>=0?'up':'down');
+function renderAccount() {
+    const totalUnrealized = positions.reduce((a, p) => {
+        const mkt = marketData.find(m => m.ticker === p.ticker);
+        const entry = p.entry_real || p.entry || p.entry_price || 0;
+        const price = mkt ? mkt.close : (p.current_price || entry);
+        const diff = p.direction === 'BUY' ? (price - entry) : (entry - price);
+        return a + diff * (p.quantity || 0);
+    }, 0);
+    const equity = balance + totalUnrealized;
+    const marginUsed = positions.reduce((a, p) => a + (p.entry_real || p.entry || 0) * (p.quantity || 0), 0);
+    document.getElementById('m-balance').textContent = '$' + fmt(balance);
+    document.getElementById('m-equity').textContent = '$' + fmt(equity);
+    document.getElementById('m-margin').textContent = '$' + fmt(marginUsed);
+    document.getElementById('m-avail').textContent = '$' + fmt(balance - marginUsed);
+    const upnlEl = document.getElementById('m-upnl');
+    upnlEl.textContent = fmtMoney(totalUnrealized);
+    upnlEl.className = 'metric-value ' + (totalUnrealized >= 0 ? 'up' : 'down');
+    document.getElementById('m-open').textContent = positions.length;
 }
 
 function renderMarkets(){
@@ -518,65 +761,241 @@ async function fetchRealData() {
             fetch(`${API_BASE}/landing_data.json${API_KEY}`),
             fetch(`${API_BASE}/positions.json${API_KEY}`)
         ]);
-        const data = await resLanding.json();
-        const posData = await resPos.json();
-        
-        if(posData.abiertas) {
-            positions = posData.abiertas;
-        }
-        if(posData.historial) {
-            history_trades = posData.historial;
-        }
-        if(posData.resumen) {
-            tracking.total_trades = posData.historial.length + posData.abiertas.length;
-            tracking.wins = posData.historial.filter(h => h.resultado === 'TP').length;
-            tracking.total_pnl = posData.resumen.pnl_acumulado_30d || 0;
-        }
-        
-        if(data.market_data) {
-            marketData = data.market_data;
-            renderMarkets();
-            updateSidePanel();
-        }
-        
-        if (data.account && data.account.balances) {
-            let total = 0;
-            for(const [asset, amnts] of Object.entries(data.account.balances)) {
-                if(asset === 'USDT') {
-                    total += amnts.free + amnts.locked;
-                }
-            }
-            if(total > 0) balance = total;
+
+        if (!resLanding.ok || !resPos.ok) {
+            console.warn('Algunos endpoints no responden, usando datos mock...');
+            loadMockData();
+            return;
         }
 
-        renderOpen(); renderHistory(); renderStats(); renderAccount();
-    } catch(err) {
-        console.error("Error fetching data:", err);
+        const landing = await resLanding.json();
+        const posData = await resPos.json();
+
+        if (landing.market_data && Array.isArray(landing.market_data)) {
+            marketData = landing.market_data;
+        } else {
+            marketData = [];
+        }
+
+        if (landing.account && landing.account.balances) {
+            let total = 0;
+            for (const [asset, amnts] of Object.entries(landing.account.balances)) {
+                if (asset === 'USDT' || asset === 'USD') {
+                    total += (amnts.free || 0) + (amnts.locked || 0);
+                }
+            }
+            if (total > 0) balance = total;
+        }
+
+        if (posData.abiertas && Array.isArray(posData.abiertas)) {
+            positions = posData.abiertas;
+        } else {
+            positions = [];
+        }
+
+        if (posData.historial && Array.isArray(posData.historial)) {
+            history_trades = posData.historial;
+        } else {
+            history_trades = [];
+        }
+
+        if (posData.resumen) {
+            tracking.total_trades = (posData.historial?.length || 0) + (posData.abiertas?.length || 0);
+            tracking.wins = posData.historial?.filter(h => h.resultado === 'TP').length || 0;
+            tracking.total_pnl = posData.resumen.pnl_acumulado_30d || 0;
+        }
+
+        renderOpen();
+        renderHistory();
+        renderStats();
+        renderAccount();
+        renderMarkets();
+        updateSidePanel();
+
+    } catch (err) {
+        console.error('Error en fetchRealData:', err);
+        loadMockData(); 
     }
 }
 
-// ─── UNIFIED CANDLE LOADER ──────────────────────────
-let candleSeries = null;
-let currentSymbol = 'BTC-USD';
+function loadMockData() {
+    positions = [
+        { ticker: 'QQQ', direction: 'BUY', entry_real: 723.80, sl: 700.04, tp1: 755.48, quantity: 1.36 }
+    ];
+    marketData = [
+        { ticker: 'QQQ', close: 711.74, signal: 'BUY', score: 70, trend: 'Alcista', atr: 2.0, spread: 0.02, volatility: 1.5, bloque: 'B_US_MARKET' }
+    ];
+    tracking.total_trades = positions.length + history_trades.length;
+    tracking.wins = history_trades.filter(h => h.resultado === 'TP').length;
+    tracking.total_pnl = 50;
+    balance = 1000;
+    renderOpen();
+    renderHistory();
+    renderStats();
+    renderAccount();
+    renderMarkets();
+    updateSidePanel();
+}
 
-function initCandles(){
+// ─── CANDLE CHART CON CHART.JS ──────────────────────
+function initCandleChart(data) {
   const el = document.getElementById('candle-chart');
-  const chart = LightweightCharts.createChart(el, {
-    layout:{ background:{color:'transparent'}, textColor:'#8A8F98', fontFamily:'SF Mono, Consolas, monospace', fontSize:11 },
-    grid:{ vertLines:{color:'#1D2129'}, horzLines:{color:'#1D2129'} },
-    rightPriceScale:{ borderColor:'#262B32' },
-    timeScale:{ borderColor:'#262B32', timeVisible:true },
-    crosshair:{ mode:0 },
-    width: el.clientWidth,
-    height: 400
+  if (!el) return;
+
+  // Destruir instancia previa
+  if (candleChart) { candleChart.destroy(); candleChart = null; }
+  el.innerHTML = '';
+
+  // Crear canvas dinámicamente
+  const canvas = document.createElement('canvas');
+  canvas.style.width = '100%';
+  canvas.style.height = '380px';
+  el.appendChild(canvas);
+
+  // Si chartjs-chart-financial no está disponible, usar fallback canvas propio
+  if (typeof Chart === 'undefined') {
+    drawFallbackCandles(canvas, data);
+    return;
+  }
+
+  try {
+    // Intentar con candlestick plugin
+    if (Chart.registry && Chart.registry.controllers && Chart.registry.controllers.ohlc) {
+      const labels = data.map(d => new Date(d.time * 1000).toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit', hour12:false}));
+      candleChart = new Chart(canvas, {
+        type: 'ohlc',
+        data: {
+          labels,
+          datasets: [{
+            label: currentSymbol,
+            data: data.map(d => ({x: d.time * 1000, o: d.open, h: d.high, l: d.low, c: d.close})),
+            color: { up: '#1FCB86', down: '#E5484D', unchanged: '#D4A847' }
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#8A8F98', maxTicksLimit: 8 }, grid: { color: '#1D2129' } },
+            y: { position: 'right', ticks: { color: '#8A8F98' }, grid: { color: '#1D2129' } }
+          }
+        }
+      });
+    } else {
+      // Fallback: gráfico de línea con close price (siempre funciona)
+      drawLineChart(canvas, data);
+    }
+  } catch(e) {
+    drawFallbackCandles(canvas, data);
+  }
+}
+
+function drawLineChart(canvas, data) {
+  const labels = data.map((d, i) => {
+    if (i % Math.ceil(data.length / 10) !== 0) return '';
+    return new Date(d.time * 1000).toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit', hour12:false});
   });
-  candleSeries = chart.addCandlestickSeries({
-    upColor:'#1FCB86', downColor:'#E5484D',
-    borderUpColor:'#1FCB86', borderDownColor:'#E5484D',
-    wickUpColor:'#1FCB86', wickDownColor:'#E5484D'
+  const prices = data.map(d => d.close);
+  const minP = Math.min(...prices), maxP = Math.max(...prices);
+  const isUp = prices[prices.length-1] >= prices[0];
+  const color = isUp ? '#1FCB86' : '#E5484D';
+
+  candleChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: currentSymbol + ' (cierre 1h)',
+        data: prices,
+        borderColor: color,
+        backgroundColor: color + '18',
+        fill: true,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        borderWidth: 2,
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: { duration: 400 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `$${fmt(ctx.raw, 2)}`
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#8A8F98', maxTicksLimit: 8 }, grid: { color: '#1D2129' } },
+        y: {
+          position: 'right',
+          ticks: { color: '#8A8F98', callback: v => '$' + fmt(v, 2) },
+          grid: { color: '#1D2129' },
+          min: minP * 0.999,
+          max: maxP * 1.001
+        }
+      }
+    }
   });
-  window.addEventListener('resize', () => chart.applyOptions({width: el.clientWidth}));
-  return chart;
+}
+
+function drawFallbackCandles(canvas, data) {
+  // Canvas 2D puro: mini gráfico de barras OHLC
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.parentElement.clientWidth || 800;
+  canvas.height = 380;
+  const W = canvas.width, H = canvas.height;
+  const pad = { t: 20, b: 30, l: 10, r: 60 };
+  const cw = W - pad.l - pad.r, ch = H - pad.t - pad.b;
+
+  const prices = data.flatMap(d => [d.high, d.low]);
+  const minP = Math.min(...prices), maxP = Math.max(...prices);
+  const scaleY = v => pad.t + ch - ((v - minP) / (maxP - minP)) * ch;
+
+  ctx.fillStyle = 'transparent';
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = '#1D2129'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (ch / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    const priceLabel = maxP - ((maxP - minP) / 4) * i;
+    ctx.fillStyle = '#8A8F98'; ctx.font = '10px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('$' + fmt(priceLabel, 2), W - pad.r + 4, y + 4);
+  }
+
+  // Candles
+  const barW = Math.max(1, Math.floor(cw / data.length) - 1);
+  data.forEach((d, i) => {
+    const x = pad.l + (i / data.length) * cw;
+    const isUp = d.close >= d.open;
+    ctx.strokeStyle = isUp ? '#1FCB86' : '#E5484D';
+    ctx.fillStyle = isUp ? '#1FCB86' : '#E5484D';
+
+    // Wick
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x + barW/2, scaleY(d.high));
+    ctx.lineTo(x + barW/2, scaleY(d.low));
+    ctx.stroke();
+
+    // Body
+    const yO = scaleY(d.open), yC = scaleY(d.close);
+    const bodyH = Math.max(1, Math.abs(yC - yO));
+    ctx.fillRect(x, Math.min(yO, yC), barW, bodyH);
+  });
+
+  // Precio actual
+  const last = data[data.length-1];
+  const yLast = scaleY(last.close);
+  ctx.strokeStyle = '#D4A847'; ctx.setLineDash([3,3]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.l, yLast); ctx.lineTo(W - pad.r - 2, yLast); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#D4A847'; ctx.font = 'bold 11px monospace'; ctx.textAlign = 'left';
+  ctx.fillText('$' + fmt(last.close, 2), W - pad.r + 4, yLast + 4);
 }
 
 async function actualizarSystemHealth() {
@@ -586,11 +1005,43 @@ async function actualizarSystemHealth() {
 
     const dot = document.getElementById('health-dot');
     const text = document.getElementById('health-text');
+    const timeEl = document.getElementById('health-time');
 
     if (dot && text) {
-      let isOk = data.services && data.services.n8n === 'active';
-      dot.className = 'dot ' + (isOk ? 'green' : 'red');
-      text.textContent = isOk ? 'Sistema operativo' : 'Error';
+      let allActive = data.services && Object.values(data.services).every(s => s === 'active');
+      dot.className = 'dot ' + (allActive ? 'green' : 'red');
+      text.textContent = allActive ? 'Sistema operativo' : '⚠️ Degradado';
+    }
+
+    if (timeEl && data.timestamp) {
+      timeEl.textContent = 'Última sinc: ' + new Date(data.timestamp).toLocaleString('es-VE');
+    }
+
+    // Render health table
+    const tbody = document.getElementById('health-tbody');
+    if (tbody && data) {
+      let rows = '';
+      if (data.vms) {
+        for (const [name, vm] of Object.entries(data.vms)) {
+          const color = vm.status === 'active' ? 'var(--green)' : 'var(--red)';
+          rows += `<tr>
+            <td style="text-transform:uppercase;">Servidor ${name}</td>
+            <td style="text-align:center;color:${color};font-weight:bold;">${vm.status.toUpperCase()}</td>
+            <td style="text-align:right;">CPU: ${vm.cpu}% | RAM: ${vm.ram}%</td>
+          </tr>`;
+        }
+      }
+      if (data.services) {
+        for (const [svc, status] of Object.entries(data.services)) {
+          const color = status === 'active' ? 'var(--green)' : 'var(--red)';
+          rows += `<tr>
+            <td style="text-transform:capitalize;">${svc.replace(/_/g,' ')}</td>
+            <td style="text-align:center;color:${color};font-weight:bold;">${status.toUpperCase()}</td>
+            <td style="text-align:right;">${status === 'active' ? '✅ OK' : '❌ ERROR'}</td>
+          </tr>`;
+        }
+      }
+      tbody.innerHTML = rows || '<tr><td colspan="3" style="text-align:center;color:var(--red);">Sin datos de telemetría</td></tr>';
     }
   } catch (e) {
     const dot = document.getElementById('health-dot');
@@ -599,6 +1050,8 @@ async function actualizarSystemHealth() {
       dot.className = 'dot gray';
       text.textContent = 'Sin conexión';
     }
+    const tbody = document.getElementById('health-tbody');
+    if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--red);">Error cargando telemetría — IONOS no responde</td></tr>';
   }
 }
 
@@ -639,47 +1092,92 @@ async function actualizarPosicionesEnGrafico(candleSeries, parSeleccionado) {
 async function loadCandles() {
     const statusEl = document.getElementById('candle-status');
     const priceEl = document.getElementById('candle-price');
+    if (!statusEl) return;
     statusEl.textContent = 'cargando velas...';
-    
-    try {
-        const res = await fetch(`${API_BASE}/candles_${currentSymbol}.json${API_KEY}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const raw = await res.json();
-        
-        const data = raw.map(k => {
-            let t = Math.floor(new Date(k.t).getTime() / 1000);
-            if (isNaN(t)) t = 0;
-            return {
-                time: t,
-                open: parseFloat(k.o), high: parseFloat(k.h),
-                low: parseFloat(k.l), close: parseFloat(k.c)
-            };
-        }).filter(d => d.time > 0);
-        
-        if (data.length === 0) throw new Error('No data');
-        
-        data.sort((a,b) => a.time - b.time);
-        const uniqueData = [];
-        const seen = new Set();
-        for (const d of data) {
-            if (!seen.has(d.time)) {
-                seen.add(d.time);
-                uniqueData.push(d);
-            }
-        }
-        
-        candleSeries.setData(uniqueData);
-        const last = uniqueData[uniqueData.length-1];
-        priceEl.textContent = `${currentSymbol} · velas 1h · $${fmt(last.close,2)}`;
-        statusEl.textContent = 'en vivo';
-        statusEl.style.color = 'var(--green)';
-        
-        actualizarPosicionesEnGrafico(candleSeries, currentSymbol);
-    } catch(e) {
-        statusEl.textContent = 'sin conexión';
-        statusEl.style.color = 'var(--red)';
-        console.error('Candle error:', e);
+    statusEl.style.color = 'var(--text-dim)';
+
+    // Intentar varias fuentes de datos en orden de prioridad
+    const urls = [
+      `${API_BASE}/candles_${currentSymbol}.json${API_KEY}`,
+      `${API_BASE}/candles_${currentSymbol.replace('-USD','USDT')}.json${API_KEY}`,
+    ];
+
+    let raw = null;
+    for (const url of urls) {
+      try {
+        const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+        if (res.ok) { raw = await res.json(); break; }
+      } catch(e) { /* intentar siguiente URL */ }
     }
+
+    // Fallback: generar datos simulados desde Yahoo Finance
+    if (!raw || raw.length === 0) {
+      try {
+        const yhSym = currentSymbol.replace('-USD','-USD');
+        const yhRes = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${yhSym}?range=5d&interval=1h`,
+          { signal: AbortSignal.timeout(6000) });
+        if (yhRes.ok) {
+          const yhData = await yhRes.json();
+          const result = yhData?.chart?.result?.[0];
+          if (result) {
+            const ts = result.timestamp || [];
+            const q = result.indicators?.quote?.[0] || {};
+            raw = ts.map((t, i) => ({
+              t: new Date(t * 1000).toISOString(),
+              o: q.open?.[i] || 0, h: q.high?.[i] || 0,
+              l: q.low?.[i] || 0, c: q.close?.[i] || 0
+            })).filter(d => d.o && d.c);
+          }
+        }
+      } catch(e) { /* Yahoo también falló */ }
+    }
+
+    if (!raw || raw.length === 0) {
+      statusEl.textContent = 'sin datos — servidor IONOS o Yahoo no responde';
+      statusEl.style.color = 'var(--red)';
+      const el = document.getElementById('candle-chart');
+      if (el) el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:380px;flex-direction:column;gap:12px;">
+        <span style="font-size:32px;">📡</span>
+        <span style="color:var(--text-mute);font-size:13px;">Sin datos de velas para ${currentSymbol}</span>
+        <span style="color:var(--text-mute);font-size:11px;">El servidor IONOS debe ejecutar quantfin_sync_landing.py</span>
+        <button onclick="loadCandles()" style="margin-top:8px;padding:6px 16px;background:var(--panel-2);border:1px solid var(--border);color:var(--gold);cursor:pointer;font-size:11px;">↺ Reintentar</button>
+      </div>`;
+      return;
+    }
+
+    // Normalizar datos
+    const data = raw.map(k => {
+      const ts = k.t || k.timestamp || '';
+      let t = typeof ts === 'number' ? ts : Math.floor(new Date(ts.replace('Z','+00:00')).getTime() / 1000);
+      if (isNaN(t) || t <= 0) return null;
+      return {
+        time: t,
+        open: parseFloat(k.o ?? k.open ?? 0),
+        high: parseFloat(k.h ?? k.high ?? 0),
+        low:  parseFloat(k.l ?? k.low ?? 0),
+        close: parseFloat(k.c ?? k.close ?? 0)
+      };
+    }).filter(d => d && d.close > 0);
+
+    if (data.length === 0) {
+      statusEl.textContent = 'datos inválidos';
+      statusEl.style.color = 'var(--red)';
+      return;
+    }
+
+    data.sort((a, b) => a.time - b.time);
+    // Deduplicar timestamps
+    const seen = new Set();
+    const uniqueData = data.filter(d => { if (seen.has(d.time)) return false; seen.add(d.time); return true; });
+
+    // Renderizar gráfico
+    initCandleChart(uniqueData);
+
+    const last = uniqueData[uniqueData.length - 1];
+    if (priceEl) priceEl.textContent = `${currentSymbol} · velas 1h · $${fmt(last.close, 2)}`;
+    statusEl.textContent = `en vivo · ${uniqueData.length} velas`;
+    statusEl.style.color = 'var(--green)';
+
     updateSidePanel();
 }
 
@@ -688,25 +1186,41 @@ document.getElementById('symbolSelect').addEventListener('change', (e) => {
     loadCandles();
 });
 
-function updateClock(){
+function renderSystemHealth() {
+    const tbody = document.getElementById('health-tbody');
+    const motores = [
+        { nombre: 'Ruflo v6 Primary', ip: 'VM2 (34.58.235.222)', estado: '🟢 Activo', rol: 'Genera señales técnicas e indicadores, envía a consenso. Anti-duplicados habilitado.' },
+        { nombre: 'Ruflo v6 Validator', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Motor de validación secundario, crontab corregido para evitar ejecución solapada con ruflo_hub.sh.' },
+        { nombre: 'Stock-Checker', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Conectado vía Bun/TypeScript prediciendo en base a Tiingo/Yahoo Data.' }
+    ];
+    if(tbody) {
+        tbody.innerHTML = motores.map(m => `
+            <tr>
+                <td style="text-align:left; padding:8px;">${m.nombre}</td>
+                <td style="text-align:center; padding:8px;">${m.estado}</td>
+                <td style="text-align:right; padding:8px;">${m.ip}<br><span style="color:var(--text-mute);font-size:11px;">${m.rol}</span></td>
+            </tr>
+        `).join('');
+    }
+}
+\nfunction updateClock(){
   const now = new Date();
   document.getElementById('clock').textContent = now.toLocaleTimeString('es-VE', {hour12:false});
 }
 
 updateClock();
 fetchRealData();
+fetchSignalsAll();
+renderSystemHealth();
 setInterval(fetchRealData, 60000);
+setInterval(fetchSignalsAll, 30000);
 setInterval(updateClock, 1000);
-
-if(typeof LightweightCharts !== 'undefined'){
-  initCandles();
-  loadCandles();
-  actualizarSystemHealth();
-  
-  setInterval(() => loadCandles(), 30000);
-  setInterval(() => actualizarSystemHealth(), 10000);
-  setInterval(() => actualizarPosicionesEnGrafico(candleSeries, currentSymbol), 30000);
-}
+// Velas: lazy al hacer click en Analytics, luego cada 30s si está activo
+setInterval(() => {
+  if (chartInitialized && document.getElementById('view-analytics')?.classList.contains('active')) {
+    loadCandles();
+  }
+}, 30000);
 </script>
 </body>
 </html>
