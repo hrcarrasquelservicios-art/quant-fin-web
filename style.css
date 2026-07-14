@@ -221,7 +221,7 @@ tr:last-child td { border-bottom: none; }
 
 /* Form Elements */
 select {
-  appearance: none; background: rgba(0,0,0,0.3) url(\"data:image/svg+xml;utf8,<svg fill='%239ca3af' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>\") no-repeat right 8px center;
+  appearance: none; background: rgba(0,0,0,0.3) url("data:image/svg+xml;utf8,<svg fill='%239ca3af' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 8px center;
   border: 1px solid var(--border); border-radius: 6px; padding: 8px 32px 8px 12px;
   color: var(--text); font-family: var(--sans); font-size: 13px; font-weight: 600;
   transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer; outline: none;
