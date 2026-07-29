@@ -36,37 +36,20 @@
 
   <!-- DASHBOARD -->
   <div id="view-dashboard" class="view active">
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="m-balance">$0.00</div></div>
-      <div class="metric"><div class="metric-label">Equity</div><div class="metric-value neutral" id="m-equity">$0.00</div></div>
-      <div class="metric"><div class="metric-label">Margen usado</div><div class="metric-value" id="m-margin">$0.00</div></div>
-      <div class="metric"><div class="metric-label">Disponible</div><div class="metric-value" id="m-avail">$0.00</div></div>
-      <div class="metric"><div class="metric-label">P&amp;L no realizado</div><div class="metric-value" id="m-upnl">+$0.00</div></div>
-      <div class="metric"><div class="metric-label">Posiciones</div><div class="metric-value" id="m-open">0</div></div>
+    <div class="panel" style="text-align:center;padding:14px;color:var(--text-mute);font-size:12px;">
+      💼 Portfolio Engine — pendiente de ejecución demo real (bloqueado en API keys demo del usuario). No se muestran balance/equity/margen simulados.
     </div>
 
-    <!-- PANEL SEÑALES HOY -->
+    <!-- PANEL SEÑALES HOY: motor de consenso legacy retirado 29 jul (huérfano
+         desde el 16 jul, nadie lo invocaba, datos fosilizados). En reconstrucción
+         como parte del Laboratorio de Investigación (ver ROADMAP.md Fase C). -->
     <div class="panel" id="signals-today-panel">
       <div class="panel-head">
         <div>
           <div class="panel-title">⚡ Centro de Señales — Hoy</div>
-          <div class="panel-sub" id="signals-last-update">Cargando...</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span id="signals-approved-count" style="font-size:11px;color:var(--green);">✅ 0 aprobadas</span>
-          <span id="signals-rejected-count" style="font-size:11px;color:var(--red);">🔴 0 rechazadas</span>
+          <div class="panel-sub">🔧 Motor de consenso legacy retirado — en reconstrucción (Laboratorio de Investigación)</div>
         </div>
       </div>
-      <!-- Barra de límite diario por activo -->
-      <div class="daily-bar-wrap" id="daily-limit-bars"></div>
-      <!-- Feed de señales -->
-      <div class="sf-filter-bar">
-        <button class="sf-filter-btn active" data-sf="all" onclick="sfFilter('all',this)">Todas</button>
-        <button class="sf-filter-btn" data-sf="approved" onclick="sfFilter('approved',this)">✅ Aprobadas</button>
-        <button class="sf-filter-btn" data-sf="rejected" onclick="sfFilter('rejected',this)">🔴 Rechazadas</button>
-        <button class="sf-filter-btn" data-sf="open" onclick="sfFilter('open',this)">🟡 Abiertas</button>
-      </div>
-      <div class="signal-feed-wrap" id="signals-feed"></div>
     </div>
 
     <!-- PANEL MOTOR NUEVO (RUF-Flow / quantfin, SOL/USDT, paper trading en medición desde 2026-07-28) -->
@@ -105,25 +88,16 @@
     </div>
   </div>
 
-  <!-- SEÑALES (tab separada) -->
+  <!-- SEÑALES (tab separada): historial legacy retirado 29 jul (signals_all.json
+       fosilizado desde el 16 jul, motor de consenso huérfano). -->
   <div id="view-senales" class="view">
     <div class="panel">
       <div class="panel-head">
         <div>
           <div class="panel-title">📋 Historial Completo de Señales</div>
-          <div class="panel-sub">Todas las señales del sistema — aprobadas y rechazadas</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span id="senales-tab-approved" style="font-size:11px;color:var(--green);">✅ 0</span>
-          <span id="senales-tab-rejected" style="font-size:11px;color:var(--red);">🔴 0</span>
+          <div class="panel-sub">🔧 Motor de consenso legacy retirado — en reconstrucción (Laboratorio de Investigación, ver ROADMAP.md)</div>
         </div>
       </div>
-      <div class="sf-filter-bar">
-        <button class="sf-filter-btn active" data-sf2="all" onclick="sfFilter2('all',this)">Todas</button>
-        <button class="sf-filter-btn" data-sf2="approved" onclick="sfFilter2('approved',this)">✅ Aprobadas</button>
-        <button class="sf-filter-btn" data-sf2="rejected" onclick="sfFilter2('rejected',this)">🔴 Rechazadas</button>
-      </div>
-      <div class="signal-feed-wrap" id="senales-feed"></div>
     </div>
   </div>
 
@@ -475,21 +449,9 @@ async function fetchQuantfinReal() {
 }
 
 async function fetchSignalsAll() {
-  try {
-    const res = await fetch(`${API_BASE}/signals_all.json${API_KEY}&t=${Date.now()}`, { signal: AbortSignal.timeout(8000) });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    allSignalsData = Array.isArray(data) ? data : [];
-    renderSignalFeed(allSignalsData, 'signals-feed', sfCurrentFilter);
-    renderSignalFeed(allSignalsData, 'senales-feed', sf2CurrentFilter);
-    renderDailyLimitBars(allSignalsData);
-    updateSignalCounters(allSignalsData);
-  } catch(e) {
-    const feed = document.getElementById('signals-feed');
-    if (feed) feed.innerHTML = `<div style="padding:18px; text-align:center; color:var(--text-mute); font-size:11px;">
-      📡 signals_all.json no disponible — ejecutar quantfin_sync_landing.py en IONOS
-    </div>`;
-  }
+  // Retirado (29 jul): signals_all.json venía de un motor de consenso legacy
+  // huérfano (sin actividad desde el 16 jul) -- no se reconecta como parche,
+  // ver ROADMAP.md / Fase C del Laboratorio para la reconstrucción real.
 }
 
 
@@ -522,7 +484,6 @@ function renderOpen() {
             <td class="${pnlCls}">${fmtPct(pct)}</td>
         </tr>`;
     }).join('');
-    document.getElementById('m-open').textContent = positions.length;
 }
 
 function renderHistory(){
@@ -559,23 +520,11 @@ function renderStats(){
 }
 
 function renderAccount() {
-    const totalUnrealized = positions.reduce((a, p) => {
-        const mkt = marketData.find(m => m.ticker === p.ticker);
-        const entry = p.entry_real || p.entry || p.entry_price || 0;
-        const price = mkt ? mkt.close : (p.current_price || entry);
-        const diff = p.direction === 'BUY' ? (price - entry) : (entry - price);
-        return a + diff * (p.quantity || 0);
-    }, 0);
-    const equity = balance + totalUnrealized;
-    const marginUsed = positions.reduce((a, p) => a + (p.entry_real || p.entry || 0) * (p.quantity || 0), 0);
-    document.getElementById('m-balance').textContent = '$' + fmt(balance);
-    document.getElementById('m-equity').textContent = '$' + fmt(equity);
-    document.getElementById('m-margin').textContent = '$' + fmt(marginUsed);
-    document.getElementById('m-avail').textContent = '$' + fmt(balance - marginUsed);
-    const upnlEl = document.getElementById('m-upnl');
-    upnlEl.textContent = fmtMoney(totalUnrealized);
-    upnlEl.className = 'metric-value ' + (totalUnrealized >= 0 ? 'up' : 'down');
-    document.getElementById('m-open').textContent = positions.length;
+    // Retirado (29 jul): calculaba "margen usado" como valor nocional completo
+    // de posiciones legacy (AAPL/QQQ/SPY) sin lógica de apalancamiento real,
+    // mostrando numeros inventados como si fueran una cuenta real. Ver
+    // ARCHITECTURE.md / Portfolio Engine -- estos numeros no existen hasta
+    // que haya ejecución demo real conectada.
 }
 
 function renderMarkets(){
@@ -665,8 +614,12 @@ async function fetchRealData() {
         ]);
 
         if (!resLanding.ok || !resPos.ok) {
-            console.warn('Algunos endpoints no responden, usando datos mock...');
-            loadMockData();
+            console.warn('Algunos endpoints no responden.');
+            positions = [];
+            history_trades = [];
+            renderOpen();
+            renderHistory();
+            renderMarkets();
             return;
         }
 
@@ -689,23 +642,13 @@ async function fetchRealData() {
             if (total > 0) balance = total;
         }
 
-        if (posData.abiertas && Array.isArray(posData.abiertas)) {
-            positions = posData.abiertas;
-        } else {
-            positions = [];
-        }
+        // Retirado (29 jul): posData.abiertas/historial venían de quantfin-tracker.service,
+        // apagado desde el 28 jul (Fase 1 del Plan Maestro) -- mostrar ese contenido sería
+        // data congelada presentada como posiciones reales en vivo. Ver ROADMAP.md.
+        positions = [];
+        history_trades = [];
 
-        if (posData.historial && Array.isArray(posData.historial)) {
-            history_trades = posData.historial;
-        } else {
-            history_trades = [];
-        }
-
-        if (posData.resumen) {
-            tracking.total_trades = (posData.historial?.length || 0) + (posData.abiertas?.length || 0);
-            tracking.wins = posData.historial?.filter(h => h.resultado === 'TP').length || 0;
-            tracking.total_pnl = posData.resumen.pnl_acumulado_30d || 0;
-        }
+        // tracking (win rate/PF/trades) retirado junto con posiciones/historial -- mismo motivo.
 
         renderOpen();
         renderHistory();
@@ -716,27 +659,13 @@ async function fetchRealData() {
 
     } catch (err) {
         console.error('Error en fetchRealData:', err);
-        loadMockData(); 
+        // Retirado (29 jul): antes fabricaba un balance de $1000 y una posición
+        // de QQQ inventada como fallback -- nunca mostrar datos simulados como reales.
+        positions = [];
+        history_trades = [];
+        renderOpen();
+        renderHistory();
     }
-}
-
-function loadMockData() {
-    positions = [
-        { ticker: 'QQQ', direction: 'BUY', entry_real: 723.80, sl: 700.04, tp1: 755.48, quantity: 1.36 }
-    ];
-    marketData = [
-        { ticker: 'QQQ', close: 711.74, signal: 'BUY', score: 70, trend: 'Alcista', atr: 2.0, spread: 0.02, volatility: 1.5, bloque: 'B_US_MARKET' }
-    ];
-    tracking.total_trades = positions.length + history_trades.length;
-    tracking.wins = history_trades.filter(h => h.resultado === 'TP').length;
-    tracking.total_pnl = 50;
-    balance = 1000;
-    renderOpen();
-    renderHistory();
-    renderStats();
-    renderAccount();
-    renderMarkets();
-    updateSidePanel();
 }
 
 // ─── CANDLE CHART CON CHART.JS ──────────────────────
