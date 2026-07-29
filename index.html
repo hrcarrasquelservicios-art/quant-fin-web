@@ -241,6 +241,32 @@
         <div class="metric"><div class="metric-label">Sharpe</div><div class="metric-value neutral">0.00</div></div>
       </div>
     </div>
+    <!-- LABORATORIO CUANTITATIVO: numeros reales de backtests ya evaluados
+         hoy (walk-forward + Monte Carlo), sincronizados desde quantfin-api
+         /lab/rankings. Nada de esto es inventado -- si un numero no existe
+         todavia (ej. "en paper trading" de multiples estrategias, que no
+         existe como concepto hoy) simplemente no se muestra esa fila. -->
+    <div class="panel" id="lab-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">🔬 Laboratorio Cuantitativo</div>
+          <div class="panel-sub" id="lab-sub">Cargando...</div>
+        </div>
+      </div>
+      <div class="metrics" style="margin:0; border:none;">
+        <div class="metric"><div class="metric-label">Backtests evaluados</div><div class="metric-value" id="lab-evaluated">0</div></div>
+        <div class="metric"><div class="metric-label">Validadas</div><div class="metric-value up" id="lab-validated">0</div></div>
+        <div class="metric"><div class="metric-label">Retiradas</div><div class="metric-value down" id="lab-retired">0</div></div>
+      </div>
+      <div style="padding:10px 18px;">
+        <div style="font-size:11px;color:var(--text-mute);margin-bottom:6px;">Top ranking (walk-forward + Monte Carlo, expectancy en R)</div>
+        <table>
+          <thead><tr><th>#</th><th>Estrategia</th><th>Par</th><th>TF</th><th>Expectancy</th><th>Prob. ruina</th><th>Kelly</th></tr></thead>
+          <tbody id="lab-top-body"></tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="panel">
       <div class="panel-head">
         <div class="panel-title">Exportar Datos</div>
@@ -423,6 +449,31 @@ function sfFilter2(filter, btn) {
   document.querySelectorAll('[data-sf2]').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderSignalFeed(allSignalsData, 'senales-feed', filter);
+}
+
+async function fetchLabRankings() {
+  const sub = document.getElementById('lab-sub');
+  try {
+    const res = await fetch(`/lab_rankings.json?t=${Date.now()}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    document.getElementById('lab-evaluated').textContent = data.n_backtests_evaluated;
+    document.getElementById('lab-validated').textContent = data.n_validated;
+    document.getElementById('lab-retired').textContent = data.n_retired;
+    if (sub) sub.textContent = `Walk-Forward + Monte Carlo sobre backtests reales — actualizado ${new Date().toLocaleTimeString('es-VE')}`;
+    const body = document.getElementById('lab-top-body');
+    if (body) {
+      body.innerHTML = data.top_3 && data.top_3.length ? data.top_3.map((r, i) => `
+        <tr>
+          <td>${i + 1}</td><td>${r.strategy}</td><td>${r.ticker}</td><td>${r.timeframe}</td>
+          <td class="${r.expectancy_r >= 0 ? 'up' : 'down'}">${(r.expectancy_r * 100).toFixed(1)}%R</td>
+          <td>${(r.probability_of_ruin * 100).toFixed(1)}%</td>
+          <td>${r.kelly_fraction != null ? r.kelly_fraction.toFixed(3) : '—'}</td>
+        </tr>`).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--text-mute);">Sin backtests evaluados todavía</td></tr>`;
+    }
+  } catch(e) {
+    if (sub) sub.textContent = '📡 lab_rankings.json no disponible';
+  }
 }
 
 async function fetchQuantfinReal() {
@@ -1043,10 +1094,12 @@ updateClock();
 fetchRealData();
 fetchSignalsAll();
 fetchQuantfinReal();
+fetchLabRankings();
 renderSystemHealth();
 setInterval(fetchRealData, 60000);
 setInterval(fetchSignalsAll, 30000);
 setInterval(fetchQuantfinReal, 60000);
+setInterval(fetchLabRankings, 60000);
 setInterval(updateClock, 1000);
 // Velas: lazy al hacer click en Analytics, luego cada 30s si está activo
 setInterval(() => {
