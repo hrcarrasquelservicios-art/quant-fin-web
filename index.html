@@ -69,6 +69,20 @@
       <div class="signal-feed-wrap" id="signals-feed"></div>
     </div>
 
+    <!-- PANEL MOTOR NUEVO (RUF-Flow / quantfin, SOL/USDT, paper trading en medición desde 2026-07-28) -->
+    <div class="panel" id="quantfin-real-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">🧪 Motor RUF-Flow — SOL/USDT (Paper Trading)</div>
+          <div class="panel-sub" id="quantfin-real-sub">Cargando...</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>ID</th><th>Par</th><th>TF</th><th>Dir</th><th>Entrada</th><th>SL</th><th>TP</th><th>Estado</th><th>R</th></tr></thead>
+        <tbody id="quantfin-real-body"></tbody>
+      </table>
+    </div>
+
     <div class="panel">
       <div class="panel-head">
         <div class="panel-title">Posiciones abiertas</div>
@@ -435,6 +449,29 @@ function sfFilter2(filter, btn) {
   document.querySelectorAll('[data-sf2]').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderSignalFeed(allSignalsData, 'senales-feed', filter);
+}
+
+async function fetchQuantfinReal() {
+  const sub = document.getElementById('quantfin-real-sub');
+  const body = document.getElementById('quantfin-real-body');
+  try {
+    const res = await fetch(`/quantfin_signals.json?t=${Date.now()}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (sub) sub.textContent = data.length
+      ? `${data.length} señal(es) reales — actualizado ${new Date().toLocaleTimeString('es-VE')}`
+      : 'En medición desde 2026-07-28 (Fase 13, 30 días) — todavía sin señales reales, es esperado';
+    if (body) {
+      body.innerHTML = data.length ? data.map(s => `
+        <tr>
+          <td>${s.id.slice(0,8)}</td><td>${s.ticker}</td><td>${s.timeframe}</td>
+          <td>${s.direction}</td><td>${s.entry}</td><td>${s.sl}</td><td>${s.tp}</td>
+          <td>${s.status}</td><td>${s.r_multiple ?? '—'}</td>
+        </tr>`).join('') : `<tr><td colspan="9" style="text-align:center;color:var(--text-mute);">Sin señales todavía</td></tr>`;
+    }
+  } catch(e) {
+    if (sub) sub.textContent = '📡 quantfin_signals.json no disponible';
+  }
 }
 
 async function fetchSignalsAll() {
@@ -1076,9 +1113,11 @@ function updateClock(){
 updateClock();
 fetchRealData();
 fetchSignalsAll();
+fetchQuantfinReal();
 renderSystemHealth();
 setInterval(fetchRealData, 60000);
 setInterval(fetchSignalsAll, 30000);
+setInterval(fetchQuantfinReal, 60000);
 setInterval(updateClock, 1000);
 // Velas: lazy al hacer click en Analytics, luego cada 30s si está activo
 setInterval(() => {
