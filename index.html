@@ -52,11 +52,11 @@
       </div>
     </div>
 
-    <!-- PANEL MOTOR NUEVO (RUF-Flow / quantfin, SOL/USDT, paper trading en medición desde 2026-07-28) -->
+    <!-- PANEL MOTOR NUEVO (NexusFlow Quant Engine / quantfin, SOL/USDT, paper trading en medicion desde 2026-07-30 - reinicio tras el fix del bug de monitoreo) -->
     <div class="panel" id="quantfin-real-panel">
       <div class="panel-head">
         <div>
-          <div class="panel-title">🧪 Motor RUF-Flow — SOL/USDT (Paper Trading)</div>
+          <div class="panel-title">🧪 NexusFlow Quant Engine — SOL/USDT (Paper Trading)</div>
           <div class="panel-sub" id="quantfin-real-sub">Cargando...</div>
         </div>
       </div>
@@ -485,7 +485,7 @@ async function fetchQuantfinReal() {
     const data = await res.json();
     if (sub) sub.textContent = data.length
       ? `${data.length} señal(es) reales — actualizado ${new Date().toLocaleTimeString('es-VE')}`
-      : 'En medición desde 2026-07-28 (Fase 13, 30 días) — todavía sin señales reales, es esperado';
+      : 'En medición desde 2026-07-30 (Fase 13, 30 días, reiniciada tras corregir un bug real de monitoreo) — todavía sin señales reales, es esperado';
     if (body) {
       body.innerHTML = data.length ? data.map(s => `
         <tr>
