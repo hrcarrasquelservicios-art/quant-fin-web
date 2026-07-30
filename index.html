@@ -489,7 +489,7 @@ async function fetchQuantfinReal() {
     if (body) {
       body.innerHTML = data.length ? data.map(s => `
         <tr>
-          <td>${s.id.slice(0,8)}</td><td>${s.ticker}</td><td>${s.timeframe}</td>
+          <td>${s.code || s.id.slice(0,8)}</td><td>${s.ticker}</td><td>${s.timeframe}</td>
           <td>${s.direction}</td><td>${s.entry}</td><td>${s.sl}</td><td>${s.tp}</td>
           <td>${s.status}</td><td>${s.r_multiple ?? '—'}</td>
         </tr>`).join('') : `<tr><td colspan="9" style="text-align:center;color:var(--text-mute);">Sin señales todavía</td></tr>`;
