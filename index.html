@@ -27,7 +27,7 @@
     <div class="tabs" id="tabs">
     <div class="tab active" data-view="dashboard">Dashboard</div>
     <div class="tab" data-view="senales">⚡ Señales</div>
-    <div class="tab" data-view="protocolo">Protocolo RUF-Flow</div>
+    <div class="tab" data-view="protocolo">Protocolo NexusFlow</div>
     <div class="tab" data-view="health">System Health</div>
     <div class="tab" data-view="analytics">Analytics</div>
     <div class="tab" data-view="reportes">Reportes</div>
@@ -101,16 +101,16 @@
     </div>
   </div>
 
-  <!-- PROTOCOLO RUF-FLOW -->
+  <!-- PROTOCOLO NEXUSFLOW -->
   <div id="view-protocolo" class="view">
     <div class="panel" style="margin-bottom: 20px;">
       <div class="panel-head">
-        <div class="panel-title">¿Qué es RUF-Flow?</div>
+        <div class="panel-title">¿Qué es NexusFlow?</div>
       </div>
       <div style="padding: 0 16px 16px; color: var(--text-dim); line-height: 1.5; font-size: 14px;">
-        RUF-Flow es un sistema algorítmico de Trading Cuantitativo desarrollado por Nexus Flow Dynamics. 
-        El sistema procesa y evalúa datos del mercado crypto y tradicional, identificando tendencias a través 
-        de un Triple Motor de Consenso (Ruflo Primary, Validator, Stock Checker). Sólo se ejecutan operaciones 
+        NexusFlow es un sistema algorítmico de Trading Cuantitativo desarrollado por Nexus Flow Dynamics.
+        El sistema procesa y evalúa datos del mercado crypto y tradicional, identificando tendencias a través
+        de un Triple Motor de Consenso (NexusFlow Primary, Validator, Stock-Checker). Sólo se ejecutan operaciones
         cuando existe una alineación total en los parámetros de volatilidad, RSI, MACD, y Bandas de Gaussian, 
         asegurando una gestión de riesgo óptima.
       </div>
@@ -1071,9 +1071,9 @@ document.getElementById('symbolSelect').addEventListener('change', (e) => {
 function renderSystemHealth() {
     const tbody = document.getElementById('health-tbody');
     const motores = [
-        { nombre: 'Ruflo v6 Primary', ip: 'VM2 (34.58.235.222)', estado: '🟢 Activo', rol: 'Genera señales técnicas e indicadores, envía a consenso. Anti-duplicados habilitado.' },
-        { nombre: 'Ruflo v6 Validator', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Motor de validación secundario, crontab corregido para evitar ejecución solapada con ruflo_hub.sh.' },
-        { nombre: 'Stock-Checker', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Conectado vía Bun/TypeScript prediciendo en base a Tiingo/Yahoo Data.' }
+        { nombre: 'NexusFlow Primary v6', ip: 'VM2 (34.58.235.222)', estado: '🟢 Activo', rol: 'Genera señales técnicas e indicadores, envía a consenso. Anti-duplicados habilitado.' },
+        { nombre: 'NexusFlow Validator v6', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Motor de validación secundario, crontab corregido para evitar ejecución solapada con ruflo_hub.sh.' },
+        { nombre: 'NexusFlow Stock-Checker', ip: 'IONOS (85.215.73.107)', estado: '🟢 Activo', rol: 'Conectado vía Bun/TypeScript prediciendo en base a Tiingo/Yahoo Data.' }
     ];
     if(tbody) {
         tbody.innerHTML = motores.map(m => `
